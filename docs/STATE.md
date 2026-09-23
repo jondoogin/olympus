@@ -1,20 +1,23 @@
 # OLYMPUS — State
-Updated: 2026-09-23 · S9 · by: codex
+Updated: 2026-09-23 · S10 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight; four fictional project case studies and their media direction are complete on `wip/project-media-direction`
-Files touched: `src/content/site.ts`, `src/content/image-manifest.json`, `src/pages/ProjectPage.tsx`, `src/styles/components.css`, `src/styles/sections.css`, `docs/ROUTES.md`, master and responsive project images under `public/OLYMPUS-asset-library/`, four films under `public/media/`, film scripts, this handoff and `docs/sessions/2026-09-23-S9-codex.md`
-Committed: project work at b47e6ed on a branch based on `origin/main` b27a897; this S9 handoff follows as a second commit.
-Next concrete step: owner reviews the four `/work/:slug` pages and opens a PR from `wip/project-media-direction` into `main`.
-Verify with: `npm run build`; visually inspect all four pages at 1440 / 1024 / 768 / 390 px, including the reduced-motion still.
-Watch out for: VELA was merged to `main` in PR #2; use `wip/project-media-direction`, not the older `wip/all-case-studies` branch, for review.
+Task: reconcile and continue the existing four-project media branch, `wip/project-media-direction`, after production launch prep landed on `main`.
+Files touched: this handoff and `docs/sessions/2026-09-23-S10-codex.md` for the deployment correction.
+Committed: project media at b47e6ed and its S9 handoff at d08d42a; `origin/main` now includes PR #3 at 5e3e58b.
+Next concrete step: inspect and integrate `origin/main` into the media branch without losing its four case studies or the SPA rewrite, then verify and finish the interior pages.
+Verify with: `npm run build`; inspect all changed pages at 1440 / 1024 / 768 / 390 px, then verify the canonical production URL after deployment.
+Watch out for: the media branch predates PR #3, so its diff against `origin/main` appears to remove `vercel.json` and absolute meta URL handling until the branches are integrated.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
 - VELA, NORTHLINE, HELIO and AURA each have a complete fictional concept case study with brief, idea, system, outcome, three supporting stills and a silent motion study. Other interior routes remain foundations.
-- Repo: https://github.com/jondoogin/olympus (private). VELA's written story is merged on `main` (PR #2). The four-project image, film and page direction is on `wip/project-media-direction` from current `origin/main`; do not push it to main directly. Earlier wip branches remain as milestones.
+- Repo: https://github.com/jondoogin/olympus (public; confirm intended visibility with owner). VELA's written story is merged on `main` (PR #2). The four-project image, film and page direction is on `wip/project-media-direction`, currently based on pre-PR #3 `main`; do not push it to main directly. Earlier wip branches remain as milestones.
+- Hosting: Vercel auto-deploys `main`. PR #3 merged the SPA rewrite and absolute OG/Twitter meta on production commit `5e3e58b`. Canonical live URL: https://olympus-green.vercel.app. The hashed deployment URLs are fixed-build previews and change each deploy; do not use them as the site URL.
+- Production browser check: `/` and direct `/work/vela` load with HTTP 200; the case study title is correct. `og:url`, `og:image`, and `twitter:image` use absolute `https://olympus-green.vercel.app/...` URLs. `VITE_SITE_URL` is set to that origin, with `https://` and no trailing slash. Update it and redeploy if a custom domain is attached.
+- Vercel Authentication is off project-wide, so previews are public. Standard Protection only exempts production custom domains; consider re-enabling it after one is attached.
 - Placeholders: hello@olympus.agency, the social links (`#`) and the collaborator cities. The list is in `docs/ROUTES.md`.
 - Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
 - External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
@@ -24,10 +27,10 @@ Watch out for: VELA was merged to `main` in PR #2; use `wip/project-media-direct
 - Not visually verified: reduced-motion rendering. The `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows could not be tested in the harness.
 
 ## NEXT QUEUE
-1. Owner reviews all four case studies and opens and merges a PR from `wip/project-media-direction` into main.
+1. Preserve and integrate the four-case-study media branch with current `main`; finish review, verify at four widths, and bring it through a PR.
 2. Build the remaining interior pages. See `docs/ROUTES.md`.
-3. Replace the placeholders once the owner supplies real details.
-4. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
+3. Check `sharp` via `npm run images` and check `x-robots-tag` on the canonical production URL before launch.
+4. Confirm with owner that the repository should be public; replace email, social and city placeholders only after real details are supplied.
 
 ## INVARIANTS
 - The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
