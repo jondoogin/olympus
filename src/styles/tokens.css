@@ -1,0 +1,134 @@
+/* ==========================================================================
+   OLYMPUS design tokens
+   One source of truth for palette, type, grid, space, borders, z, motion.
+   Breakpoints (mirrored in src/lib/tokens.ts):
+     mobile  < 768   · 4 columns
+     tablet  768–1099 · 8 columns
+     desktop ≥ 1100  · 12 columns
+   ========================================================================== */
+
+:root {
+  /* Palette — mostly ivory, black and stone. Accents are decisive and rare. */
+  --marble: #f4f1ea;
+  --marble-2: #ebe6db;        /* stone, one step down */
+  --stone: #cfc8b9;           /* hairlines on ivory, muted stone */
+  --stone-ink: #77705f;       /* secondary text on ivory (AA on marble) */
+  --obsidian: #080808;
+  --obsidian-2: #151515;
+  --ash: #8f8a80;             /* secondary text on obsidian */
+  --gold: #d4af37;            /* Zeus */
+  --aegean: #2563eb;          /* Aegean blue */
+  --apollo: #ff6a00;          /* Apollo orange */
+
+  --bg: var(--marble);
+  --fg: var(--obsidian);
+  --fg-muted: var(--stone-ink);
+  --rule: color-mix(in srgb, var(--fg) 18%, transparent);
+
+  /* Type families */
+  --font-grotesk: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
+  --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Times New Roman', serif;
+  --font-hand: 'Reenie Beanie', 'Bradley Hand', cursive;
+
+  /* Archivo's width axis does a lot of the art direction */
+  --wdth-condensed: 72;
+  --wdth-normal: 100;
+  --wdth-expanded: 125;
+
+  /* Type scale — fluid, clamped. Display sizes are deliberately enormous. */
+  --fs-micro: 0.6875rem;                               /* 11px labels */
+  --fs-small: 0.8125rem;                               /* 13px */
+  --fs-body: clamp(1rem, 0.96rem + 0.18vw, 1.125rem);
+  --fs-lead: clamp(1.25rem, 1.05rem + 0.8vw, 1.75rem);
+  --fs-h3: clamp(1.5rem, 1.1rem + 1.6vw, 2.5rem);
+  --fs-h2: clamp(2.5rem, 1.6rem + 4vw, 5.5rem);
+  --fs-display: clamp(2.5rem, 11.4vw, 12.5rem);
+  --fs-colossal: clamp(4.2rem, 0.4rem + 15vw, 17rem);
+
+  --lh-tight: 0.86;
+  --lh-snug: 1.05;
+  --lh-body: 1.5;
+
+  --track-label: 0.16em;
+  --track-display: -0.035em;
+
+  /* Grid */
+  --cols: 4;
+  --gutter: 1rem;
+  --margin: 1.125rem;
+  --max: 1680px;
+
+  /* Space — 4pt base, then editorial leaps */
+  --s-1: 0.25rem;
+  --s-2: 0.5rem;
+  --s-3: 0.75rem;
+  --s-4: 1rem;
+  --s-5: 1.5rem;
+  --s-6: 2rem;
+  --s-7: 3rem;
+  --s-8: 4.5rem;
+  --s-9: 7rem;
+  --s-10: 10rem;
+  --section: clamp(5rem, 3rem + 9vw, 12rem);   /* vertical section rhythm */
+
+  /* Borders */
+  --hairline: 1px solid var(--rule);
+  --radius: 0;                 /* editorial: square corners everywhere */
+  --radius-pill: 999px;
+
+  /* Layers */
+  --z-base: 1;
+  --z-overlay: 10;
+  --z-header: 50;
+  --z-menu: 60;
+  --z-skip: 100;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);        /* expensive, long tail */
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-snap: cubic-bezier(0.2, 0.9, 0.1, 1.2);
+  --dur-fast: 180ms;
+  --dur-base: 420ms;
+  --dur-slow: 900ms;
+  --dur-reveal: 1200ms;
+
+  --header-h: 4.25rem;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --cols: 8;
+    --gutter: 1.25rem;
+    --margin: 2rem;
+    --header-h: 4.75rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  :root {
+    --cols: 12;
+    --gutter: 1.5rem;
+    --margin: clamp(2rem, 3.2vw, 3.5rem);
+    --header-h: 5.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur-base: 1ms;
+    --dur-slow: 1ms;
+    --dur-reveal: 1ms;
+  }
+}
+
+/* Themes are applied per section so header + UI can follow the ground */
+[data-theme='dark'] {
+  --bg: var(--obsidian);
+  --fg: var(--marble);
+  --fg-muted: var(--ash);
+  --rule: color-mix(in srgb, var(--marble) 18%, transparent);
+}
+[data-theme='stone'] {
+  --bg: var(--marble-2);
+}

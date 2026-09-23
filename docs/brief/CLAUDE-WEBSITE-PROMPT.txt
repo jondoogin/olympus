@@ -1,0 +1,38 @@
+You are the creative director, digital art director, senior UX designer, motion designer, and front-end engineer for OLYMPUS, a fictional creative agency run by reincarnated Greek gods. Build a genuinely memorable, Awwwards-caliber website experience that feels like a globally respected contemporary agency first. The mythology should reveal itself through exacting art direction, deadpan copy, portrait details, and a few delightful interactions—not a novelty Greek theme.
+
+Your source assets are in the adjacent OLYMPUS-asset-library folder. Read ASSET-MANIFEST.md and use the actual files. Do not rebuild the logo as text, redraw the bolt, stretch the art, or substitute generic stock. Keep the outlined SVG wordmark intact, including its matching-weight O, pronounced bolt, and restrained Greek micro-detail. Use transparent or reversed variants as their backgrounds require. The 1200×630 PNG is the Open Graph image. Keep image crop positions configurable per breakpoint.
+
+POSITIONING AND VOICE
+OLYMPUS / Creative Agency
+Higher ideas for a lower world.
+The gods have reincarnated as a dysfunctional but exceptionally talented agency. Zeus is CEO; Athena is ECD; Hermes leads Strategy; Apollo leads Creative; Dionysus leads Culture and Experiences; Artemis leads Production. Play the premise straight. Copy is confident, economical, sharp, dry, culturally literate, and just a little arrogant. Never campy, fantasy-RPG, corporate, or tourist-board Greek. A visitor should think “this agency looks incredible” before they realize the mythological joke.
+
+VISUAL SYSTEM
+Ancient authority × contemporary creative culture. Classical sculpture collides with modern editorial design; museum permanence with irreverent mark-making. Base palette: marble #F4F1EA and obsidian #080808. Accents: Zeus gold #D4AF37, Aegean blue #2563EB, Apollo orange #FF6A00. Use blue/orange/gold decisively and sparingly. The palette should breathe: mostly ivory, black and stone.
+
+Typography: an oversized blunt geometric grotesk (Archivo, Space Grotesk, or an equally apt open font), an elegant high-contrast editorial serif (Instrument Serif, Cormorant Garamond, or equivalent), and very occasional handwritten annotation. Do not use Greek-key borders. Build a 12-column editorial desktop grid, 6–8 columns tablet, and a deliberately composed 4-column mobile system. Embrace asymmetry, hard crops, enormous but controlled type, visual pauses, narrow text columns, full-bleed imagery, crop/registration details, and unexpected changes of scale. Give every major section a distinct compositional idea while making the whole feel authored by one studio.
+
+EXPERIENCE AND CONTENT
+Implement a complete homepage and establish reusable foundations for Work, About, Services, People, Culture, and Contact. The homepage should include:
+1. A minimal fashion-editorial header with the exact OLYMPUS vector mark, restrained navigation, and a genuinely designed mobile menu.
+2. A striking hero using 03-hero/zeus-blue-sky-hero.png or the winged alternate, with oversized “HIGHER IDEAS / FOR A LOWER WORLD.” Compose type and sculpture together; preserve the hero's negative space. Add a concise agency description and clear Work / People calls to action. Do not center everything.
+3. A manifesto with strong typographic contrast: “We believe in the unreasonable idea. The thought that won’t sit still. The brand that dares to be remembered. We are Olympus. A creative agency for a more interesting world.”
+4. A selected-work portfolio of four believable fictional clients, using the four separate 05-selected-work campaign images. Suggested projects: VELA (fashion identity), NORTHLINE (architecture), HELIO (culture/music), and AURA (technology). Give each a credible discipline, year, one-line positioning, and its own art-directed card layout. Do not imply these are real clients.
+5. Services as a typographic index, not six generic cards: Strategy, Brand, Campaign, Content, Experiences, & Other Divine Interventions.
+6. The Pantheon: six personalities. Use the five portraits in 04-people-and-atmosphere plus a tight mobile-safe crop from the Zeus hero for Zeus. Names/roles: Zeus—CEO; Athena—Executive Creative Director; Hermes—Strategy; Apollo—Creative; Dionysus—Culture / Experiences; Artemis—Production. Short lines: “Big ideas. Bigger budgets.” / “Discipline creates freedom.” / “Same day. Different hemisphere.” / “A little brighter. A little louder.” / “Work hard. Party harder.” / “On time. On target.”
+7. A sharp black/ivory cultural interruption—e.g. “CREATIVITY IS A CONTACT SPORT.” Use one strong image, symbol, or annotation, not a pile of effects.
+8. Credible proof without fake revenue: “6 gods / 12 disciplines / 1 unreasonable standard,” independent since 2026, global collaborators.
+9. A contact finale: “MAKE MORTALS NOTICE.” Copy: “Bring us the problem people keep telling you cannot be solved.” CTA “Start Something”; fictional address hello@olympus.agency clearly treated as placeholder until real contact details exist.
+10. A useful footer: navigation, social placeholders, “MT. OLYMPUS / GLOBAL,” and the understated line “Operating above sea level.”
+
+Use 04-people-and-atmosphere/athens-columns.png and athens-clouds.png as pacing images, not wallpaper. The 06-textures SVGs are very low-contrast optional overlays. The icons are supporting punctuation; do not turn every surface into a mythological motif. Provide meaningful image alt text. The SVG social square and OG artwork should not become page hero substitutes.
+
+MOTION AND INTERACTION
+Design a distinctive, restrained sequence: an intentional hero entrance, one or two mask/line reveals, a refined image parallax or pan, tactile project hover states, typographic service interactions, and a subtle annotation/bolt gesture. Motion must feel expensive, not busy. No global gimmick cursor or heavy WebGL by default. Respect prefers-reduced-motion, keyboard access, focus visibility, and touch. Keep page transitions and loading simple unless they improve the work.
+
+IMPLEMENTATION
+First inspect the existing project and preserve its useful stack and conventions. If empty, choose a lightweight React + TypeScript + Vite implementation with clean CSS; avoid large dependencies without justification. Make reusable design tokens for palette, typography, grid, spacing, borders, breakpoints, z-index, easing, and motion. Keep structured content separate from layout where helpful. Use responsive images, lazy-load below-fold assets, reserve image aspect ratios, prevent layout shift, and optimize delivery without altering master assets. All image paths should resolve from the actual packaged library copied into the project's public assets.
+
+Deliver the built homepage, associated components/styles/content, a short design-system note, and a route/content outline for future pages. Run the project and verify a production build. Inspect the rendered experience at 1440, 1024, 768, and 390 px, including mobile menu, image crops, text overflow, focus states, and reduced motion. Make at least one explicit visual refinement pass from screenshots. Report what you built, what you verified, and anything still placeholder. If you cannot generate more imagery, use these supplied assets; do not replace them with generic imagery.
+
+Creative bar: not a template, not a collection of cards, not ancient-Greek cosplay. Make strong decisions in scale, rhythm, whitespace, contrast, and restraint. The work should feel like an elite agency made it—and only then reveal that the agency is Olympus.

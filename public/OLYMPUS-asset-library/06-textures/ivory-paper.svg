@@ -1,0 +1,3 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Warm ivory paper texture">
+<filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".72" numOctaves="3" seed="13" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="linear" slope=".09"/></feComponentTransfer></filter><path d="M0 0h1200v800H0z" fill="#F4F1EA"/><path d="M0 0h1200v800H0z" filter="url(#n)" opacity=".4"/>
+</svg>

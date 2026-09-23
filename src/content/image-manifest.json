@@ -1,0 +1,149 @@
+{
+  "winged-nike-alternate-hero": {
+    "dir": "03-hero",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "zeus-blue-sky-hero": {
+    "dir": "03-hero",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1672
+    ]
+  },
+  "apollo-creative": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "artemis-production": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "athena-ecd": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "athens-clouds": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "athens-columns": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "dionysus-culture": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "hermes-strategy": {
+    "dir": "04-people-and-atmosphere",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "architecture-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "culture-campaign": {
+    "dir": "05-selected-work",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      800,
+      1200,
+      1254
+    ]
+  },
+  "fashion-campaign": {
+    "dir": "05-selected-work",
+    "width": 1024,
+    "height": 1536,
+    "widths": [
+      480,
+      800,
+      1024
+    ]
+  },
+  "technology-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "zeus-portrait": {
+    "dir": "crops",
+    "width": 533,
+    "height": 800,
+    "widths": [
+      480,
+      533
+    ]
+  }
+}

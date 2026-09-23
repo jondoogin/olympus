@@ -1,0 +1,11 @@
+node_modules
+dist
+.DS_Store
+.claude/
+
+# Source asset package — duplicated in public/OLYMPUS-asset-library (committed)
+OLYMPUS-asset-library.zip
+/OLYMPUS-asset-library/
+/CLAUDE-WEBSITE-PROMPT.txt
+/ASSET-MANIFEST.md
+*.tsbuildinfo
