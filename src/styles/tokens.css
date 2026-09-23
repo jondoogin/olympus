@@ -27,8 +27,13 @@
 
   /* Type families */
   --font-grotesk: 'Archivo', 'Helvetica Neue', Arial, sans-serif;
-  --font-serif: 'Instrument Serif', 'Cormorant Garamond', 'Times New Roman', serif;
+  /* GFS Didot sits behind the serifs so any Greek glyph falls through to it. */
+  --font-serif: 'Instrument Serif', 'GFS Didot', 'Cormorant Garamond', 'Times New Roman', serif;
   --font-hand: 'Reenie Beanie', 'Bradley Hand', cursive;
+  /* Two registers. Inscription = the ancient (carved Greek, numerals).
+     Mono = the screen (live readouts, system notes). Both are small and rare. */
+  --font-inscr: 'GFS Didot', 'Instrument Serif', 'Times New Roman', serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Menlo, monospace;
 
   /* Archivo's width axis does a lot of the art direction */
   --wdth-condensed: 72;
@@ -50,6 +55,7 @@
   --lh-body: 1.5;
 
   --track-label: 0.16em;
+  --track-inscr: 0.22em;     /* carved capitals are spaced wide */
   --track-display: -0.035em;
 
   /* Grid */

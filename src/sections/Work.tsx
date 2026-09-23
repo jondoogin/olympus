@@ -4,6 +4,7 @@ import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
 import { useScrollProgress } from '../hooks/useScrollProgress';
+import { greekNumeral } from '../lib/antiquity';
 
 const SIZES: Record<Project['layout'], string> = {
   'portrait-left': '(min-width: 1100px) 46vw, (min-width: 768px) 60vw, 100vw',
@@ -22,7 +23,7 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
           <span className="proj__view" aria-hidden="true">View project</span>
         </Reveal>
         <div className="proj__meta">
-          <span className="proj__n">{String(i + 1).padStart(2, '0')}</span>
+          <span className="proj__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
           <h3 className="proj__client">{p.client}</h3>
           <p className="proj__disc">
             <span>{p.discipline}</span>

@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { nav, contact, socials } from '../content/site';
+import { nav, contact, socials, oracleStatus } from '../content/site';
+import { greekNumeral } from '../lib/antiquity';
 import { Logo } from './Logo';
 import { Picture } from './Picture';
 import { Mark } from './Mark';
@@ -80,7 +81,7 @@ export function Header() {
               {nav.slice(0, 5).map((item, i) => (
                 <li key={item.to}>
                   <NavLink to={item.to} className="navlink">
-                    <span className="navlink__n">0{i + 1}</span>
+                    <span className="navlink__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
                     {item.label}
                   </NavLink>
                 </li>
@@ -166,7 +167,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           {nav.map((item, i) => (
             <li key={item.to} style={{ ['--i' as string]: i }}>
               <NavLink to={item.to} onClick={onClose}>
-                <span className="mmenu__n">0{i + 1}</span>
+                <span className="mmenu__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
                 <span className="mmenu__label">{item.label}</span>
                 <span className="mmenu__note">{item.note}</span>
               </NavLink>
@@ -181,6 +182,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           <span className="mmenu__caption">Management is watching.</span>
         </div>
         <div className="mmenu__meta">
+          <span className="sys sys--dot mmenu__status">{oracleStatus}</span>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
           <span className="mmenu__placeholder">Placeholder address</span>
           <ul className="mmenu__social">

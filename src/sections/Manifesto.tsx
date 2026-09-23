@@ -1,4 +1,4 @@
-import { manifesto } from '../content/site';
+import { figures, manifesto } from '../content/site';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { CropMarks } from '../components/CropMarks';
@@ -32,7 +32,10 @@ export function Manifesto() {
             />
             <CropMarks />
           </div>
-          <figcaption>Fig. 1 — The old office. Good light, no heating.</figcaption>
+          <figcaption>
+            {figures.columns.caption}
+            <span className="sys fig-note">{figures.columns.note}</span>
+          </figcaption>
         </figure>
 
         <Reveal as="div" kind="lines" className="manifesto__sign">

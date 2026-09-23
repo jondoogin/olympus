@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { hero } from '../content/site';
 import { Picture } from '../components/Picture';
@@ -44,11 +45,37 @@ export function Hero() {
           </Link>
         </div>
         <ul className="hero__meta" aria-label="At a glance">
-          <li>Independent since 2026</li>
-          <li>Mt. Olympus / Global</li>
-          <li className="hero__scroll" aria-hidden="true">Scroll</li>
+          <li className="inscr hero__inscr" lang="el">{hero.inscription}</li>
+          <li>{hero.est}</li>
+          <Readout />
+          <li className="hero__scroll" aria-hidden="true">{hero.scroll}</li>
         </ul>
       </div>
     </section>
+  );
+}
+
+/**
+ * The screen register: the site noticing where it is being shown.
+ * Real numbers only — the visitor's viewport and how long the page took to render.
+ */
+function Readout() {
+  const [size, setSize] = useState<string | null>(null);
+  const [secs, setSecs] = useState<string | null>(null);
+  useEffect(() => {
+    const measure = () => setSize(`${window.innerWidth} × ${window.innerHeight}`);
+    measure();
+    window.addEventListener('resize', measure);
+    const nav = performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined;
+    const t = nav && nav.domContentLoadedEventEnd > 0 ? nav.domContentLoadedEventEnd : performance.now();
+    setSecs((t / 1000).toFixed(2));
+    return () => window.removeEventListener('resize', measure);
+  }, []);
+  if (!size) return null;
+  return (
+    <>
+      <li className="sys hero__sys">Now showing on {size} px of glass</li>
+      {secs && <li className="sys hero__sys hero__sys--time">Rendered in {secs}s. The Parthenon took fifteen years.</li>}
+    </>
   );
 }
