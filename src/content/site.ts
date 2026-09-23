@@ -5,11 +5,11 @@ import type { ImageKey } from '../lib/images';
 export type Crop = { mobile: string; tablet?: string; desktop?: string };
 
 export const nav = [
-  { label: 'Work', to: '/work', note: 'Selected projects' },
+  { label: 'Work', to: '/work', note: 'The collection' },
   { label: 'Services', to: '/services', note: 'What we do, mostly' },
   { label: 'People', to: '/people', note: 'The Pantheon' },
-  { label: 'Culture', to: '/culture', note: 'How we behave' },
-  { label: 'About', to: '/about', note: 'The short version' },
+  { label: 'Culture', to: '/culture', note: 'House rules, some carved' },
+  { label: 'About', to: '/about', note: 'The long version is an epic' },
   { label: 'Contact', to: '/contact', note: 'Start something' },
 ] as const;
 
@@ -21,6 +21,10 @@ export const hero = {
   lineB: 'for a lower world.',
   intro:
     'Olympus is an independent creative agency for brands that would rather be remembered than reassured. Strategy, identity, campaigns and experiences — made by a very small, very senior team.',
+  /** Carved into the meta rail. The live readouts next to it are built in Hero.tsx. */
+  inscription: 'ΟΛΥΜΠΟΣ',
+  est: 'Est. c. 1200 BC',
+  scroll: 'Scroll. Ancient format, still undefeated.',
 };
 
 export const manifesto = [
@@ -131,6 +135,8 @@ export type God = {
   name: string;
   role: string;
   line: string;
+  /** The previous job title. Dry, one sentence. */
+  formerly: string;
   image: ImageKey;
   alt: string;
   crop: Crop;
@@ -142,6 +148,7 @@ export const pantheon: God[] = [
     name: 'Zeus',
     role: 'CEO',
     line: 'Big ideas. Bigger budgets.',
+    formerly: 'Formerly king of the gods. Still does the weather.',
     image: 'zeus-portrait',
     alt: 'Zeus: close crop of a bearded marble statue in black sunglasses against blue sky.',
     crop: { mobile: '50% 30%' },
@@ -151,6 +158,7 @@ export const pantheon: God[] = [
     name: 'Athena',
     role: 'Executive Creative Director',
     line: 'Discipline creates freedom.',
+    formerly: 'Formerly wisdom, war and one entire city.',
     image: 'athena-ecd',
     alt: 'Athena: marble bust in a crested helmet with a severe gaze, a single blue paint-marker slash on the backdrop.',
     crop: { mobile: '50% 30%' },
@@ -160,6 +168,7 @@ export const pantheon: God[] = [
     name: 'Hermes',
     role: 'Strategy',
     line: 'Same day. Different hemisphere.',
+    formerly: 'Formerly messenger of the gods. Now answers email within the hour.',
     image: 'hermes-strategy',
     alt: 'Hermes: marble bust in a winged helmet and dark sunglasses against a motion-blurred blue backdrop.',
     crop: { mobile: '50% 25%' },
@@ -168,6 +177,7 @@ export const pantheon: God[] = [
     name: 'Apollo',
     role: 'Creative',
     line: 'A little brighter. A little louder.',
+    formerly: 'Formerly the sun, music and prophecy. Kept the sun.',
     image: 'apollo-creative',
     alt: 'Apollo: curly-haired marble sculpture in orange acetate sunglasses, lit by hard flash and an orange glow.',
     crop: { mobile: '50% 25%' },
@@ -177,6 +187,7 @@ export const pantheon: God[] = [
     name: 'Dionysus',
     role: 'Culture / Experiences',
     line: 'Work hard. Party harder.',
+    formerly: 'Formerly wine, theatre and revelry. Role largely unchanged.',
     image: 'dionysus-culture',
     alt: 'Dionysus: expressive marble bust with ivy in its hair, head tipped back under violet stage light.',
     crop: { mobile: '50% 30%' },
@@ -185,6 +196,7 @@ export const pantheon: God[] = [
     name: 'Artemis',
     role: 'Production',
     line: 'On time. On target.',
+    formerly: 'Formerly the hunt and the moon. Now hunts deadlines.',
     image: 'artemis-production',
     alt: 'Artemis: marble bust with tied hair and a direct gaze, sharp light with a sage-green shadow.',
     crop: { mobile: '50% 25%' },
@@ -210,3 +222,58 @@ export const socials = [
   { label: 'Vimeo', href: '#' },
   { label: 'Are.na', href: '#' },
 ];
+
+/* ---------------------------------------------------------------------------
+   Voice: two registers.
+   Ancient: carved, Greek, museum-label. Screen: system readouts that know they
+   are being shown on glass. One joke per block, never explained.
+   --------------------------------------------------------------------------- */
+
+/** Museum labels under the pacing images. `note` is the screen-aware second line. */
+export const figures = {
+  columns: {
+    caption: 'Fig. 1 — The old office. Good light, no heating.',
+    note: 'Pentelic marble, c. 447 BC. Digitised 2026. Not to scale; your screen is smaller.',
+  },
+  clouds: {
+    caption: 'Fig. 2 — The commute.',
+    note: 'Actual clouds may vary with screen brightness.',
+  },
+};
+
+/** Maxims from the forecourt at Delphi, with house commentary. Culture page. `·` is the carver's word divider. */
+export const maxims = [
+  { greek: 'ΓΝΩΘΙ · ΣΕΑΥΤΟΝ', english: 'Know thyself.', note: 'Then know the audience. In that order.' },
+  { greek: 'ΜΗΔΕΝ · ΑΓΑΝ', english: 'Nothing in excess.', note: 'Dionysus has requested an exemption. It is under review.' },
+  { greek: 'ΕΓΓΥΑ · ΠΑΡΑ Δ’ ΑΤΗ', english: 'Make a pledge and ruin is near.', note: 'We don’t promise what we can’t ship.' },
+];
+
+export const maximsIntro = {
+  title: 'Carved at Delphi, c. 600 BC.',
+  em: 'Reposted without permission.',
+  note: 'The rules were written on a temple wall so nobody could say they missed the memo. We kept three.',
+};
+
+export const contactNote = 'Replies faster than Delphi, and considerably less ambiguous.';
+
+export const footerLines = {
+  carved: 'Carved in React. Rendered on glass. No marble was harmed.',
+  end: 'You have reached the end of the scroll. Unlike the Library of Alexandria, this one will still be here tomorrow.',
+};
+
+export const oracleStatus = 'The oracle is online';
+
+/** Browser-tab titles. `away` shows while the visitor is in another tab. */
+export const titles = {
+  home: 'OLYMPUS — Creative Agency',
+  suffix: ' — OLYMPUS',
+  notFound: 'Lost to antiquity',
+  away: 'Come back, mortal.',
+};
+
+export const notFound = {
+  title: 'Lost to',
+  em: 'antiquity.',
+  lead: 'This page has been lost to antiquity. The archaeologists have been notified; expect a fragment by 2031.',
+  link: 'Return to the summit',
+};

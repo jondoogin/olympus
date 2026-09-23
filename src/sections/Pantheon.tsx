@@ -19,6 +19,7 @@ export function GodCard({ g, i }: { g: God; i: number }) {
         <span className="god__role">{g.role}</span>
         <span className="god__name">{g.name}</span>
         <q className="god__line">{g.line}</q>
+        <span className="god__formerly">{g.formerly}</span>
       </figcaption>
     </Reveal>
   );

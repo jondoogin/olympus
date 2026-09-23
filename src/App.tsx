@@ -11,6 +11,7 @@ import CulturePage from './pages/CulturePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
+import { nav, titles } from './content/site';
 
 function ScrollReset() {
   const { pathname } = useLocation();
@@ -20,11 +21,33 @@ function ScrollReset() {
   return null;
 }
 
+function pageTitle(pathname: string) {
+  if (pathname === '/') return titles.home;
+  const item = nav.find((n) => pathname === n.to || pathname.startsWith(`${n.to}/`));
+  return (item ? item.label : titles.notFound) + titles.suffix;
+}
+
+/** Sets the tab title per route, and asks nicely when the visitor wanders to another tab. */
+function DocumentTitle() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    const title = pageTitle(pathname);
+    document.title = title;
+    const onVis = () => {
+      document.title = document.hidden ? titles.away : title;
+    };
+    document.addEventListener('visibilitychange', onVis);
+    return () => document.removeEventListener('visibilitychange', onVis);
+  }, [pathname]);
+  return null;
+}
+
 export default function App() {
   return (
     <>
       <a href="#main" className="skip">Skip to content</a>
       <ScrollReset />
+      <DocumentTitle />
       <div id="top" />
       <Header />
       <main id="main" tabIndex={-1}>

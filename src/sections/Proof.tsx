@@ -1,4 +1,5 @@
-import { collaborators, proof } from '../content/site';
+import { collaborators, figures, proof } from '../content/site';
+import { greekNumeral } from '../lib/antiquity';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
@@ -20,7 +21,10 @@ export function Pause() {
         The view is better <em>from up here.</em>
         <span>The work is, too.</span>
       </p>
-      <p className="pause__fig">Fig. 2 — The commute.</p>
+      <p className="pause__fig">
+        {figures.clouds.caption}
+        <span className="sys fig-note">{figures.clouds.note}</span>
+      </p>
     </section>
   );
 }
@@ -37,14 +41,17 @@ export function Proof() {
               <span className="line" style={{ ['--i' as string]: i }}>
                 <span className="line__inner proof__n">{p.n}</span>
               </span>
-              <span className="proof__l">{p.label}</span>
+              <span className="proof__l">
+                <span className="inscr proof__greek" aria-hidden="true">{greekNumeral(p.n)}</span>
+                {p.label}
+              </span>
             </li>
           ))}
         </Reveal>
         <dl className="proof__facts">
           <div>
             <dt>Status</dt>
-            <dd>Independent since 2026. No holding company. Nobody above us, structurally or otherwise.</dd>
+            <dd>Independent since 2026. Operational since roughly the Bronze Age. No holding company. Nobody above us, structurally or otherwise.</dd>
           </div>
           <div>
             <dt>Collaborators</dt>

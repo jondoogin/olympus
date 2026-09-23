@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { services } from '../content/site';
 import { Label } from '../components/Label';
+import { greekNumeral } from '../lib/antiquity';
 
 export function Services() {
   const [active, setActive] = useState<number | null>(null);
@@ -41,7 +42,7 @@ export function Services() {
                     aria-controls={id}
                     onClick={() => setActive(open && hovered.current !== i ? null : i)}
                   >
-                    <span className="svc__n">{String(i + 1).padStart(2, '0')}</span>
+                    <span className="svc__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
                     <span className="svc__name">
                       {s.em && <span className="svc__amp">&amp; </span>}
                       {s.name}
