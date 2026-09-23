@@ -424,7 +424,13 @@ export const proof = [
   { n: '1', label: 'unreasonable standard' },
 ];
 
-export const collaborators = ['Athens', 'London', 'New York', 'Lagos', 'Mexico City', 'Seoul', 'Copenhagen'];
+export const workNote = 'Four imagined collaborations. The clients are fictional concepts; the standards are not.';
+
+export const proofFacts = [
+  { label: 'Status', body: 'A fictional independent agency, imagined in 2026. Operational since roughly the Bronze Age, if the mythology is to be believed.' },
+  { label: 'Collaborators', body: 'A small-team model built around the right directors, makers and specialists for each brief. Real collaborator locations are still to be confirmed.' },
+  { label: 'Working model', body: 'Senior people on every brief, from the first meeting to the final file. No pitch-and-vanish handoff.' },
+];
 
 export const contact = {
   email: 'hello@olympus.agency',
@@ -493,3 +499,65 @@ export const notFound = {
   lead: 'This page has been lost to antiquity. The archaeologists have been notified; expect a fragment by 2031.',
   link: 'Return to the summit',
 };
+
+/** Interior routes. These describe the fictional practice, not real clients or staff. */
+export const interior = {
+  work: {
+    n: '02', label: 'Work', title: ['Selected'], em: 'work.',
+    lead: 'Concept projects for fictional clients, made to the standard we would hold real ones to. Each case study is a proposed direction, not a launched commission.',
+  },
+  services: {
+    n: '03', label: 'Services', title: ['What we'], em: 'do, mostly.',
+    lead: 'The right answer changes with the question. These are the disciplines we bring together, from the first difficult conversation to the final file.',
+    sections: [
+      { title: 'Find the point of view.', body: 'Strategy starts by deciding what a brand can own and what it should leave alone. We turn research, context and a candid conversation into a position that can guide real decisions.', points: ['Positioning and audience insight', 'Brand architecture and naming', 'A brief everyone can use'], related: 'northline' },
+      { title: 'Make it unmistakable.', body: 'An identity should work in a single glance and still reward a second look. We build the visual and verbal rules that keep a brand coherent without making every expression identical.', points: ['Visual and verbal identity', 'Typography and art direction', 'A working system, not a static book'], related: 'vela' },
+      { title: 'Give the idea distance.', body: 'A campaign needs an idea strong enough to travel across formats. We shape the central thought, then make each execution feel native to its place.', points: ['Campaign platforms', 'Film, print and out of home', 'Launch concepts and rollout'], related: 'helio' },
+      { title: 'Keep making it matter.', body: 'Content earns attention through consistency and craft. We design repeatable editorial systems, then make the individual pieces worth stopping for.', points: ['Editorial direction', 'Photography and motion', 'Social content systems'], related: 'aura' },
+      { title: 'Make a place for it.', body: 'Sometimes the brand needs a room, a screen or a moment people can enter. We connect the identity to spatial, event and digital experiences.', points: ['Experiences and launches', 'Retail and spatial concepts', 'Digital product direction'], related: 'helio' },
+      { title: 'Bring us the strange one.', body: 'A brief that crosses categories is often the most interesting. We assemble the right small team around the problem and make the scope clear before the work begins.', points: ['Reinvention and unusual briefs', 'Senior partners at every stage', 'A defined route from idea to delivery'] },
+    ],
+  },
+  people: {
+    n: '04', label: 'People', title: ['Senior by'], em: 'several millennia.',
+    lead: 'Meet the fictional leadership of OLYMPUS. Six familiar names, recast as a small creative agency with very contemporary opinions.',
+    intro: 'No anonymous departments. Each discipline has a face and a point of view; every brief gets the people who will actually make the work.',
+    note: 'Fictional agency and characters — these are creative personae, not staff biographies.',
+    bios: [
+      'Sets the ambition, then asks whether the idea is brave enough to deserve it. Zeus keeps the agency focused on work that can stand in the open.',
+      'Treats clarity as a creative act. Athena makes the argument behind the work as exacting as the work itself.',
+      'Finds the useful signal in a crowded landscape. Hermes moves between research, language and the next conversation.',
+      'Turns a strong thought into a vivid public moment. Apollo brings light, rhythm and an ear for what people will remember.',
+      'Believes culture is made together. Dionysus gives gatherings, stories and unexpected encounters a reason to happen.',
+      'Makes the promise executable. Artemis protects the details, the schedule and the people doing the making.',
+    ],
+  },
+  culture: {
+    n: '07', label: 'Culture', title: ['How we'], em: 'behave.',
+    lead: 'A few house rules for making ambitious work with other people. The old inscriptions are good; the daily practice matters more.',
+    sections: [
+      { title: 'Disagree in the room.', body: 'A sharper idea survives a candid conversation. We challenge the work early, make decisions openly and leave the performance out of feedback.', points: ['Direct critique', 'Clear ownership', 'Credit shared with the makers'] },
+      { title: 'Make space for obsession.', body: 'The smallest detail can carry the whole idea. We protect time for craft, then know when to stop polishing and put the work into the world.', points: ['A strong reason for every choice', 'Time to make and remake', 'Deadlines treated as design constraints'] },
+      { title: 'Gather on purpose.', body: 'Good work happens around a table as well as on a screen. We make room for collaborators, experiments and the occasional Dionysus-approved celebration.', points: ['Small teams around each brief', 'Open exchange across disciplines', 'Rituals worth keeping'] },
+    ],
+    note: 'There are no open roles or public events to list at present. Any future opportunity will appear here with real details.',
+  },
+  about: {
+    n: '01', label: 'About', title: ['The short'], em: 'version.',
+    lead: 'OLYMPUS is a fictional independent creative agency founded in 2026 by six partners with a long shared mythology and a strong opinion about modern brands.',
+    sections: [
+      { title: 'Small by design.', body: 'The imagined working model is deliberately direct: the people in the first conversation stay close to the final work. Strategy, creative and production meet around one clear idea.', points: ['Senior people on every brief', 'The right collaborators for the work', 'No pitch-and-vanish handoff'] },
+      { title: 'Built to be remembered.', body: 'We favour a distinctive point of view over another polished version of the expected. That means understanding the audience, then finding the courage to make a choice.', points: ['Clarity before spectacle', 'Systems that can grow', 'Craft at every scale'] },
+      { title: 'An open invitation.', body: 'The four projects on this site are fictional studies of what this practice might make. They show an approach and a standard, without claiming clients, launches or results that do not exist.', points: ['Explore the concept work', 'Bring a real question', 'Start with a conversation'], related: 'vela' },
+    ],
+  },
+  contact: {
+    n: '06', label: 'Contact', title: ['Start'], em: 'something.',
+    lead: 'Tell us what you are trying to change. A real contact address and a working brief form will be added when the owner supplies them.',
+    sections: [
+      { title: 'A useful first brief.', body: 'Start with the problem, the audience and what needs to be different. A polished deck is optional; an honest question is much more useful.', points: ['What are you making or changing?', 'Who needs to care?', 'What decision or date is driving the work?'] },
+      { title: 'How we would begin.', body: 'We would agree on the question, the people in the room and the shape of the work before proposing a direction. Scope and timing should be clear enough to build trust.', points: ['A conversation about the brief', 'A defined team and scope', 'A plan for making and reviewing'] },
+    ],
+    note: 'The displayed email is a marked placeholder. There is no live submission form or published office address yet.',
+  },
+} as const;

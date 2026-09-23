@@ -1,15 +1,16 @@
-import { PageIntro } from '../components/PageIntro';
+import { InteriorIntro } from '../components/InteriorIntro';
+import { InteriorSections } from '../components/InteriorSections';
 import { Manifesto } from '../sections/Manifesto';
 import { Proof } from '../sections/Proof';
 import { Contact } from '../sections/Contact';
+import { interior } from '../content/site';
 
 export default function AboutPage() {
   return (
     <>
-      <PageIntro n="01" label="About" title={['The short']} em="version.">
-        <p>An independent creative agency founded in 2026 by six partners with a long shared history and a stronger opinion of it.</p>
-      </PageIntro>
+      <InteriorIntro content={interior.about} />
       <Manifesto />
+      <InteriorSections label={interior.about.label} sections={interior.about.sections} />
       <Proof />
       <Contact />
     </>

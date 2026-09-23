@@ -1,16 +1,13 @@
-import { PageIntro } from '../components/PageIntro';
+import { InteriorIntro } from '../components/InteriorIntro';
+import { InteriorSections } from '../components/InteriorSections';
 import { Contact } from '../sections/Contact';
-import { contact } from '../content/site';
+import { interior } from '../content/site';
 
 export default function ContactPage() {
   return (
     <>
-      <PageIntro n="06" label="Contact" title={['Start']} em="something.">
-        <p>
-          New business, collaborations and unreasonable requests: <a href={`mailto:${contact.email}`}>{contact.email}</a>{' '}
-          <span className="tag tag--ink">Placeholder</span>. A proper brief form will live here once real contact details exist.
-        </p>
-      </PageIntro>
+      <InteriorIntro content={interior.contact} />
+      <InteriorSections label={interior.contact.label} sections={interior.contact.sections} note={interior.contact.note} />
       <Contact />
     </>
   );

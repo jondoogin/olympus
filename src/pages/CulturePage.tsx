@@ -1,17 +1,18 @@
-import { PageIntro } from '../components/PageIntro';
+import { InteriorIntro } from '../components/InteriorIntro';
+import { InteriorSections } from '../components/InteriorSections';
 import { Interruption } from '../sections/Interruption';
 import { Maxims } from '../sections/Maxims';
 import { Pause } from '../sections/Proof';
 import { Contact } from '../sections/Contact';
+import { interior } from '../content/site';
 
 export default function CulturePage() {
   return (
     <>
-      <PageIntro n="07" label="Culture" title={['How we']} em="behave.">
-        <p>Principles, rituals and the occasional feast. Some of our rules are new. The better ones are carved into a temple. Open roles and the Dionysus-approved events calendar will follow.</p>
-      </PageIntro>
+      <InteriorIntro content={interior.culture} />
       <Interruption />
       <Maxims />
+      <InteriorSections label={interior.culture.label} sections={interior.culture.sections} note={interior.culture.note} />
       <Pause />
       <Contact />
     </>

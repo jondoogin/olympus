@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { projects, type Project } from '../content/site';
+import { projects, workNote, type Project } from '../content/site';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
@@ -48,9 +48,7 @@ export function Work() {
           Selected <em>work</em>
           <sup>(04)</sup>
         </h2>
-        <p className="work__note">
-          Four recent collaborations. The clients are fictional concepts; the standards are not.
-        </p>
+        <p className="work__note">{workNote}</p>
       </div>
       <div className="work__list">
         {projects.map((p, i) => <ProjectCard key={p.slug} p={p} i={i} />)}
