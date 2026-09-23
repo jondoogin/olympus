@@ -1,30 +1,31 @@
 # OLYMPUS — State
-Updated: 2026-09-23 · S3 · by: claude
+Updated: 2026-09-23 · S6 · by: codex
 
 ## STOPPED AT
-Task: UI/UX + voice pass, "antiquity, rendered" (S3). Done, pushed to branch `claude/adoring-turing-zhiltk` (not merged to main).
-Files touched: index.html, App.tsx, main.tsx, content/site.ts, lib/antiquity.ts (new), components/{Label,Header,Footer}.tsx, sections/{Hero,Manifesto,Work,Services,Pantheon,Interruption,Proof,Contact,Maxims(new)}.tsx, pages/{CulturePage,NotFound}.tsx, styles/*.css, docs.
-Not touched on purpose, because ChatGPT is producing image/video assets in parallel: ProjectPage.tsx, the `projects` array, image manifest, scripts/, public/.
-Next concrete step: owner reviews the branch. Then merge it, and fold ChatGPT's new assets into the case-study pages.
-Verify with: `npm run build` (tsc + vite). Checked visually at 1440 / 1100 / 1024 / 768 / 390 px, including the mobile menu, /culture and 404. No horizontal overflow.
+Task: nothing in flight; Codex work is rebased onto Claude's branding pass on `chatgpt/vela-case-study`
+Files touched: `src/App.tsx`, `src/content/site.ts`, `src/pages/ProjectPage.tsx`, `src/styles/components.css`, `docs/STATE.md`, `docs/sessions/2026-09-23-S6-codex.md`
+Committed: integration code at 48d08f2; S6 handoff at branch HEAD. Local `main` tracks `origin/main` at d375cd3.
+Next concrete step: owner opens and merges a PR from `chatgpt/vela-case-study`, then add project-specific supporting imagery for VELA.
+Verify with: `npm run build`; check `/` and `/work/vela` at 1440 / 1024 / 768 / 390 px, including mobile navigation focus.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
-- Interior routes are foundations only: /work, /work/:slug, /services, /people, /culture, /about, /contact, and a 404.
-- Repo: https://github.com/jondoogin/olympus (private). The only branch is `main`.
-- Placeholders: hello@olympus.agency, the social links (`#`), case-study body copy and the collaborator cities. The list is in `docs/ROUTES.md`.
-- Voice layer (S3): Greek numerals on every index, carved Greek (GFS Didot), live "screen" readouts (IBM Plex Mono). The rules are in DESIGN-SYSTEM.md under "S3 layer".
-- Not visually verified: reduced-motion rendering. The new `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows couldn't be tested in the harness (a click works).
+- VELA has a written concept case study with brief, idea, system and outcome sections. NORTHLINE, HELIO and AURA still use the case-study placeholder; other interior routes remain foundations.
+- Repo: https://github.com/jondoogin/olympus (private). This work is on `chatgpt/vela-case-study` over Claude's branding pass on main; do not push this branch's commits to main directly.
+- Placeholders: hello@olympus.agency, the social links (`#`), three remaining case-study bodies and the collaborator cities. VELA still needs project-specific supporting images. The list is in `docs/ROUTES.md`.
+- Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
+- External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
+- Review fixes complete: closed service descriptions are absent from the accessibility tree, mobile route navigation focuses the new main content, and routes have distinct document titles. Browser-verified on `/`, `/work`, and `/work/vela` where applicable. See `docs/sessions/2026-09-23-S4-codex.md`.
+- Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
+- Not visually verified: reduced-motion rendering. The `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows could not be tested in the harness.
 
 ## NEXT QUEUE
-1. Owner review of the S3 voice pass. Merge `claude/adoring-turing-zhiltk` → main.
-2. Integrate ChatGPT's new image/video assets into /work/:slug (via `npm run images` + `<Picture>`).
-3. Triage the ChatGPT review into concrete tasks here.
-4. Build out the interior pages (case studies first). See `docs/ROUTES.md`.
-5. Replace the placeholders once the owner supplies real details.
-6. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
+1. Owner opens and merges the PR from `chatgpt/vela-case-study` into main.
+2. Finish VELA supporting imagery, then build the remaining case studies and interior pages. See `docs/ROUTES.md`.
+3. Replace the placeholders once the owner supplies real details.
+4. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
 
 ## INVARIANTS
 - The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.

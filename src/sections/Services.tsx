@@ -50,7 +50,7 @@ export function Services() {
                     <span className="svc__plus" aria-hidden="true" />
                   </button>
                 </h3>
-                <div className="svc__panel" id={id} role="region" aria-label={s.name}>
+                <div className="svc__panel" id={id} role="region" aria-label={s.name} aria-hidden={!open}>
                   <div className="svc__panel-inner">
                     <p className="svc__line">{s.line}</p>
                     <ul className="svc__caps">

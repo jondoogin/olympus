@@ -44,7 +44,15 @@ export type Project = {
   crop: Crop;
   scope: string[];
   layout: 'portrait-left' | 'bleed' | 'square-right' | 'offset';
+  caseStudy?: {
+    brief: { label: string; title: string; body: string };
+    idea: { label: string; statement: string; body: string };
+    system: { label: string; title: string; body: string; principles: string[] };
+    outcome: { label: string; title: string; body: string };
+  };
 };
+
+export const conceptNotice = 'Fictional concept — no real client';
 
 export const projects: Project[] = [
   {
@@ -58,6 +66,33 @@ export const projects: Project[] = [
     crop: { mobile: '50% 40%' },
     scope: ['Identity', 'Art direction', 'Campaign'],
     layout: 'portrait-left',
+    caseStudy: {
+      brief: {
+        label: 'The brief',
+        title: 'Make restraint impossible to ignore.',
+        body: 'VELA is an imagined fashion house built around sculptural form. Its first collection needed an identity that could feel unmistakable without competing with the clothes. The concept brief asked for presence, not noise.',
+      },
+      idea: {
+        label: 'The idea',
+        statement: 'Quiet is a form of force.',
+        body: 'Let the silhouette do the talking. Hard light, generous space, and one decisive frame give the collection its own gravity.',
+      },
+      system: {
+        label: 'The system',
+        title: 'A house language cut to the bone.',
+        body: 'The proposed direction moves between severe and soft: blunt typography against sculptural fabric, a cool field of colour against warm stone, and layouts that leave room for the unexpected.',
+        principles: [
+          'Shape before decoration',
+          'Space as a signature',
+          'Campaign images with the confidence to stand alone',
+        ],
+      },
+      outcome: {
+        label: 'The outcome',
+        title: 'A direction, ready to become a world.',
+        body: 'This is an editorial concept, not a launched identity. The image and principles show the intended direction; no client approval, audience response, or commercial result is claimed.',
+      },
+    },
   },
   {
     slug: 'northline',
@@ -267,6 +302,7 @@ export const oracleStatus = 'The oracle is online';
 export const titles = {
   home: 'OLYMPUS — Creative Agency',
   suffix: ' — OLYMPUS',
+  concept: 'Fictional Concept',
   notFound: 'Lost to antiquity',
   away: 'Come back, mortal.',
 };

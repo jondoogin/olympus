@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
@@ -11,19 +11,31 @@ import CulturePage from './pages/CulturePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
-import { nav, titles } from './content/site';
+import { nav, projects, titles } from './content/site';
 
 function ScrollReset() {
   const { pathname } = useLocation();
+  const previousPath = useRef(pathname);
   useEffect(() => {
     window.scrollTo(0, 0);
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    // The menu restores focus while closing; move it to new content afterward.
+    const frame = requestAnimationFrame(() => {
+      document.getElementById('main')?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
   return null;
 }
 
 function pageTitle(pathname: string) {
   if (pathname === '/') return titles.home;
-  const item = nav.find((n) => pathname === n.to || pathname.startsWith(`${n.to}/`));
+  if (pathname.startsWith('/work/')) {
+    const project = projects.find((p) => pathname === `/work/${p.slug}`);
+    return (project ? `${project.client} — ${titles.concept}` : titles.notFound) + titles.suffix;
+  }
+  const item = nav.find((n) => pathname === n.to);
   return (item ? item.label : titles.notFound) + titles.suffix;
 }
 
