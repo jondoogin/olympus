@@ -44,11 +44,18 @@ export type Project = {
   crop: Crop;
   scope: string[];
   layout: 'portrait-left' | 'bleed' | 'square-right' | 'offset';
-  caseStudy?: {
+  caseStudy: {
     brief: { label: string; title: string; body: string };
     idea: { label: string; statement: string; body: string };
     system: { label: string; title: string; body: string; principles: string[] };
     outcome: { label: string; title: string; body: string };
+    media: {
+      galleryLabel: string;
+      detail: { image: ImageKey; alt: string; caption: string };
+      campaign: { image: ImageKey; alt: string; caption: string };
+      materials: { image: ImageKey; alt: string; caption: string };
+      film: { src: string; label: string; caption: string };
+    };
   };
 };
 
@@ -90,7 +97,30 @@ export const projects: Project[] = [
       outcome: {
         label: 'The outcome',
         title: 'A direction, ready to become a world.',
-        body: 'This is an editorial concept, not a launched identity. The image and principles show the intended direction; no client approval, audience response, or commercial result is claimed.',
+        body: 'This is an editorial concept, not a launched identity. The campaign images, material studies and motion piece show the intended direction; no client approval, audience response, or commercial result is claimed.',
+      },
+      media: {
+        galleryLabel: 'Campaign and identity studies',
+        detail: {
+          image: 'vela-fabric-detail',
+          alt: 'Close view of sculptural ivory fabric folds, hard sunlight and a strip of cobalt-blue ground.',
+          caption: 'Material study / Form held by light',
+        },
+        campaign: {
+          image: 'vela-silhouette',
+          alt: 'Faceless mannequin in an ivory sculptural gown at the edge of a marble colonnade above a cobalt-blue floor.',
+          caption: 'Campaign study / Space as a signature',
+        },
+        materials: {
+          image: 'vela-material-study',
+          alt: 'Unmarked ivory paper, sculptural fabric and a cobalt-blue card arranged on sunlit travertine.',
+          caption: 'Identity study / Paper, cloth, colour',
+        },
+        film: {
+          src: '/media/vela-motion-study.mp4',
+          label: 'VELA motion study',
+          caption: 'Motion study / 00:09 / silent',
+        },
       },
     },
   },
@@ -105,6 +135,56 @@ export const projects: Project[] = [
     crop: { mobile: '30% 50%', tablet: '40% 50%', desktop: '50% 55%' },
     scope: ['Brand strategy', 'Naming', 'Identity', 'Film'],
     layout: 'bleed',
+    caseStudy: {
+      brief: {
+        label: 'The brief',
+        title: 'Give permanence a point of view.',
+        body: 'NORTHLINE is an imagined architecture practice working between civic scale and intimate detail. The concept brief called for a name and identity that could speak about longevity without borrowing the usual language of luxury or progress.',
+      },
+      idea: {
+        label: 'The idea',
+        statement: 'Built to outlast the moment.',
+        body: 'Put the ancient and the new in the same frame. The distance between them becomes the argument: good architecture belongs to its time and remains useful beyond it.',
+      },
+      system: {
+        label: 'The system',
+        title: 'A visual language with weight.',
+        body: 'The proposed identity takes its cues from architectural plans and stone itself: decisive geometry, warm mineral colour, deep shadow, and space left deliberately unfilled. Print pieces feel measured rather than embellished.',
+        principles: [
+          'A name that sets direction',
+          'Geometry as the organising device',
+          'Material evidence over ornamental claims',
+        ],
+      },
+      outcome: {
+        label: 'The outcome',
+        title: 'A practice imagined for the long view.',
+        body: 'The name, imagery and motion study form a proposed brand world for a fictional practice. No buildings were commissioned, identity was launched, or audience response measured.',
+      },
+      media: {
+        galleryLabel: 'Architecture and identity studies',
+        detail: {
+          image: 'northline-detail',
+          alt: 'Warm travertine wall meeting a still reflecting pool, with a weathered column at the edge and a long geometric shadow.',
+          caption: 'Material study / Stone and shadow',
+        },
+        campaign: {
+          image: 'northline-campaign',
+          alt: 'Ancient stone column in the foreground across a reflecting basin from a severe modern travertine building.',
+          caption: 'Campaign study / Two times in one frame',
+        },
+        materials: {
+          image: 'northline-materials',
+          alt: 'Architectural paper, a charcoal cover and a small travertine block arranged on a sunlit stone table.',
+          caption: 'Identity study / Paper and stone',
+        },
+        film: {
+          src: '/media/northline-motion-study.mp4',
+          label: 'NORTHLINE motion study',
+          caption: 'Motion study / 00:09 / silent',
+        },
+      },
+    },
   },
   {
     slug: 'helio',
@@ -117,6 +197,56 @@ export const projects: Project[] = [
     crop: { mobile: '60% 40%' },
     scope: ['Campaign', 'Experience', 'Motion'],
     layout: 'square-right',
+    caseStudy: {
+      brief: {
+        label: 'The brief',
+        title: 'Make a summer gathering feel inevitable.',
+        body: 'HELIO is an imagined music and culture festival on the Mediterranean coast. The concept brief asked for an identity that could move from a single announcement to a place, a ticket and a shared moment, without losing its charge.',
+      },
+      idea: {
+        label: 'The idea',
+        statement: 'Follow the sun.',
+        body: 'One orange disc becomes the event’s signal. Against ultramarine and pale stone, it reads as a poster from a distance, a stage from above, and a destination at the end of the day.',
+      },
+      system: {
+        label: 'The system',
+        title: 'One symbol. A whole horizon.',
+        body: 'The proposed campaign holds to three elements: the solar circle, an electric blue field, and flashes of weathered marble. Repetition builds recognition while scale changes the feeling from intimate print to monumental space.',
+        principles: [
+          'A circle that carries the campaign',
+          'Blue and orange with no apology',
+          'An experience imagined from the first frame',
+        ],
+      },
+      outcome: {
+        label: 'The outcome',
+        title: 'A festival world before the first note.',
+        body: 'The campaign images, printed-material study and motion piece explore a fictional event identity. No festival took place, tickets were sold, or attendance and cultural impact measured.',
+      },
+      media: {
+        galleryLabel: 'Campaign and experience studies',
+        detail: {
+          image: 'helio-detail',
+          alt: 'Empty marble amphitheatre at blue hour with a luminous orange disc on its stage above the sea.',
+          caption: 'Experience study / The sun takes the stage',
+        },
+        campaign: {
+          image: 'helio-campaign',
+          alt: 'Pale coastal stone stairway descending toward an oversized orange sun above an ultramarine sea.',
+          caption: 'Campaign study / A destination in sight',
+        },
+        materials: {
+          image: 'helio-materials',
+          alt: 'Unprinted blue folded poster, orange circular card and blank ivory ticket on a marble ledge by the sea.',
+          caption: 'Identity study / Circle, colour, invitation',
+        },
+        film: {
+          src: '/media/helio-motion-study.mp4',
+          label: 'HELIO motion study',
+          caption: 'Motion study / 00:09 / silent',
+        },
+      },
+    },
   },
   {
     slug: 'aura',
@@ -129,6 +259,56 @@ export const projects: Project[] = [
     crop: { mobile: '28% 60%', tablet: '32% 60%', desktop: '40% 60%' },
     scope: ['Launch strategy', 'Product film', 'Content system'],
     layout: 'offset',
+    caseStudy: {
+      brief: {
+        label: 'The brief',
+        title: 'Let the product make room for life.',
+        body: 'AURA is an imagined personal audio device with one luminous control and no visual clutter. The concept brief asked for a launch direction that could explain its restraint through feeling and form, without inventing features or specifications.',
+      },
+      idea: {
+        label: 'The idea',
+        statement: 'Less to see. More to feel.',
+        body: 'Give the object space, then let its single halo become the signal. The campaign moves between an intimate material detail and a quiet architectural setting where the product feels considered rather than announced.',
+      },
+      system: {
+        label: 'The system',
+        title: 'A launch held in one line of light.',
+        body: 'The proposed system pairs reflective obsidian with pale marble, clean blue air, and a fine warm ring. Crops shift from close product evidence to large fields of calm; packaging follows the same reduction.',
+        principles: [
+          'The halo as a consistent visual cue',
+          'Product form before feature language',
+          'Quiet space around every object',
+        ],
+      },
+      outcome: {
+        label: 'The outcome',
+        title: 'A product world, deliberately unfinished.',
+        body: 'These images and the silent motion study propose a launch language for a fictional device. They do not describe a manufactured product, tested capability, commercial launch, or measured result.',
+      },
+      media: {
+        galleryLabel: 'Product and identity studies',
+        detail: {
+          image: 'aura-detail',
+          alt: 'Close view of a reflective black oval audio device and its thin luminous ring against pale stone and sea light.',
+          caption: 'Product study / One line of light',
+        },
+        campaign: {
+          image: 'aura-campaign',
+          alt: 'Small black halo-lit device alone on a long travertine bench in a spare courtyard opening toward the sea.',
+          caption: 'Campaign study / Space around the signal',
+        },
+        materials: {
+          image: 'aura-materials',
+          alt: 'Reflective black audio device beside an unmarked black box and blank ivory card on a marble surface.',
+          caption: 'Identity study / The unboxing moment',
+        },
+        film: {
+          src: '/media/aura-motion-study.mp4',
+          label: 'AURA motion study',
+          caption: 'Motion study / 00:09 / silent',
+        },
+      },
+    },
   },
 ];
 

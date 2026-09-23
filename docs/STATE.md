@@ -1,29 +1,30 @@
 # OLYMPUS — State
-Updated: 2026-09-23 · S6 · by: codex
+Updated: 2026-09-23 · S8 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight; Codex work is rebased onto Claude's branding pass on `chatgpt/vela-case-study`
-Files touched: `src/App.tsx`, `src/content/site.ts`, `src/pages/ProjectPage.tsx`, `src/styles/components.css`, `docs/STATE.md`, `docs/sessions/2026-09-23-S6-codex.md`
-Committed: integration code at 48d08f2; S6 handoff at branch HEAD. Local `main` tracks `origin/main` at d375cd3.
-Next concrete step: owner opens and merges a PR from `chatgpt/vela-case-study`, then add project-specific supporting imagery for VELA.
-Verify with: `npm run build`; check `/` and `/work/vela` at 1440 / 1024 / 768 / 390 px, including mobile navigation focus.
+Task: nothing in flight; all four fictional project case studies are complete on `wip/all-case-studies`
+Files touched: `src/content/site.ts`, `src/content/image-manifest.json`, `src/pages/ProjectPage.tsx`, `src/styles/components.css`, `docs/ROUTES.md`, `scripts/build-remaining-films.sh`, new NORTHLINE/HELIO/AURA masters and derivatives under `public/OLYMPUS-asset-library/05-selected-work/`, three motion studies under `public/media/`
+Committed: case studies at d28181f; S8 handoff at branch HEAD. Local `main` tracks `origin/main` at d375cd3.
+Next concrete step: owner reviews the four `/work/:slug` pages and opens a PR from `wip/all-case-studies` into `main`; this branch contains VELA plus NORTHLINE, HELIO and AURA.
+Verify with: `npm run build`; check all four case studies at 1440 / 1024 / 768 / 390 px and the reduced-motion film still.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
-- VELA has a written concept case study with brief, idea, system and outcome sections. NORTHLINE, HELIO and AURA still use the case-study placeholder; other interior routes remain foundations.
-- Repo: https://github.com/jondoogin/olympus (private). This work is on `chatgpt/vela-case-study` over Claude's branding pass on main; do not push this branch's commits to main directly.
-- Placeholders: hello@olympus.agency, the social links (`#`), three remaining case-study bodies and the collaborator cities. VELA still needs project-specific supporting images. The list is in `docs/ROUTES.md`.
+- VELA, NORTHLINE, HELIO and AURA each have a complete fictional concept case study with brief, idea, system, outcome, three supporting stills and a silent motion study. Other interior routes remain foundations.
+- Repo: https://github.com/jondoogin/olympus (private). The four case studies and media are on `wip/all-case-studies`, based on `chatgpt/vela-case-study` over Claude's branding pass on main; do not push these commits to main directly. `wip/vela-media` preserves the prior VELA-only milestone.
+- Placeholders: hello@olympus.agency, the social links (`#`) and the collaborator cities. The list is in `docs/ROUTES.md`.
 - Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
 - External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
 - Review fixes complete: closed service descriptions are absent from the accessibility tree, mobile route navigation focuses the new main content, and routes have distinct document titles. Browser-verified on `/`, `/work`, and `/work/vela` where applicable. See `docs/sessions/2026-09-23-S4-codex.md`.
 - Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
+- Each project now has three project-specific stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each case story; the film is replaced by a still when reduced motion is requested. Build passed and browser checks at 1440 / 1024 / 768 / 390 px found no horizontal overflow. NORTHLINE's long title has its own scale to fit the reveal mask. See `docs/sessions/2026-09-23-S8-codex.md`.
 - Not visually verified: reduced-motion rendering. The `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows could not be tested in the harness.
 
 ## NEXT QUEUE
-1. Owner opens and merges the PR from `chatgpt/vela-case-study` into main.
-2. Finish VELA supporting imagery, then build the remaining case studies and interior pages. See `docs/ROUTES.md`.
+1. Owner reviews all four case studies and opens and merges a PR from `wip/all-case-studies` into main.
+2. Build the remaining interior pages. See `docs/ROUTES.md`.
 3. Replace the placeholders once the owner supplies real details.
 4. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
 
