@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { pageTitle } from './content/site';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import Home from './pages/Home';
@@ -15,8 +16,17 @@ import { nav, titles } from './content/site';
 
 function ScrollReset() {
   const { pathname } = useLocation();
+  const previousPath = useRef(pathname);
   useEffect(() => {
+    document.title = pageTitle(pathname);
     window.scrollTo(0, 0);
+    if (previousPath.current === pathname) return;
+    previousPath.current = pathname;
+    // The menu restores focus while closing; move it to new content afterward.
+    const frame = requestAnimationFrame(() => {
+      document.getElementById('main')?.focus({ preventScroll: true });
+    });
+    return () => cancelAnimationFrame(frame);
   }, [pathname]);
   return null;
 }
