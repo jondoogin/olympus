@@ -6,7 +6,7 @@ All content lives in `src/content/site.ts` (nav, hero, manifesto, projects, serv
 | --- | --- | --- | --- |
 | `/` | **Complete** | Hero · Manifesto · Work · Services · Pantheon · Interruption · Pause · Proof · Contact | — |
 | `/work` | Foundation | PageIntro + all `ProjectCard`s + Contact | Filters by discipline once there are more than 4 projects |
-| `/work/:slug` | **Complete for all four concepts** | Case hero, full-bleed plate, editorial story, supporting stills, silent motion study, next-project link | Review concept direction before publishing; no client results are claimed |
+| `/work/:slug` | **Complete for all four concepts** | Case hero, project-specific image composition, editorial story, supporting stills, titled silent motion study with playback control, next-project link | Review concept direction before publishing; no client results are claimed |
 | `/services` | Foundation | PageIntro + Services index | One sub-section per discipline: approach, deliverables, related work |
 | `/people` | Foundation | PageIntro + Pantheon | Per-god bios; also the mortal team, once there is one |
 | `/culture` | Foundation | PageIntro + Interruption + Pause | Principles, rituals, open roles, events (Dionysus) |
