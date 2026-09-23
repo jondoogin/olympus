@@ -1,30 +1,31 @@
 # OLYMPUS — State
-Updated: 2026-09-23 · S3 · by: claude
+Updated: 2026-09-23 · S3 · by: codex, after Claude's branding pass
 
 ## STOPPED AT
-Task: UI/UX + voice pass, "antiquity, rendered" (S3). Done, pushed to branch `claude/adoring-turing-zhiltk` (not merged to main).
-Files touched: index.html, App.tsx, main.tsx, content/site.ts, lib/antiquity.ts (new), components/{Label,Header,Footer}.tsx, sections/{Hero,Manifesto,Work,Services,Pantheon,Interruption,Proof,Contact,Maxims(new)}.tsx, pages/{CulturePage,NotFound}.tsx, styles/*.css, docs.
-Not touched on purpose, because ChatGPT is producing image/video assets in parallel: ProjectPage.tsx, the `projects` array, image manifest, scripts/, public/.
-Next concrete step: owner reviews the branch. Then merge it, and fold ChatGPT's new assets into the case-study pages.
-Verify with: `npm run build` (tsc + vite). Checked visually at 1440 / 1100 / 1024 / 768 / 390 px, including the mobile menu, /culture and 404. No horizontal overflow.
+Task: nothing in flight; the external review is complete
+Files touched: `docs/STATE.md`, `docs/sessions/2026-09-23-S3-codex.md`
+Committed: external review notes on this branch; Claude's branding pass is on main
+Next concrete step: fix route-change focus and page titles, then hide collapsed service panel content from assistive technology.
+Verify with: `npm run build`; test keyboard navigation and service announcements in a browser.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
 - Interior routes are foundations only: /work, /work/:slug, /services, /people, /culture, /about, /contact, and a 404.
-- Repo: https://github.com/jondoogin/olympus (private). The only branch is `main`.
+- Repo: https://github.com/jondoogin/olympus (private).
 - Placeholders: hello@olympus.agency, the social links (`#`), case-study body copy and the collaborator cities. The list is in `docs/ROUTES.md`.
-- Voice layer (S3): Greek numerals on every index, carved Greek (GFS Didot), live "screen" readouts (IBM Plex Mono). The rules are in DESIGN-SYSTEM.md under "S3 layer".
-- Not visually verified: reduced-motion rendering. The new `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows couldn't be tested in the harness (a click works).
+- Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
+- External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
+- Review findings: collapsed service descriptions remain in the accessibility tree; mobile route navigation returns focus to the Menu button instead of the new page; all routes share one document title. See `docs/sessions/2026-09-23-S3-codex.md`.
+- Not visually verified: reduced-motion rendering. The `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows could not be tested in the harness.
 
 ## NEXT QUEUE
-1. Owner review of the S3 voice pass. Merge `claude/adoring-turing-zhiltk` → main.
-2. Integrate ChatGPT's new image/video assets into /work/:slug (via `npm run images` + `<Picture>`).
-3. Triage the ChatGPT review into concrete tasks here.
-4. Build out the interior pages (case studies first). See `docs/ROUTES.md`.
-5. Replace the placeholders once the owner supplies real details.
-6. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
+1. Fix and verify route-change focus, route-specific page titles, and collapsed service panel accessibility.
+2. Integrate future project-specific assets into /work/:slug (via `npm run images` + `<Picture>`).
+3. Build out the interior pages (case studies first). See `docs/ROUTES.md`.
+4. Replace the placeholders once the owner supplies real details.
+5. Launch prep: pick a host, set up the SPA fallback rewrite, and make OG URLs absolute.
 
 ## INVARIANTS
 - The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
