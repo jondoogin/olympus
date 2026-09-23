@@ -3,6 +3,7 @@ import { conceptNotice, projects, type Project } from '../content/site';
 import { Picture } from '../components/Picture';
 import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
+import { greekNumeral } from '../lib/antiquity';
 import NotFound from './NotFound';
 
 export default function ProjectPage() {
@@ -19,7 +20,7 @@ export default function ProjectPage() {
           <Reveal as="h1" kind="lines" className="case-hero__title">
             <Line>{p.client}</Line>
           </Reveal>
-          <p className="case-hero__concept">{conceptNotice}</p>
+          <p className="case-hero__concept sys">{conceptNotice}</p>
           <p className="case-hero__line">{p.line}</p>
           <ul className="case-hero__scope">{p.scope.map((s) => <li key={s}>{s}</li>)}</ul>
         </div>
@@ -73,7 +74,10 @@ function CaseStory({ story }: { story: NonNullable<Project['caseStudy']> }) {
             <p>{story.system.body}</p>
             <ol className="case-system__principles">
               {story.system.principles.map((principle, index) => (
-                <li key={principle}><span>{String(index + 1).padStart(2, '0')}</span>{principle}</li>
+                <li key={principle}>
+                  <span className="case-system__numeral" aria-hidden="true">{greekNumeral(index + 1)}</span>
+                  <span className="sr-only">{index + 1}. </span>{principle}
+                </li>
               ))}
             </ol>
           </div>

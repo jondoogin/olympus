@@ -13,14 +13,6 @@ export const nav = [
   { label: 'Contact', to: '/contact', note: 'Start something' },
 ] as const;
 
-export function pageTitle(pathname: string) {
-  if (pathname === '/') return 'OLYMPUS — Creative Agency';
-  const project = projects.find((item) => pathname === `/work/${item.slug}`);
-  if (project) return `${project.client} — Fictional Concept | OLYMPUS`;
-  const page = nav.find((item) => item.to === pathname);
-  return page ? `${page.label} | OLYMPUS` : 'Page Not Found | OLYMPUS';
-}
-
 export const hero = {
   image: 'zeus-blue-sky-hero' as ImageKey,
   alt: 'Low-angle photograph of a weathered marble statue of a bearded god wearing black sunglasses, set against a deep blue Mediterranean sky.',
@@ -310,6 +302,7 @@ export const oracleStatus = 'The oracle is online';
 export const titles = {
   home: 'OLYMPUS — Creative Agency',
   suffix: ' — OLYMPUS',
+  concept: 'Fictional Concept',
   notFound: 'Lost to antiquity',
   away: 'Come back, mortal.',
 };

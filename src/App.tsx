@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
-import { pageTitle } from './content/site';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import Home from './pages/Home';
@@ -12,13 +11,12 @@ import CulturePage from './pages/CulturePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
-import { nav, titles } from './content/site';
+import { nav, projects, titles } from './content/site';
 
 function ScrollReset() {
   const { pathname } = useLocation();
   const previousPath = useRef(pathname);
   useEffect(() => {
-    document.title = pageTitle(pathname);
     window.scrollTo(0, 0);
     if (previousPath.current === pathname) return;
     previousPath.current = pathname;
@@ -33,7 +31,11 @@ function ScrollReset() {
 
 function pageTitle(pathname: string) {
   if (pathname === '/') return titles.home;
-  const item = nav.find((n) => pathname === n.to || pathname.startsWith(`${n.to}/`));
+  if (pathname.startsWith('/work/')) {
+    const project = projects.find((p) => pathname === `/work/${p.slug}`);
+    return (project ? `${project.client} — ${titles.concept}` : titles.notFound) + titles.suffix;
+  }
+  const item = nav.find((n) => pathname === n.to);
   return (item ? item.label : titles.notFound) + titles.suffix;
 }
 
