@@ -1,4 +1,4 @@
-import { collaborators, figures, proof } from '../content/site';
+import { figures, proof, proofFacts } from '../content/site';
 import { greekNumeral } from '../lib/antiquity';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
@@ -49,18 +49,7 @@ export function Proof() {
           ))}
         </Reveal>
         <dl className="proof__facts">
-          <div>
-            <dt>Status</dt>
-            <dd>Independent since 2026. Operational since roughly the Bronze Age. No holding company. Nobody above us, structurally or otherwise.</dd>
-          </div>
-          <div>
-            <dt>Collaborators</dt>
-            <dd>A trusted network of directors, makers and specialists in {collaborators.slice(0, -1).join(', ')} and {collaborators.at(-1)}.</dd>
-          </div>
-          <div>
-            <dt>Working model</dt>
-            <dd>Senior people on every brief, from the first meeting to the final file. We don’t do the pitch-and-vanish.</dd>
-          </div>
+          {proofFacts.map((fact) => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.body}</dd></div>)}
         </dl>
       </div>
     </section>

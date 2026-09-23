@@ -586,4 +586,5 @@
   .mmenu__nav a { opacity: 1; transform: none; }
   .hero__scroll::after { animation: none; }
   .pause__media .pic img, .proj__frame .pic, .manifesto__frame .pic { translate: none !important; }
+  .case-film video { display: none; }
 }

@@ -1,33 +1,36 @@
 # OLYMPUS — State
-Updated: 2026-09-23 · S7 · by: claude
+Updated: 2026-09-23 · S10 · by: codex
 
 ## STOPPED AT
-Task: launch prep (PR #3: `vercel.json` SPA rewrite + absolute OG/Twitter meta). Rebased cleanly onto main after the PR #1/#2 squash-merges diverged its history; awaiting merge.
-Files touched: `vercel.json` (new), `vite.config.ts`, `docs/STATE.md`, `docs/sessions/`.
-Committed: rebased branch pushed to `claude/vercel-launch-prep`. `main` is at the merge of PR #2 (VELA case study over the branding pass).
-Next concrete step: owner (or Claude) merges PR #3. Vercel will auto-redeploy `main` on merge — confirm the SPA rewrite and `og:image` are live, then set the `VITE_SITE_URL` project env var on Vercel to the assigned/custom domain and redeploy once more so OG/Twitter tags go absolute.
-Verify with: `npm run build`; check `/` and `/work/vela` at 1440 / 1024 / 768 / 390 px, including mobile navigation focus.
+Task: nothing in flight; four project media stories and the interior concept pages are complete locally on `wip/project-media-direction` and awaiting owner review.
+Files touched: `src/content/site.ts`, interior pages and components, `src/styles/components.css`, `src/sections/Work.tsx`, `src/sections/Proof.tsx`, `docs/ROUTES.md`, this handoff and `docs/sessions/2026-09-23-S10-codex.md`.
+Committed: `wip/project-media-direction` at bd16004, including the merge of `origin/main` at 5e3e58b.
+Next concrete step: owner reviews the four case studies and five interior pages, then decides whether to publish this branch through a PR into `main`.
+Verify with: `npm run build`; inspect changed pages at 1440 / 1024 / 768 / 390 px, then check `https://olympus-green.vercel.app` after a `main` deployment.
+Watch out for: production remains on 5e3e58b until a PR merges; do not use hashed deployment URLs for verification.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
-- VELA has a written concept case study with brief, idea, system and outcome sections. NORTHLINE, HELIO and AURA still use the case-study placeholder; other interior routes remain foundations.
-- Repo: https://github.com/jondoogin/olympus. **Now public** (was private) — the owner switched it, likely to simplify the Vercel import. Confirm this is intentional before assuming it stays that way.
-- Hosting: Vercel is connected via its GitHub App and auto-deploys `main` to production on every merge (`vercel[bot]` deployment, confirmed via the GitHub deployments API). No custom domain attached yet as of S7.
-- Placeholders: hello@olympus.agency, the social links (`#`), three remaining case-study bodies and the collaborator cities. VELA still needs project-specific supporting images. The list is in `docs/ROUTES.md`.
+- VELA, NORTHLINE, HELIO and AURA each have a complete fictional concept case study with brief, idea, system, outcome, three supporting stills and a silent motion study. Services, People, Culture and About now have route-specific concept content; Contact has brief guidance but awaits a real address and form destination. Work is the complete concept index.
+- Repo: https://github.com/jondoogin/olympus (public; owner confirmation requested). VELA's written story and launch prep are merged on `main` (PRs #2 and #3). The four-project media and interior page direction is on local `wip/project-media-direction`, integrated with PR #3, awaiting review; do not push it to main directly. Earlier wip branches remain as milestones.
+- Hosting: Vercel auto-deploys `main`. PR #3 merged the SPA rewrite and absolute OG/Twitter meta on production commit `5e3e58b`. Canonical live URL: https://olympus-green.vercel.app. The hashed deployment URLs are fixed-build previews and change each deploy; do not use them as the site URL.
+- Production browser check: `/` and direct `/work/vela` load with HTTP 200; the case study title is correct. `og:url`, `og:image`, and `twitter:image` use absolute `https://olympus-green.vercel.app/...` URLs. `VITE_SITE_URL` is set to that origin, with `https://` and no trailing slash. Update it and redeploy if a custom domain is attached.
+- Vercel Authentication is off project-wide, so previews are public. Standard Protection only exempts production custom domains; consider re-enabling it after one is attached.
+- Placeholders: hello@olympus.agency and social links (`#`). No collaborator cities are displayed as facts; real network details await the owner. The list is in `docs/ROUTES.md`.
 - Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
 - External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
 - Review fixes complete: closed service descriptions are absent from the accessibility tree, mobile route navigation focuses the new main content, and routes have distinct document titles. Browser-verified on `/`, `/work`, and `/work/vela` where applicable. See `docs/sessions/2026-09-23-S4-codex.md`.
 - Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
-- Not visually verified: reduced-motion rendering. The `.sys--dot` pulse is in the reduce block. Keyboard Enter on the service rows could not be tested in the harness.
+- Each project has three project-specific supporting stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each story with distinct compositions: VELA editorial, NORTHLINE architectural, HELIO solar, AURA dark product. Film frames carry project titles and an accessible play/pause control; the film is replaced by a still when reduced motion is requested. Build and four-width overflow checks passed. See `docs/sessions/2026-09-23-S8-codex.md` and S9.
+- Local S10 verification: `npm run images` succeeds with `sharp`; `npm run build` passes. Home, all four project pages and all five interior pages show no horizontal overflow, failed loaded images or Vite overlay at 1440 / 1024 / 768 / 390 px. Reduced-motion VELA shows a still and omits video and playback controls. Keyboard Enter on service rows remains untested.
+- Canonical production headers for `/` and `/work/vela` return HTTP 200 without `x-robots-tag`; the HTML has no robots noindex tag. New branch work is not live on production yet.
 
 ## NEXT QUEUE
-1. Merge PR #3 (`claude/vercel-launch-prep`) into main. Vercel auto-redeploys; verify `/work/vela` no longer 404s on direct load and `og:image` is present (will still be relative until step 2).
-2. Set the `VITE_SITE_URL` Vercel project env var to the live domain, redeploy, and confirm `og:image`/`og:url` resolve absolute.
-3. Finish VELA supporting imagery, then build the remaining case studies (NORTHLINE, HELIO, AURA) and interior pages. See `docs/ROUTES.md`.
-4. Replace the placeholders once the owner supplies real details (email, socials, collaborator cities).
-5. Confirm the repo's new public visibility is intentional; if not, flip it back private (Vercel's GitHub App works with private repos too, it just needs re-authorizing).
+1. Owner reviews the four case studies and interior concept pages; publish through a PR into `main` when approved, then verify on the canonical production URL after Vercel deploys.
+2. Confirm with owner that the repository should be public.
+3. Replace email and social placeholders, add a usable contact form and any real collaborator details only after the owner supplies them.
 
 ## INVARIANTS
 - The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
@@ -47,7 +50,7 @@ Verify with: `npm run build`; check `/` and `/work/vela` at 1440 / 1024 / 768 / 
 - Every animation must collapse under `prefers-reduced-motion`. Add the new selector to the reduce block at the end of `sections.css`.
 
 ## FRAGILE
-- `vercel.json` does the SPA fallback (all routes → `index.html`). `vite.config.ts` has a small plugin that rewrites `og:image`/`twitter:image` to absolute and adds `og:url`, gated on the `VITE_SITE_URL` env var (no trailing slash) being set at build time — unset, the tags stay relative (fine for `npm run build` locally/previews). Set it as a Vercel project env var once the domain is known.
+- `vercel.json` rewrites deep links to `index.html`. The `vite.config.ts` plugin uses `VITE_SITE_URL` at build time to add absolute OG/Twitter image URLs and `og:url`; the value needs the `https://` origin without a trailing slash.
 - The desktop hero meta rail is one line at ≥1380px. The "Rendered in…" readout hides below that, and the hero intro must stay 3 lines or it collides with "for a lower world."
 - Display type sizes are tuned so words like "SELECTED", "NORTHLINE", "MORTALS" and "OLYMPUS." don't clip at 390px. Re-check mobile after any copy or type change (`--fs-display` and the per-section clamps).
 - The desktop hero composition depends on the crop `hero.crop` in site.ts plus the annotation position (`.hero__annot` in sections.css).

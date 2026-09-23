@@ -105,6 +105,40 @@
       1536
     ]
   },
+  "aura-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "aura-detail": {
+    "dir": "05-selected-work",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1672
+    ]
+  },
+  "aura-materials": {
+    "dir": "05-selected-work",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      800,
+      1200,
+      1254
+    ]
+  },
   "culture-campaign": {
     "dir": "05-selected-work",
     "width": 1254,
@@ -126,7 +160,109 @@
       1024
     ]
   },
+  "helio-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "helio-detail": {
+    "dir": "05-selected-work",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1672
+    ]
+  },
+  "helio-materials": {
+    "dir": "05-selected-work",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      800,
+      1200,
+      1254
+    ]
+  },
+  "northline-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "northline-detail": {
+    "dir": "05-selected-work",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1672
+    ]
+  },
+  "northline-materials": {
+    "dir": "05-selected-work",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      800,
+      1200,
+      1254
+    ]
+  },
   "technology-campaign": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "vela-fabric-detail": {
+    "dir": "05-selected-work",
+    "width": 1672,
+    "height": 941,
+    "widths": [
+      480,
+      800,
+      1200,
+      1600,
+      1672
+    ]
+  },
+  "vela-material-study": {
+    "dir": "05-selected-work",
+    "width": 1254,
+    "height": 1254,
+    "widths": [
+      480,
+      800,
+      1200,
+      1254
+    ]
+  },
+  "vela-silhouette": {
     "dir": "05-selected-work",
     "width": 1536,
     "height": 1024,
