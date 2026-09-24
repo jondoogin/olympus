@@ -26,7 +26,6 @@ export function Contact() {
           <p className="sys contact__note">{contactNote}</p>
           <p className="contact__mail">
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
-            {contact.emailIsPlaceholder && <span className="tag">Placeholder</span>}
           </p>
         </div>
       </div>

@@ -580,6 +580,43 @@
   .maxim__note { grid-column: 3; justify-self: end; text-align: right; max-width: 26ch; }
 }
 
+/* Touch screens trade hover for scroll: imagery moves at a different depth,
+   while names and editorial lines arrive as each panel enters. */
+@media (max-width: 1099px) and (prefers-reduced-motion: no-preference) {
+  .hero__pic img { scale: 1.08; }
+  .work__title[data-reveal='fade']:not(.is-in), .pantheon__title[data-reveal='fade']:not(.is-in),
+  .services__title[data-reveal='fade']:not(.is-in), .people-bios__head h2[data-reveal='fade']:not(.is-in) { transform: translateY(3.5rem); }
+  .page-intro__lead[data-reveal='fade']:not(.is-in), .case-brief__title[data-reveal='fade']:not(.is-in),
+  .case-system h2[data-reveal='fade']:not(.is-in), .case-outcome h2[data-reveal='fade']:not(.is-in),
+  .interior-story__main h2[data-reveal='fade']:not(.is-in), .people-bio__copy[data-reveal='fade']:not(.is-in) { transform: translateY(2.75rem); }
+  .page-intro__lead[data-reveal='fade'] { transition-delay: 220ms; }
+  .proj__frame .pic { translate: 0 calc((var(--p, 0.5) - 0.5) * -18%); scale: 1.06; }
+  .proj__meta[data-reveal='fade'] { transform: translateY(2.75rem); transition-delay: 180ms; }
+  .proj__meta[data-reveal='fade'].is-in { transform: none; }
+  .proj__frame.is-in .proj__view { opacity: 1; translate: 0 0; transition-delay: 550ms; }
+  .proj__frame::after {
+    content: ''; position: absolute; z-index: 2; inset: auto 0 0; height: 2px;
+    background: var(--marble); transform: scaleX(0); transform-origin: left;
+    transition: transform 1200ms var(--ease-out) 350ms;
+  }
+  .proj__frame.is-in::after { transform: scaleX(1); }
+  .god__frame .pic { scale: 1.16; translate: 0 calc((var(--p, 0.5) - 0.5) * -13%); }
+  .case-media { overflow: hidden; }
+  .case-media .pic { scale: 1.14; translate: 0 calc((var(--p, 0.5) - 0.5) * -12%); }
+  .case-plate > .pic, .case-gallery .pic { overflow: hidden; }
+  .case-plate .pic img { scale: 1.12; translate: 0 calc((var(--p, 0.5) - 0.5) * -11%); }
+  .case-gallery figure:first-child .pic img { scale: 1.12; translate: 0 calc((var(--p, 0.5) - 0.5) * -10%); }
+  .case-gallery figure:last-child .pic img { scale: 1.12; translate: 0 calc((var(--p, 0.5) - 0.5) * 10%); }
+  .case-gallery figure:nth-child(2)[data-reveal='fade'] { transition-delay: 170ms; }
+  .case-idea__statement { translate: 0 calc((var(--p, 0.5) - 0.5) * -2rem); }
+  .case-page[data-project='helio'] .case-idea::before { translate: 0 calc((var(--p, 0.5) - 0.5) * 16%); }
+  .people-bio__image .pic { scale: 1.16; translate: 0 calc((var(--p, 0.5) - 0.5) * -12%); }
+  .people-bio:nth-child(even) .people-bio__copy[data-reveal='fade'] { transition-delay: 170ms; }
+  .interior-story__main h2 { translate: 0 calc((var(--p, 0.5) - 0.5) * -1.5rem); }
+  .interior-story__aside { translate: 0 calc((var(--p, 0.5) - 0.5) * 1rem); }
+  .interior-story__aside[data-reveal='fade'] { transition-delay: 160ms; }
+}
+
 /* Reduced motion: remaining hard-coded transitions become instant */
 @media (prefers-reduced-motion: reduce) {
   .mmenu, .mmenu[data-open='true'], .mmenu__nav a, .svc__panel, .svc__name, .proj__frame, .god__frame::after { transition: none !important; }
@@ -587,4 +624,10 @@
   .hero__scroll::after { animation: none; }
   .pause__media .pic img, .proj__frame .pic, .manifesto__frame .pic { translate: none !important; }
   .case-film video { display: none; }
+  .hero__pic img, .proj__frame .pic, .god__frame .pic, .case-media .pic,
+  .case-plate .pic img, .case-gallery .pic img, .case-idea__statement,
+  .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic,
+  .interior-story__main h2, .interior-story__aside { translate: none !important; scale: 1 !important; }
+  .proj__view { opacity: 1; translate: none; transition: none; }
+  .proj__frame::after { transition: none; transform: none; }
 }

@@ -43,6 +43,7 @@ Sections set `data-theme` (`dark` / `stone`) to re-map `--bg` / `--fg` / `--rule
 4. Services: hovering, focusing or tapping a row stretches its name along Archivo's width axis (84 → 118) and dims the others.
 5. The gold bolt in the interruption strikes (snap + brief glow). The header and contact CTA bolts tilt on hover.
 6. Slow parallax/pan on the columns, projects and clouds. Nothing moves the cursor, and there's no WebGL.
+7. At mobile and tablet widths, scrolling also moves project plates, case-study details, gallery images and portraits at a separate depth. Headings and captions rise in as they enter; project cards reveal a persistent view cue and a fine registration line. These effects stop under reduced motion.
 
 ## Assets
 

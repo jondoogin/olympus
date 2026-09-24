@@ -433,15 +433,15 @@ export const proofFacts = [
 ];
 
 export const contact = {
-  email: 'hello@olympus.agency',
-  emailIsPlaceholder: true,
+  email: 'john@duggan.design',
+  emailNote: 'The summit is fictional. The inbox is real.',
 };
 
 export const socials = [
-  { label: 'Instagram', href: '#' },
-  { label: 'LinkedIn', href: '#' },
-  { label: 'Vimeo', href: '#' },
-  { label: 'Are.na', href: '#' },
+  { label: 'Instagram', href: 'https://www.instagram.com/jondoogin/' },
+  { label: 'LinkedIn', href: 'https://linkedin.com/in/jondoogin' },
+  { label: 'Behance', href: 'https://behance.net/jondoogin' },
+  { label: 'Dribbble', href: 'https://dribbble.com/jondoogin' },
 ];
 
 /* ---------------------------------------------------------------------------
@@ -475,7 +475,7 @@ export const maximsIntro = {
   note: 'The rules were written on a temple wall so nobody could say they missed the memo. We kept three.',
 };
 
-export const contactNote = 'Replies faster than Delphi, and considerably less ambiguous.';
+export const contactNote = 'Send the first thought. The useful details can follow.';
 
 export const footerLines = {
   carved: 'Carved in React. Rendered on glass. No marble was harmed.',
@@ -553,11 +553,11 @@ export const interior = {
   },
   contact: {
     n: '06', label: 'Contact', title: ['Start'], em: 'something.',
-    lead: 'Tell us what you are trying to change. A real contact address and a working brief form will be added when the owner supplies them.',
+    lead: 'Tell us what you are trying to change. Start with an email; a polished deck can wait.',
     sections: [
       { title: 'A useful first brief.', body: 'Start with the problem, the audience and what needs to be different. A polished deck is optional; an honest question is much more useful.', points: ['What are you making or changing?', 'Who needs to care?', 'What decision or date is driving the work?'] },
       { title: 'How we would begin.', body: 'We would agree on the question, the people in the room and the shape of the work before proposing a direction. Scope and timing should be clear enough to build trust.', points: ['A conversation about the brief', 'A defined team and scope', 'A plan for making and reviewing'] },
     ],
-    note: 'The displayed email is a marked placeholder. There is no live submission form or published office address yet.',
+    note: 'Email opens your mail app. There is no standalone submission form or published office address.',
   },
 } as const;

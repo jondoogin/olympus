@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
 import { services } from '../content/site';
 import { Label } from '../components/Label';
+import { Reveal } from '../components/Reveal';
 import { greekNumeral } from '../lib/antiquity';
 
 export function Services() {
@@ -12,7 +13,7 @@ export function Services() {
       <div className="wrap grid">
         <div className="services__aside">
           <Label n="03">Services</Label>
-          <h2 id="services-title" className="services__title">An index of ways in.</h2>
+          <Reveal as="h2" id="services-title" className="services__title" kind="fade">An index of ways in.</Reveal>
           <p className="services__note">Six disciplines. Most clients need three. Some need a miracle.</p>
         </div>
 

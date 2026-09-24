@@ -14,7 +14,7 @@ export function PageIntro({ n, label, title, em, children }: Props) {
           {title.map((t, i) => <Line key={t} i={i}>{t}</Line>)}
           {em && <Line i={title.length}><em>{em}</em></Line>}
         </Reveal>
-        {children && <div className="page-intro__lead">{children}</div>}
+        {children && <Reveal className="page-intro__lead" kind="fade" threshold={0.1}>{children}</Reveal>}
       </div>
     </section>
   );

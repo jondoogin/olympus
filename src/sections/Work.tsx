@@ -22,7 +22,7 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
           <Picture image={p.image} alt={p.alt} sizes={SIZES[p.layout]} crop={p.crop} />
           <span className="proj__view" aria-hidden="true">View project</span>
         </Reveal>
-        <div className="proj__meta">
+        <Reveal className="proj__meta" kind="fade" threshold={0.1}>
           <span className="proj__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
           <h3 className="proj__client">{p.client}</h3>
           <p className="proj__disc">
@@ -33,7 +33,7 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
           <ul className="proj__scope" aria-label="Scope">
             {p.scope.map((s) => <li key={s}>{s}</li>)}
           </ul>
-        </div>
+        </Reveal>
       </Link>
     </article>
   );
@@ -44,10 +44,10 @@ export function Work() {
     <section className="work section" id="work" data-ink="obsidian" aria-labelledby="work-title">
       <div className="wrap grid work__head">
         <Label n="02" className="work__label">Selected work</Label>
-        <h2 id="work-title" className="work__title">
+        <Reveal as="h2" id="work-title" kind="fade" className="work__title">
           Selected <em>work</em>
           <sup>(04)</sup>
-        </h2>
+        </Reveal>
         <p className="work__note">{workNote}</p>
       </div>
       <div className="work__list">
