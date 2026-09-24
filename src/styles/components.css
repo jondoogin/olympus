@@ -139,7 +139,6 @@
 .mmenu__meta { display: grid; gap: 0.3rem; margin-left: auto; text-align: right; color: var(--fg-muted); }
 .mmenu__meta a { color: var(--fg); }
 .mmenu__status { color: var(--gold); }
-.mmenu__placeholder { font-size: var(--fs-micro); letter-spacing: var(--track-label); text-transform: uppercase; }
 .mmenu__social { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 0.25rem 0.9rem; margin-top: 0.5rem; }
 
 /* ==========================================================================

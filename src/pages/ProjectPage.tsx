@@ -5,9 +5,11 @@ import { Picture } from '../components/Picture';
 import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
 import { greekNumeral } from '../lib/antiquity';
+import { useScrollProgress } from '../hooks/useScrollProgress';
 import NotFound from './NotFound';
 
 export default function ProjectPage() {
+  const mediaRef = useScrollProgress<HTMLElement>();
   const { slug } = useParams();
   const i = projects.findIndex((p) => p.slug === slug);
   if (i < 0) return <NotFound />;
@@ -26,7 +28,7 @@ export default function ProjectPage() {
           <ul className="case-hero__scope">{p.scope.map((s) => <li key={s}>{s}</li>)}</ul>
         </div>
       </section>
-      <figure className="case-media" data-ink="ivory">
+      <figure className="case-media" data-ink="ivory" ref={mediaRef}>
         <Picture image={p.image} alt={p.alt} sizes="100vw" crop={p.crop} priority />
       </figure>
       <CaseStory project={p} />
@@ -41,6 +43,9 @@ export default function ProjectPage() {
 }
 
 function CaseStory({ project }: { project: Project }) {
+  const plateRef = useScrollProgress<HTMLElement>();
+  const ideaRef = useScrollProgress<HTMLElement>();
+  const galleryRef = useScrollProgress<HTMLElement>();
   const story = project.caseStudy;
   const darkSystem = project.slug === 'aura';
   return (
@@ -48,18 +53,18 @@ function CaseStory({ project }: { project: Project }) {
       <section className="case-brief section" data-ink="obsidian" aria-labelledby="case-brief-title">
         <div className="wrap grid">
           <Label className="case-brief__label">{story.brief.label}</Label>
-          <h2 className="case-brief__title" id="case-brief-title">{story.brief.title}</h2>
+          <Reveal as="h2" kind="fade" className="case-brief__title" id="case-brief-title">{story.brief.title}</Reveal>
           <p className="case-brief__body">{story.brief.body}</p>
         </div>
       </section>
-      <figure className="case-plate" data-ink={project.slug === 'vela' || project.slug === 'northline' ? 'obsidian' : 'ivory'}>
+      <figure className="case-plate" data-ink={project.slug === 'vela' || project.slug === 'northline' ? 'obsidian' : 'ivory'} ref={plateRef}>
         <Picture image={story.media.detail.image} alt={story.media.detail.alt} sizes="100vw" />
         <figcaption className="wrap label">{story.media.detail.caption}</figcaption>
       </figure>
-      <section className="case-idea" data-theme="dark" data-ink="ivory" aria-labelledby="case-idea-title">
+      <section className="case-idea" data-theme="dark" data-ink="ivory" aria-labelledby="case-idea-title" ref={ideaRef}>
         <div className="wrap case-idea__inner">
           <Label>{story.idea.label}</Label>
-          <h2 className="case-idea__statement" id="case-idea-title">{story.idea.statement}</h2>
+          <Reveal as="h2" kind="fade" className="case-idea__statement" id="case-idea-title">{story.idea.statement}</Reveal>
           <p className="case-idea__body">{story.idea.body}</p>
         </div>
       </section>
@@ -67,7 +72,7 @@ function CaseStory({ project }: { project: Project }) {
         <div className="wrap grid">
           <Label className="case-system__label">{story.system.label}</Label>
           <div className="case-system__content">
-            <h2 id="case-system-title">{story.system.title}</h2>
+            <Reveal as="h2" kind="fade" id="case-system-title">{story.system.title}</Reveal>
             <p>{story.system.body}</p>
             <ol className="case-system__principles">
               {story.system.principles.map((principle, index) => (
@@ -80,23 +85,23 @@ function CaseStory({ project }: { project: Project }) {
           </div>
         </div>
       </section>
-      <section className="case-gallery section" data-theme={darkSystem ? 'dark' : undefined} data-ink={darkSystem ? 'ivory' : 'obsidian'} aria-label={story.media.galleryLabel}>
+      <section className="case-gallery section" data-theme={darkSystem ? 'dark' : undefined} data-ink={darkSystem ? 'ivory' : 'obsidian'} aria-label={story.media.galleryLabel} ref={galleryRef}>
         <div className="wrap case-gallery__grid">
-          <figure>
+          <Reveal as="figure" kind="fade">
             <Picture image={story.media.campaign.image} alt={story.media.campaign.alt} sizes="(min-width: 768px) 60vw, 100vw" />
             <figcaption className="label">{story.media.campaign.caption}</figcaption>
-          </figure>
-          <figure>
+          </Reveal>
+          <Reveal as="figure" kind="fade">
             <Picture image={story.media.materials.image} alt={story.media.materials.alt} sizes="(min-width: 768px) 40vw, 100vw" />
             <figcaption className="label">{story.media.materials.caption}</figcaption>
-          </figure>
+          </Reveal>
         </div>
       </section>
       <MotionStudy media={story.media} client={project.client} />
       <section className="case-outcome section" data-theme="stone" data-ink="obsidian" aria-labelledby="case-outcome-title">
         <div className="wrap grid">
           <Label className="case-outcome__label">{story.outcome.label}</Label>
-          <h2 id="case-outcome-title">{story.outcome.title}</h2>
+          <Reveal as="h2" kind="fade" id="case-outcome-title">{story.outcome.title}</Reveal>
           <p>{story.outcome.body}</p>
         </div>
       </section>

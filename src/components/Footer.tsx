@@ -28,20 +28,18 @@ export function Footer() {
           <ul>
             {socials.map((s) => (
               <li key={s.label}>
-                <a href={s.href} aria-label={`${s.label} (placeholder link)`}>{s.label}</a>
+                <a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a>
               </li>
             ))}
           </ul>
         </div>
 
         <div className="site-footer__col">
-          <p className="site-footer__h">Address</p>
+          <p className="site-footer__h">Contact</p>
           <address>
-            MT. OLYMPUS / GLOBAL
-            <br />
             <a href={`mailto:${contact.email}`}>{contact.email}</a>
             <br />
-            <span className="site-footer__muted">Placeholder until mortal paperwork clears.</span>
+            <span className="site-footer__muted">{contact.emailNote}</span>
           </address>
         </div>
       </div>

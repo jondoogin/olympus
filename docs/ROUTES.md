@@ -11,12 +11,13 @@ All content lives in `src/content/site.ts` (nav, hero, manifesto, projects, serv
 | `/people` | Complete fictional leadership page | Six individual bios and portraits | Mortal team details if one exists |
 | `/culture` | Complete concept page | Interruption + maxims + three working principles + Pause | Real open roles and events if offered |
 | `/about` | Complete concept page | Manifesto + working model essays + Proof | Real history and collaborator network when supplied |
-| `/contact` | Content complete, contact pending | Brief guidance + working approach + Contact | Real email/address and a usable form once the owner supplies them |
+| `/contact` | Email contact live | Brief guidance + working approach + direct email link + Contact | Standalone submission form and office address if desired |
 | `*` | Done | 404 — "Not even Hermes found it." | — |
 
-## Placeholders to replace before launch
-- `hello@olympus.agency`: marked "Placeholder" in the contact section, footer and menu.
-- Social links (`#`): Instagram, LinkedIn, Vimeo, Are.na.
+## Owner-supplied contact details
+- Email: `john@duggan.design` in the contact section, footer and menu.
+- Instagram: `@jondoogin`; LinkedIn, Behance and Dribbble link to the owner's supplied profile URLs.
+- A standalone submission form and office address are not published.
 - The four projects are fictional concepts, and the site says so in the Work intro and the footer.
 - Collaborator locations and identities are withheld until the owner supplies real details.
 - All four case studies are fictional concepts with supporting stills and silent motion studies. None claim a real client, launch, or measured result.

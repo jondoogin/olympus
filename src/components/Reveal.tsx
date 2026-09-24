@@ -5,15 +5,16 @@ type Props = {
   as?: ElementType;
   children: ReactNode;
   className?: string;
+  id?: string;
   /** 'lines' masks each .line child upward; 'fade' is a quiet rise. */
   kind?: 'lines' | 'fade' | 'wipe';
   threshold?: number;
 };
 
-export function Reveal({ as: Tag = 'div', children, className, kind = 'fade', threshold }: Props) {
+export function Reveal({ as: Tag = 'div', children, className, id, kind = 'fade', threshold }: Props) {
   const ref = useReveal<HTMLElement>({ threshold });
   return (
-    <Tag ref={ref} className={className} data-reveal={kind}>
+    <Tag ref={ref} className={className} id={id} data-reveal={kind}>
       {children}
     </Tag>
   );

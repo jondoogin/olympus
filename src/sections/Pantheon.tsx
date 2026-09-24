@@ -3,11 +3,13 @@ import { pantheon, type God } from '../content/site';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
+import { useScrollProgress } from '../hooks/useScrollProgress';
 
 export function GodCard({ g, i }: { g: God; i: number }) {
+  const portraitRef = useScrollProgress<HTMLDivElement>();
   return (
     <Reveal as="figure" className={`god god--${i + 1}`} threshold={0.25}>
-      <div className="god__frame" data-accent={g.accent}>
+      <div className="god__frame" data-accent={g.accent} ref={portraitRef}>
         <Picture
           image={g.image}
           alt={g.alt}
@@ -30,9 +32,9 @@ export function Pantheon() {
     <section className="pantheon section" id="people" data-theme="stone" data-ink="obsidian" aria-labelledby="pantheon-title">
       <div className="wrap grid pantheon__head">
         <Label n="04" className="pantheon__label">People</Label>
-        <h2 id="pantheon-title" className="pantheon__title">
+        <Reveal as="h2" id="pantheon-title" kind="fade" className="pantheon__title">
           The <em>Pantheon</em>
-        </h2>
+        </Reveal>
         <p className="pantheon__note">
           Six senior partners, several thousand years of experience between them, and one very long group chat.
         </p>

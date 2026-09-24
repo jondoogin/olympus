@@ -184,10 +184,9 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
         <div className="mmenu__meta">
           <span className="sys sys--dot mmenu__status">{oracleStatus}</span>
           <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          <span className="mmenu__placeholder">Placeholder address</span>
           <ul className="mmenu__social">
             {socials.map((s) => (
-              <li key={s.label}><a href={s.href}>{s.label}</a></li>
+              <li key={s.label}><a href={s.href} target="_blank" rel="noopener noreferrer">{s.label}</a></li>
             ))}
           </ul>
           <span>Mt. Olympus / Global</span>
