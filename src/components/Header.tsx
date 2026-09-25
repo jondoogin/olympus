@@ -42,9 +42,14 @@ function useHeaderState() {
       if (!raf) raf = requestAnimationFrame(probe);
     };
     probe();
+    // Pages load their code on demand; read the ink again once the page has rendered.
+    const main = document.getElementById('main');
+    const mo = new MutationObserver(onScroll);
+    if (main) mo.observe(main, { childList: true });
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => {
+      mo.disconnect();
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
       cancelAnimationFrame(raf);

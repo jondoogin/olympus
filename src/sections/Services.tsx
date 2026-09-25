@@ -1,13 +1,19 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { services } from '../content/site';
 import { Label } from '../components/Label';
 import { Reveal } from '../components/Reveal';
 import { greekNumeral } from '../lib/antiquity';
+import { observeFocusBand } from '../hooks/useFocusBand';
 
 export function Services() {
   const [active, setActive] = useState<number | null>(null);
   // A mouse hover already opens a row; a click on that same row shouldn't slam it shut.
   const hovered = useRef<number | null>(null);
+  const list = useRef<HTMLOListElement>(null);
+  useEffect(() => {
+    const rows = [...(list.current?.children ?? [])].map(observeFocusBand);
+    return () => rows.forEach((stop) => stop());
+  }, []);
   return (
     <section className="services section" data-ink="obsidian" aria-labelledby="services-title">
       <div className="wrap grid">
@@ -17,7 +23,7 @@ export function Services() {
           <p className="services__note">Six disciplines. Most clients need three. Some need a miracle.</p>
         </div>
 
-        <ol className="services__list" onPointerLeave={(e) => {
+        <ol className="services__list" ref={list} onPointerLeave={(e) => {
             if (e.pointerType !== 'mouse') return;
             hovered.current = null;
             setActive(null);

@@ -44,6 +44,8 @@ Sections set `data-theme` (`dark` / `stone`) to re-map `--bg` / `--fg` / `--rule
 5. The gold bolt in the interruption strikes (snap + brief glow). The header and contact CTA bolts tilt on hover.
 6. Slow parallax/pan on the columns, projects and clouds. Nothing moves the cursor, and there's no WebGL.
 7. At mobile and tablet widths, scrolling also moves project plates, case-study details, gallery images and portraits at a separate depth. Headings and captions rise in as they enter; project cards reveal a persistent view cue and a fine registration line. These effects stop under reduced motion.
+8. Page turns (View Transitions): the old page lifts and dims, the new one wipes up from the bottom edge; the header holds; a project card's image grows into the case study's lead image.
+9. Touch screens (`hover: none`): whatever crosses the middle of the screen takes its hover state (`.is-focus`), and presses answer with a slight scale. Below 1100px, where scroll timelines exist, display type unfolds along the width axis as it arrives (page and case titles fold as they leave), the hero plate pushes in, list items rise into place, the contact bolt charges up, and the interruption's sky flickers gold when the bolt strikes.
 
 ## Assets
 

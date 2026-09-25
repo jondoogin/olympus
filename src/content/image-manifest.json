@@ -103,7 +103,11 @@
       800,
       1200,
       1536
-    ]
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
   },
   "aura-campaign": {
     "dir": "05-selected-work",
@@ -148,7 +152,11 @@
       800,
       1200,
       1254
-    ]
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
   },
   "fashion-campaign": {
     "dir": "05-selected-work",
@@ -158,7 +166,11 @@
       480,
       800,
       1024
-    ]
+    ],
+    "social": {
+      "width": 1024,
+      "height": 538
+    }
   },
   "helio-campaign": {
     "dir": "05-selected-work",
@@ -237,7 +249,11 @@
       800,
       1200,
       1536
-    ]
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
   },
   "vela-fabric-detail": {
     "dir": "05-selected-work",

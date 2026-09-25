@@ -6,10 +6,12 @@ import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
 import { greekNumeral } from '../lib/antiquity';
 import { useScrollProgress } from '../hooks/useScrollProgress';
+import { useFocusBand } from '../hooks/useFocusBand';
 import NotFound from './NotFound';
 
 export default function ProjectPage() {
   const mediaRef = useScrollProgress<HTMLElement>();
+  const nextRef = useFocusBand<HTMLAnchorElement>();
   const { slug } = useParams();
   const i = projects.findIndex((p) => p.slug === slug);
   if (i < 0) return <NotFound />;
@@ -33,7 +35,7 @@ export default function ProjectPage() {
       </figure>
       <CaseStory project={p} />
       <section className="case-next" data-theme="dark" data-ink="ivory">
-        <Link to={`/work/${next.slug}`} className="wrap case-next__link">
+        <Link ref={nextRef} to={`/work/${next.slug}`} className="wrap case-next__link">
           <span className="label">Next project</span>
           <span className="case-next__name">{next.client}</span>
         </Link>

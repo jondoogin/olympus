@@ -1,5 +1,6 @@
 import { defineConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
+import { sitePages } from './scripts/site-plugin';
 
 /**
  * Rewrites the relative OG/Twitter image and adds an absolute og:url, using
@@ -32,5 +33,5 @@ function absoluteSocialMeta(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [react(), absoluteSocialMeta()],
+  plugins: [react(), absoluteSocialMeta(), sitePages()],
 });
