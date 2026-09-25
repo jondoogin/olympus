@@ -477,6 +477,46 @@ export const maximsIntro = {
 
 export const contactNote = 'Send the first thought. The useful details can follow.';
 
+/**
+ * The brief form on /contact. Without VITE_CONTACT_ENDPOINT it drafts an email in the
+ * visitor's mail app; with one, it posts the brief there (any JSON form service).
+ */
+export const contactForm = {
+  label: 'The brief',
+  title: 'Start with the problem.',
+  em: 'The deck can wait.',
+  fields: {
+    name: 'Your name',
+    email: 'Email for the reply',
+    org: 'Company or project',
+    optional: 'Optional',
+    timing: 'When does it need to exist?',
+    message: 'What are you trying to change?',
+    messageHint: 'The problem, who needs to care, and what should be different afterwards.',
+  },
+  timings: ['This month', 'This quarter', 'Later this year', 'Just exploring'],
+  submit: 'Send the brief',
+  sending: 'Consulting the oracle…',
+  errors: {
+    name: 'We need something to call you.',
+    email: 'An email address we can reply to, please.',
+    message: 'A sentence or two about the problem, please.',
+  },
+  mail: {
+    subject: 'A brief for Olympus',
+    note: 'Sending opens your mail app with the brief written out. Nothing is stored on this site.',
+    doneTitle: 'Your mail app has the draft.',
+    doneBody: 'Press send there and it reaches the summit. If nothing opened, write to',
+  },
+  post: {
+    note: 'The brief goes straight to a partner’s inbox. Nothing else is done with it.',
+    doneTitle: 'Received on the summit.',
+    doneBody: 'A partner will reply by email. If it is urgent, write to',
+    failed: 'The message did not go through. Nothing was lost on your side; write to',
+  },
+  again: 'Write another',
+};
+
 export const footerLines = {
   carved: 'Carved in React. Rendered on glass. No marble was harmed.',
   end: 'You have reached the end of the scroll. Unlike the Library of Alexandria, this one will still be here tomorrow.',
@@ -558,6 +598,6 @@ export const interior = {
       { title: 'A useful first brief.', body: 'Start with the problem, the audience and what needs to be different. A polished deck is optional; an honest question is much more useful.', points: ['What are you making or changing?', 'Who needs to care?', 'What decision or date is driving the work?'] },
       { title: 'How we would begin.', body: 'We would agree on the question, the people in the room and the shape of the work before proposing a direction. Scope and timing should be clear enough to build trust.', points: ['A conversation about the brief', 'A defined team and scope', 'A plan for making and reviewing'] },
     ],
-    note: 'Email opens your mail app. There is no standalone submission form or published office address.',
+    note: 'The form and the email address reach the same real inbox. There is no published office address.',
   },
 } as const;

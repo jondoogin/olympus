@@ -4,9 +4,10 @@ import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
 import { useScrollProgress } from '../hooks/useScrollProgress';
+import { useFocusBand } from '../hooks/useFocusBand';
 
 export function GodCard({ g, i }: { g: God; i: number }) {
-  const portraitRef = useScrollProgress<HTMLDivElement>();
+  const portraitRef = useFocusBand(useScrollProgress<HTMLDivElement>());
   return (
     <Reveal as="figure" className={`god god--${i + 1}`} threshold={0.25}>
       <div className="god__frame" data-accent={g.accent} ref={portraitRef}>

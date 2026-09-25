@@ -375,3 +375,101 @@
   .case-page[data-project='vela'] .case-film__frame, .case-page[data-project='aura'] .case-film__frame { aspect-ratio: 4 / 5; }
   .case-film__wordmark { bottom: var(--s-4); }
 }
+
+/* ==========================================================================
+   Contact brief form (sections/ContactForm.tsx)
+   Hairline fields on stone; labels carry Greek numerals like every other index.
+   ========================================================================== */
+.brief { border-top: var(--hairline); scroll-margin-top: var(--header-h); }
+.brief__head { display: grid; gap: var(--s-4); align-content: start; margin-bottom: var(--s-7); }
+.brief__title { font-family: var(--font-serif); font-weight: 400; font-size: var(--fs-h2); line-height: 0.96; letter-spacing: -0.03em; max-width: 12ch; }
+.brief__title em { display: block; color: var(--fg-muted); }
+.brief__note { max-width: 30ch; color: var(--fg-muted); }
+
+.brief__form { display: grid; gap: var(--s-6); }
+.brief__row { display: grid; gap: var(--s-2); min-width: 0; border: 0; margin: 0; padding: 0; }
+.brief__label {
+  display: flex; align-items: baseline; gap: 0.6rem;
+  font-size: var(--fs-micro); font-weight: 600; letter-spacing: var(--track-label); text-transform: uppercase;
+}
+.brief__n { font-family: var(--font-inscr); font-size: 0.95rem; font-weight: 400; letter-spacing: 0.04em; color: var(--fg-muted); }
+.brief__opt { margin-left: auto; font-weight: 400; color: var(--fg-muted); }
+.brief__timing legend { width: 100%; padding: 0; margin-bottom: var(--s-2); }
+.brief__form input[type='text'], .brief__form input[type='email'], .brief__form textarea {
+  width: 100%; min-width: 0; padding: 0.35rem 0 0.6rem;
+  font: inherit; font-family: var(--font-serif); font-size: var(--fs-lead); line-height: 1.2; color: inherit;
+  background: transparent; border: 0; border-bottom: 1px solid color-mix(in srgb, var(--fg) 40%, transparent); border-radius: 0;
+  transition: border-color var(--dur-base) var(--ease-out), box-shadow var(--dur-base) var(--ease-out);
+}
+.brief__form textarea { resize: vertical; min-height: 8.5rem; }
+.brief__form input:focus, .brief__form textarea:focus { outline: none; border-bottom-color: var(--aegean); box-shadow: 0 1px 0 var(--aegean); }
+.brief__form [aria-invalid='true'] { border-bottom-color: var(--obsidian); box-shadow: 0 2px 0 var(--obsidian); }
+.brief__hint { font-size: var(--fs-small); color: var(--fg-muted); max-width: 40ch; }
+.brief__error { font-family: var(--font-serif); font-style: italic; font-size: var(--fs-body); }
+.brief__error::before { content: '— '; }
+
+.brief__chips { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+.brief__chip { position: relative; cursor: pointer; }
+.brief__chip input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.brief__chip span {
+  display: inline-block; padding: 0.6rem 0.95rem; border: var(--hairline); border-color: color-mix(in srgb, var(--fg) 35%, transparent);
+  border-radius: var(--radius-pill); font-size: var(--fs-small);
+  transition: background-color var(--dur-base) var(--ease-out), color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.brief__chip input:checked + span { background: var(--obsidian); color: var(--marble); border-color: var(--obsidian); }
+.brief__chip input:focus-visible + span { outline: 2px solid var(--aegean); outline-offset: 3px; }
+.brief__chip:active span { transform: scale(0.96); }
+.brief__trap { position: absolute; left: -100vw; width: 1px; height: 1px; overflow: hidden; }
+
+.brief__actions { display: grid; gap: var(--s-3); justify-items: start; }
+.brief__submit {
+  display: inline-flex; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.6rem 1.05rem; border-radius: var(--radius-pill);
+  background: var(--obsidian); color: var(--marble);
+  font-size: clamp(1rem, 0.9rem + 0.5vw, 1.25rem); font-weight: 700; letter-spacing: 0.02em; text-transform: uppercase;
+  transition: background-color var(--dur-base) var(--ease-out), transform var(--dur-fast) var(--ease-out);
+}
+.brief__submit-bolt { width: 0.85rem; transition: transform 500ms var(--ease-snap), color var(--dur-base); }
+.brief__submit:hover { background: var(--aegean); }
+.brief__submit:hover .brief__submit-bolt, .brief__submit:focus-visible .brief__submit-bolt { color: var(--gold); transform: rotate(-14deg) scale(1.35); }
+.brief__submit:active { transform: scale(0.97); }
+.brief__submit:disabled { cursor: progress; opacity: 0.7; }
+.brief__status:empty { display: none; }
+.brief__status a { text-decoration: underline; }
+
+.brief__done { display: grid; gap: var(--s-4); justify-items: start; align-content: start; max-width: 34rem; }
+.brief__done:focus { outline: none; }
+.brief__bolt { width: 1.6rem; animation: brief-strike 900ms var(--ease-snap) both; }
+.brief__done-title { font-family: var(--font-serif); font-size: var(--fs-h3); line-height: 1.05; }
+@keyframes brief-strike {
+  0% { transform: translateY(-60%) rotate(-24deg) scale(0.2); opacity: 0; }
+  60% { opacity: 1; filter: drop-shadow(0 0 0.9rem rgb(212 175 55 / 0.9)); }
+  100% { transform: none; opacity: 1; filter: none; }
+}
+
+@media (min-width: 768px) {
+  .brief__form { grid-template-columns: 1fr 1fr; column-gap: var(--gutter); row-gap: var(--s-7); }
+  .brief__form > .brief__row:nth-child(n + 3), .brief__actions { grid-column: 1 / -1; }
+}
+@media (min-width: 1100px) {
+  .brief__head { grid-column: 1 / span 4; position: sticky; top: calc(var(--header-h) + var(--s-6)); align-self: start; margin: 0; }
+  .brief__form, .brief__done { grid-column: 6 / -1; }
+}
+
+/* ==========================================================================
+   Page transitions (components/PageTransitions.tsx)
+   The old page lifts and dims; the new one wipes up from the bottom edge, the
+   same gesture as the project image reveals. The header holds still across it,
+   and a project card's image grows into the case study's lead image.
+   ========================================================================== */
+.route-pending { min-height: 100svh; }
+.site-header { view-transition-name: site-header; }
+.vt-morph .case-media { view-transition-name: case-media; }
+
+::view-transition-old(root) { animation: vt-lift 520ms var(--ease-out) both; }
+::view-transition-new(root) { animation: vt-wipe 820ms var(--ease-out) both; }
+::view-transition-group(case-media) { animation-duration: 820ms; animation-timing-function: var(--ease-out); z-index: 1; }
+::view-transition-old(case-media), ::view-transition-new(case-media) { height: 100%; object-fit: cover; }
+::view-transition-group(site-header) { z-index: 2; }
+@keyframes vt-lift { to { transform: translateY(-6%); filter: brightness(0.8); } }
+@keyframes vt-wipe { from { clip-path: inset(100% 0 0 0); } to { clip-path: inset(0 0 0 0); } }

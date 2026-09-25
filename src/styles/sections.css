@@ -617,6 +617,89 @@
   .interior-story__aside[data-reveal='fade'] { transition-delay: 160ms; }
 }
 
+/* ==========================================================================
+   Touch focus — phones and tablets get what the mouse gets
+   Whatever crosses the middle of the screen takes its hover treatment
+   (hooks/useFocusBand adds .is-focus), and a press answers the finger at once.
+   ========================================================================== */
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .proj__link.is-focus .proj__frame { clip-path: inset(1.6% 1.6% 1.6% 1.6%); }
+  .proj__link.is-focus .pic img { scale: 1.06; }
+  .proj__link.is-focus .proj__client { letter-spacing: -0.02em; }
+  .proj__link:active .proj__frame { clip-path: inset(3% 3% 3% 3%); transition-duration: 240ms; }
+
+  .svc.is-focus:not(.is-open) .svc__name { font-variation-settings: 'wdth' 110; }
+  .svc--em.is-focus:not(.is-open) .svc__name { font-variation-settings: normal; letter-spacing: -0.005em; }
+  .svc.is-focus .svc__n { color: var(--aegean); }
+  .svc__btn:active .svc__name { opacity: 0.55; }
+
+  .god__name { transition: letter-spacing var(--dur-slow) var(--ease-out); }
+  .god__frame.is-focus::after { transform: scaleX(1); }
+  .god__frame.is-focus .pic img { scale: 1.05; }
+  .god:has(.god__frame.is-focus) .god__name { letter-spacing: -0.012em; }
+
+  .case-next__link.is-focus .case-next__name { color: var(--gold); letter-spacing: -0.02em; }
+
+  .btn:active, .contact__cta:active, .site-header__cta:active, .brief__submit:active,
+  .case-film__toggle:active, .mmenu__nav a:active { scale: 0.97; }
+  .mmenu__nav a:active .mmenu__label { color: var(--gold); }
+}
+
+/* Lightning, seen from below: when the bolt strikes, the sky behind it flickers. */
+@media (max-width: 1099px) and (prefers-reduced-motion: no-preference) {
+  .interrupt { position: relative; }
+  .interrupt__inner { z-index: 1; }
+  .interrupt::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none; opacity: 0;
+    background: radial-gradient(120% 70% at 72% 38%, rgb(212 175 55 / 0.32), rgb(212 175 55 / 0.06) 45%, transparent 70%);
+  }
+  .interrupt:has(.interrupt__inner.is-in)::after { animation: sky-flash 1100ms linear 1000ms both; }
+}
+@keyframes sky-flash {
+  0% { opacity: 0; } 8% { opacity: 1; } 18% { opacity: 0.15; } 26% { opacity: 0.75; } 100% { opacity: 0; }
+}
+
+/* ==========================================================================
+   Scroll-linked type — phones and tablets, where supported
+   Display type unfolds along Archivo's width axis as it arrives and folds as it
+   leaves; the hero plate pushes in as the page begins. Driven by the scroll
+   position itself (CSS scroll timelines), so it tracks the finger exactly.
+   Browsers without scroll timelines keep the static layout.
+   ========================================================================== */
+@supports (animation-timeline: view()) {
+  @media (max-width: 1099px) and (prefers-reduced-motion: no-preference) {
+    .work__title, .pantheon__title, .manifesto__we, .contact__title, .proof__n, .case-next__name, .interrupt__title {
+      animation: type-unfold linear both;
+      animation-timeline: view();
+      animation-range: entry 15% cover 45%;
+    }
+    .interrupt__title { --wdth-from: 62; }
+    .page-intro__title, .case-hero__title {
+      animation: type-fold linear both;
+      animation-timeline: view();
+      animation-range: exit 0% exit 90%;
+    }
+
+    .hero__pic { animation: hero-push linear both; animation-timeline: scroll(root); animation-range: 0 85vh; }
+    .hero__a { animation: hero-fold linear both; animation-timeline: scroll(root); animation-range: 0 75vh; }
+
+    .case-system__principles li, .interior-story__aside li, .proof__facts > div, .maxim, .brief__row, .god__cap > * {
+      animation: item-rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 80%;
+    }
+
+    .contact__bolt { animation: bolt-charge linear both; animation-timeline: view(); animation-range: entry 30% cover 50%; }
+  }
+}
+/* No `to` keyframe: each title settles on its own designed width. */
+@keyframes type-unfold { from { font-variation-settings: 'wdth' var(--wdth-from, 72); } }
+@keyframes type-fold { to { font-variation-settings: 'wdth' var(--wdth-condensed); opacity: 0.2; } }
+@keyframes hero-push { to { scale: 1.16; } }
+@keyframes hero-fold { to { font-variation-settings: 'wdth' 72; translate: 0 -40%; opacity: 0.35; } }
+@keyframes item-rise { from { opacity: 0; translate: 0 1.25rem; } }
+@keyframes bolt-charge { to { rotate: -14deg; scale: 1.35; color: var(--gold); } }
+
 /* Reduced motion: remaining hard-coded transitions become instant */
 @media (prefers-reduced-motion: reduce) {
   .mmenu, .mmenu[data-open='true'], .mmenu__nav a, .svc__panel, .svc__name, .proj__frame, .god__frame::after { transition: none !important; }
@@ -629,5 +712,7 @@
   .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic,
   .interior-story__main h2, .interior-story__aside { translate: none !important; scale: 1 !important; }
   .proj__view { opacity: 1; translate: none; transition: none; }
+  .brief__bolt, .interrupt::after { animation: none !important; }
+  ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   .proj__frame::after { transition: none; transform: none; }
 }

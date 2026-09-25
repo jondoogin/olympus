@@ -4,6 +4,7 @@ import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
 import { useScrollProgress } from '../hooks/useScrollProgress';
+import { useFocusBand } from '../hooks/useFocusBand';
 import { greekNumeral } from '../lib/antiquity';
 
 const SIZES: Record<Project['layout'], string> = {
@@ -15,9 +16,10 @@ const SIZES: Record<Project['layout'], string> = {
 
 export function ProjectCard({ p, i }: { p: Project; i: number }) {
   const ref = useScrollProgress<HTMLElement>();
+  const focusRef = useFocusBand<HTMLAnchorElement>();
   return (
     <article className={`proj proj--${p.layout}`} ref={ref}>
-      <Link to={`/work/${p.slug}`} className="proj__link" aria-label={`${p.client} — ${p.discipline}, ${p.year}. View project`}>
+      <Link ref={focusRef} to={`/work/${p.slug}`} className="proj__link" aria-label={`${p.client} — ${p.discipline}, ${p.year}. View project`}>
         <Reveal kind="wipe" className="proj__frame">
           <Picture image={p.image} alt={p.alt} sizes={SIZES[p.layout]} crop={p.crop} />
           <span className="proj__view" aria-hidden="true">View project</span>

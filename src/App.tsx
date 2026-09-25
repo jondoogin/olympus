@@ -1,23 +1,20 @@
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { PageTransitions } from './components/PageTransitions';
 import Home from './pages/Home';
-import WorkPage from './pages/WorkPage';
-import ProjectPage from './pages/ProjectPage';
-import ServicesPage from './pages/ServicesPage';
-import PeoplePage from './pages/PeoplePage';
-import CulturePage from './pages/CulturePage';
-import AboutPage from './pages/AboutPage';
-import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
-import { nav, projects, titles } from './content/site';
+import { AboutPage, ContactPage, CulturePage, PeoplePage, ProjectPage, ServicesPage, WorkPage, preloadAllWhenIdle } from './routes';
+import { pageTitle } from './lib/meta';
+import { scrollToStart } from './lib/scroll';
+import { titles } from './content/site';
 
 function ScrollReset() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
   const previousPath = useRef(pathname);
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollToStart(hash);
     if (previousPath.current === pathname) return;
     previousPath.current = pathname;
     // The menu restores focus while closing; move it to new content afterward.
@@ -27,16 +24,6 @@ function ScrollReset() {
     return () => cancelAnimationFrame(frame);
   }, [pathname]);
   return null;
-}
-
-function pageTitle(pathname: string) {
-  if (pathname === '/') return titles.home;
-  if (pathname.startsWith('/work/')) {
-    const project = projects.find((p) => pathname === `/work/${p.slug}`);
-    return (project ? `${project.client} — ${titles.concept}` : titles.notFound) + titles.suffix;
-  }
-  const item = nav.find((n) => pathname === n.to);
-  return (item ? item.label : titles.notFound) + titles.suffix;
 }
 
 /** Sets the tab title per route, and asks nicely when the visitor wanders to another tab. */
@@ -55,25 +42,29 @@ function DocumentTitle() {
 }
 
 export default function App() {
+  useEffect(preloadAllWhenIdle, []);
   return (
     <>
       <a href="#main" className="skip">Skip to content</a>
       <ScrollReset />
       <DocumentTitle />
+      <PageTransitions />
       <div id="top" />
       <Header />
       <main id="main" tabIndex={-1}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/work" element={<WorkPage />} />
-          <Route path="/work/:slug" element={<ProjectPage />} />
-          <Route path="/services" element={<ServicesPage />} />
-          <Route path="/people" element={<PeoplePage />} />
-          <Route path="/culture" element={<CulturePage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/contact" element={<ContactPage />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
+        <Suspense fallback={<div className="route-pending" />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/work" element={<WorkPage />} />
+            <Route path="/work/:slug" element={<ProjectPage />} />
+            <Route path="/services" element={<ServicesPage />} />
+            <Route path="/people" element={<PeoplePage />} />
+            <Route path="/culture" element={<CulturePage />} />
+            <Route path="/about" element={<AboutPage />} />
+            <Route path="/contact" element={<ContactPage />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </Suspense>
       </main>
       <Footer />
     </>

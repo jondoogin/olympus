@@ -19,6 +19,16 @@ const CROPS = [
   },
 ];
 
+// Link-preview crops (1.91:1, the shape social cards use) of each project's lead image.
+// Used as that case study's og:image. Never upscaled: width is capped at the master's.
+// `top` places the band (0 = top edge of the image); without it, sharp picks the busiest region.
+const SOCIAL = [
+  { key: 'fashion-campaign', top: 0.1 },
+  { key: 'architecture-campaign' },
+  { key: 'culture-campaign', top: 0.04 },
+  { key: 'technology-campaign' },
+];
+
 async function exists(p) {
   try { await stat(p); return true; } catch { return false; }
 }
@@ -55,6 +65,24 @@ for (const c of CROPS) {
   const widths = await emit(() => sharp(src).extract(c.region), path.join(OUT, 'crops'), c.name, c.region.width);
   manifest[c.name] = { dir: 'crops', width: c.region.width, height: c.region.height, widths };
   console.log(`crop ${c.name}  →  ${widths.join(', ')}`);
+}
+
+for (const { key, top } of SOCIAL) {
+  const m = manifest[key];
+  const src = path.join(LIB, m.dir, `${key}.png`);
+  const width = Math.min(1200, m.width);
+  const height = Math.round(width / 1.905);
+  const outDir = path.join(OUT, 'social');
+  const out = path.join(outDir, `${key}.jpg`);
+  await mkdir(outDir, { recursive: true });
+  if (!(await exists(out))) {
+    const img = top === undefined
+      ? sharp(src).resize({ width, height, fit: 'cover', position: sharp.strategy.attention })
+      : sharp(src).resize({ width }).extract({ left: 0, top: Math.round(top * m.height * (width / m.width)), width, height });
+    await img.jpeg({ quality: 82, mozjpeg: true }).toFile(out);
+  }
+  m.social = { width, height };
+  console.log(`social ${key}  →  ${width}×${height}`);
 }
 
 const { writeFile } = await import('node:fs/promises');

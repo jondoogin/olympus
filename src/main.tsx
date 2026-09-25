@@ -16,7 +16,8 @@ console.log(
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
+    {/* Synchronous route updates let PageTransitions swap pages inside a View Transition. */}
+    <BrowserRouter useTransitions={false}>
       <App />
     </BrowserRouter>
   </StrictMode>,
