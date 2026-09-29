@@ -1,13 +1,13 @@
 # OLYMPUS — State
-Updated: 2026-09-24 · S12 · by: codex
+Updated: 2026-09-29 · S13 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight; PR #5 published owner-supplied contact links and richer mobile/tablet motion to production.
-Files touched: `docs/STATE.md` and `docs/sessions/2026-09-24-S12-codex.md` for the release handoff.
-Committed: site update merged to `main` at 1b5dce9; this S12 handoff follows as a docs-only commit.
-Next concrete step: owner reviews the motion on a physical phone and tablet and notes any pacing changes; decide whether a standalone contact form is wanted.
-Verify with: `npm run build`; check `https://olympus-green.vercel.app` on direct routes and at 1440 / 1024 / 768 / 390 px after future deployments.
-Watch out for: use the canonical domain, not hashed fixed-build deployment URLs. `VITE_SITE_URL` must be changed and rebuilt if a custom domain is attached.
+Task: reactive O and bolt motion is complete locally; the production site still has the previous logo behavior.
+Files touched: `src/components/Logo.tsx`, `src/styles/components.css`, `src/styles/sections.css`, and `docs/DESIGN-SYSTEM.md`.
+Committed: `wip/reactive-logo` at 378937c; this S13 handoff follows as a docs-only commit.
+Next concrete step: review the logo motion on a physical phone and desktop, then publish the branch when the pacing feels right.
+Verify with: `npm run build`; run `npm run dev` and check the logo at 1440 / 1024 / 768 / 390 px, including reduced motion.
+Watch out for: the source SVGs remain untouched; `Logo.tsx` wraps the original bolt path so CSS transforms do not displace its SVG transform.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
@@ -25,15 +25,16 @@ Watch out for: use the canonical domain, not hashed fixed-build deployment URLs.
 - Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
 - Each project has three project-specific supporting stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each story with distinct compositions: VELA editorial, NORTHLINE architectural, HELIO solar, AURA dark product. Film frames carry project titles and an accessible play/pause control; the film is replaced by a still when reduced motion is requested. Build and four-width overflow checks passed. See `docs/sessions/2026-09-23-S8-codex.md` and S9.
 - `npm run images` succeeds with `sharp`; `npm run build` passes. Keyboard Enter opens and closes Services rows. The 390px mobile menu fits with the new social links; the Contact opener and representative motion frames were visually inspected. Scroll-position checks at 390 and 1024 px confirmed changing image translation and project cues.
+- The local `wip/reactive-logo` branch gives the original O and bolt a brief idle strike, pointer-position response, keyboard-focus response and tap strike. Reduced motion disables these transforms and animations. Build passed; the browser rendered the mark without errors and showed no horizontal overflow at 1440 / 1024 / 768 / 390 px. This branch is not published.
 - Canonical production headers for `/` and `/work/vela` return HTTP 200 without `x-robots-tag`; the HTML has no robots noindex tag.
 
 ## NEXT QUEUE
-1. Owner reviews motion pacing on a physical phone and tablet; tune specific sections based on feedback.
+1. Owner reviews the new logo motion on a physical phone and desktop; tune pacing if needed, then publish the branch. Also review the earlier mobile/tablet section motion.
 2. Decide whether to add a standalone contact form. The direct email link works now; a form needs a chosen delivery service or endpoint.
 3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
 
 ## INVARIANTS
-- The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
+- The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG, maps `fill="#080808"` → currentColor, and adds motion hooks around the original O and bolt paths; the source assets stay untouched.
 - Master assets in `public/OLYMPUS-asset-library/` are never edited. Derivatives come only from `npm run images`.
 - `npm run images` never upscales. It regenerates `src/content/image-manifest.json`, and that manifest is where `lib/images.ts` gets its `ImageKey` types.
 - A new image means: add the master → run `npm run images` → reference it by key through `<Picture>`. Never hardcode a path.
