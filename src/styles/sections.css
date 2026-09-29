@@ -619,6 +619,12 @@
 
 /* Reduced motion: remaining hard-coded transitions become instant */
 @media (prefers-reduced-motion: reduce) {
+  .logo__o, .logo__bolt, .logo[data-strike='true'] .logo__bolt,
+  .logo[data-interacting='true'] .logo__o, .logo[data-interacting='true'] .logo__bolt,
+  .site-header__logo:focus-visible .logo__o, .site-header__logo:focus-visible .logo__bolt,
+  .mmenu__logo:focus-visible .logo__o, .mmenu__logo:focus-visible .logo__bolt {
+    animation: none !important; transition: none !important; transform: none !important; filter: none !important;
+  }
   .mmenu, .mmenu[data-open='true'], .mmenu__nav a, .svc__panel, .svc__name, .proj__frame, .god__frame::after { transition: none !important; }
   .mmenu__nav a { opacity: 1; transform: none; }
   .hero__scroll::after { animation: none; }

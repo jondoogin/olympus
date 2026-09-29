@@ -41,7 +41,7 @@ Sections set `data-theme` (`dark` / `stone`) to re-map `--bg` / `--fg` / `--rule
 2. Line-mask reveals on "We are Olympus", the interruption, the contact headline and page intros.
 3. Project images wipe up from the bottom. On hover the frame pulls in 1.2% while the image scales, a "View project" chip appears, and the client name loosens its tracking.
 4. Services: hovering, focusing or tapping a row stretches its name along Archivo's width axis (84 → 118) and dims the others.
-5. The gold bolt in the interruption strikes (snap + brief glow). The header and contact CTA bolts tilt on hover.
+5. The gold bolt in the interruption strikes (snap + brief glow). The logo's original O and bolt make a brief idle strike; pointer position tilts the O and moves the bolt, keyboard focus energizes it, and taps trigger a strike. All logo motion stops under reduced motion. The header and contact CTA bolts tilt on hover.
 6. Slow parallax/pan on the columns, projects and clouds. Nothing moves the cursor, and there's no WebGL.
 7. At mobile and tablet widths, scrolling also moves project plates, case-study details, gallery images and portraits at a separate depth. Headings and captions rise in as they enter; project cards reveal a persistent view cue and a fine registration line. These effects stop under reduced motion.
 
