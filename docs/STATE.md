@@ -1,13 +1,13 @@
 # OLYMPUS — State
-Updated: 2026-09-29 · S13 · by: codex
+Updated: 2026-09-29 · S14 · by: codex
 
 ## STOPPED AT
-Task: reactive O and bolt motion is complete locally; the production site still has the previous logo behavior.
-Files touched: `src/components/Logo.tsx`, `src/styles/components.css`, `src/styles/sections.css`, and `docs/DESIGN-SYSTEM.md`.
-Committed: `wip/reactive-logo` at 378937c; this S13 handoff follows as a docs-only commit.
-Next concrete step: review the logo motion on a physical phone and desktop, then publish the branch when the pacing feels right.
-Verify with: `npm run build`; run `npm run dev` and check the logo at 1440 / 1024 / 768 / 390 px, including reduced motion.
-Watch out for: the source SVGs remain untouched; `Logo.tsx` wraps the original bolt path so CSS transforms do not displace its SVG transform.
+Task: nothing in flight; the reactive logo branch has a public Vercel preview for owner testing.
+Files touched: `docs/STATE.md` and `docs/sessions/2026-09-29-S14-codex.md` for the preview handoff.
+Committed: `wip/reactive-logo` at 73517a5 was pushed and deployed; this S14 handoff follows as a docs-only commit.
+Next concrete step: owner tests the logo at `https://olympus-git-wip-reactive-logo-read-with-lantern.vercel.app/` on phone and desktop, then gives pacing feedback or approves production release.
+Verify with: `npm run build`; check the preview URL and its logo motion, including reduced motion.
+Watch out for: the canonical production URL still shows the old logo; the preview branch URL is for this change.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
@@ -25,11 +25,11 @@ Watch out for: the source SVGs remain untouched; `Logo.tsx` wraps the original b
 - Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
 - Each project has three project-specific supporting stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each story with distinct compositions: VELA editorial, NORTHLINE architectural, HELIO solar, AURA dark product. Film frames carry project titles and an accessible play/pause control; the film is replaced by a still when reduced motion is requested. Build and four-width overflow checks passed. See `docs/sessions/2026-09-23-S8-codex.md` and S9.
 - `npm run images` succeeds with `sharp`; `npm run build` passes. Keyboard Enter opens and closes Services rows. The 390px mobile menu fits with the new social links; the Contact opener and representative motion frames were visually inspected. Scroll-position checks at 390 and 1024 px confirmed changing image translation and project cues.
-- The local `wip/reactive-logo` branch gives the original O and bolt a brief idle strike, pointer-position response, keyboard-focus response and tap strike. Reduced motion disables these transforms and animations. Build passed; the browser rendered the mark without errors and showed no horizontal overflow at 1440 / 1024 / 768 / 390 px. This branch is not published.
+- The `wip/reactive-logo` branch gives the original O and bolt a brief idle strike, pointer-position response, keyboard-focus response and tap strike. Reduced motion disables these transforms and animations. Build passed; the browser rendered the mark without errors and showed no horizontal overflow at 1440 / 1024 / 768 / 390 px. The branch is published at `https://olympus-git-wip-reactive-logo-read-with-lantern.vercel.app/`; production has not changed.
 - Canonical production headers for `/` and `/work/vela` return HTTP 200 without `x-robots-tag`; the HTML has no robots noindex tag.
 
 ## NEXT QUEUE
-1. Owner reviews the new logo motion on a physical phone and desktop; tune pacing if needed, then publish the branch. Also review the earlier mobile/tablet section motion.
+1. Owner reviews the new logo preview on a physical phone and desktop; tune pacing if needed, then merge it to production. Also review the earlier mobile/tablet section motion.
 2. Decide whether to add a standalone contact form. The direct email link works now; a form needs a chosen delivery service or endpoint.
 3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
 
