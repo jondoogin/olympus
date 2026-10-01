@@ -1,15 +1,16 @@
 # OLYMPUS — State
-Updated: 2026-09-29 · S14 · by: codex
+Updated: 2026-10-01 · S15 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight; the reactive logo branch has a public Vercel preview for owner testing.
+Task: dedicated logo preview added at `/logo-preview` for focused owner testing.
 Files touched: `docs/STATE.md` and `docs/sessions/2026-09-29-S14-codex.md` for the preview handoff.
 Committed: `wip/reactive-logo` at 73517a5 was pushed and deployed; this S14 handoff follows as a docs-only commit.
-Next concrete step: owner tests the logo at `https://olympus-git-wip-reactive-logo-read-with-lantern.vercel.app/` on phone and desktop, then gives pacing feedback or approves production release.
+Next concrete step: owner tests `https://olympus-git-wip-reactive-logo-read-with-lantern.vercel.app/logo-preview` on phone and desktop, then gives pacing feedback or approves production release.
 Verify with: `npm run build`; check the preview URL and its logo motion, including reduced motion.
 Watch out for: the canonical production URL still shows the old logo; the preview branch URL is for this change.
 
 ## NOW
+- `/logo-preview` is a dedicated motion review page with a large logo, replay by click or tap, and light/dark background switching. It omits the site header and footer. Build passed.
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
