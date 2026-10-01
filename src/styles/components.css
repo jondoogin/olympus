@@ -42,18 +42,27 @@
 }
 .logo[data-interacting='true'] .logo__o,
 .site-header__logo:focus-visible .logo__o,
-.mmenu__logo:focus-visible .logo__o {
+.mmenu__logo:focus-visible .logo__o,
+.logo-preview__stage:focus-visible .logo__o {
   animation: none;
   transform: rotate(var(--logo-tilt, -7deg)) scale(1.035);
 }
 .logo[data-interacting='true'] .logo__bolt,
 .site-header__logo:focus-visible .logo__bolt,
-.mmenu__logo:focus-visible .logo__bolt {
+.mmenu__logo:focus-visible .logo__bolt,
+.logo-preview__stage:focus-visible .logo__bolt {
   animation: none;
   transform: translate(var(--logo-x, 2px), var(--logo-y, -2px)) scale(1.12);
   filter: drop-shadow(0 0 3px rgb(212 175 55 / 0.55));
 }
 .logo[data-strike='true'] .logo__bolt { animation: logo-bolt-strike 650ms var(--ease-snap) both; }
+.logo-preview { min-height: 100svh; padding: clamp(1.25rem, 4vw, 4rem); display: flex; flex-direction: column; }
+.logo-preview[data-theme='light'] { background: var(--marble); color: var(--obsidian); }
+.logo-preview__top, .logo-preview__bottom { display: flex; justify-content: space-between; gap: 1.5rem; align-items: baseline; }
+.logo-preview__stage { width: min(100%, 64rem); margin: auto; padding-block: 4rem; }
+.logo-preview__bottom p { max-width: 38rem; font-size: var(--fs-small); }
+.logo-preview__bottom button { flex: none; border-bottom: 1px solid currentColor; padding-block: 0.5rem; }
+@media (max-width: 767px) { .logo-preview__bottom { flex-direction: column; } }
 @keyframes logo-o-idle {
   0%, 83%, 100% { transform: rotate(0); }
   87% { transform: rotate(-5deg) scale(1.025); }

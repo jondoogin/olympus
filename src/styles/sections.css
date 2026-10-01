@@ -622,7 +622,8 @@
   .logo__o, .logo__bolt, .logo[data-strike='true'] .logo__bolt,
   .logo[data-interacting='true'] .logo__o, .logo[data-interacting='true'] .logo__bolt,
   .site-header__logo:focus-visible .logo__o, .site-header__logo:focus-visible .logo__bolt,
-  .mmenu__logo:focus-visible .logo__o, .mmenu__logo:focus-visible .logo__bolt {
+  .mmenu__logo:focus-visible .logo__o, .mmenu__logo:focus-visible .logo__bolt,
+  .logo-preview__stage:focus-visible .logo__o, .logo-preview__stage:focus-visible .logo__bolt {
     animation: none !important; transition: none !important; transform: none !important; filter: none !important;
   }
   .mmenu, .mmenu[data-open='true'], .mmenu__nav a, .svc__panel, .svc__name, .proj__frame, .god__frame::after { transition: none !important; }

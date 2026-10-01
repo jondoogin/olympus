@@ -561,3 +561,11 @@ export const interior = {
     note: 'Email opens your mail app. There is no standalone submission form or published office address.',
   },
 } as const;
+export const logoPreview = {
+  title: 'OLYMPUS / Logo motion',
+  site: 'View the site',
+  replay: 'Replay logo motion',
+  instructions: 'Move across the logo to feel its response. Click or tap to replay the strike. Motion pauses when reduced motion is enabled.',
+  light: 'Light background',
+  dark: 'Dark background',
+};

@@ -11,6 +11,7 @@ import CulturePage from './pages/CulturePage';
 import AboutPage from './pages/AboutPage';
 import ContactPage from './pages/ContactPage';
 import NotFound from './pages/NotFound';
+import LogoPreview from './pages/LogoPreview';
 import { nav, projects, titles } from './content/site';
 
 function ScrollReset() {
@@ -30,6 +31,7 @@ function ScrollReset() {
 }
 
 function pageTitle(pathname: string) {
+  if (pathname === '/logo-preview') return 'Logo preview' + titles.suffix;
   if (pathname === '/') return titles.home;
   if (pathname.startsWith('/work/')) {
     const project = projects.find((p) => pathname === `/work/${p.slug}`);
@@ -55,16 +57,19 @@ function DocumentTitle() {
 }
 
 export default function App() {
+  const { pathname } = useLocation();
+  const preview = pathname === '/logo-preview';
   return (
     <>
       <a href="#main" className="skip">Skip to content</a>
       <ScrollReset />
       <DocumentTitle />
       <div id="top" />
-      <Header />
+      {!preview && <Header />}
       <main id="main" tabIndex={-1}>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/logo-preview" element={<LogoPreview />} />
           <Route path="/work" element={<WorkPage />} />
           <Route path="/work/:slug" element={<ProjectPage />} />
           <Route path="/services" element={<ServicesPage />} />
@@ -75,7 +80,7 @@ export default function App() {
           <Route path="*" element={<NotFound />} />
         </Routes>
       </main>
-      <Footer />
+      {!preview && <Footer />}
     </>
   );
 }
