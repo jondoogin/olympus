@@ -2,10 +2,10 @@
 Updated: 2026-09-25 · S13 · by: claude
 
 ## STOPPED AT
-Task: S13 platform + mobile pass is on branch `claude/next-features-chatgpt-wait-btk862` (not merged). It adds per-route HTML/meta + real 404 + sitemap, stops deploying master PNGs, lazy route chunks, View Transition page turns, a contact brief form, CI with a browser check, and a touch/scroll motion layer.
+Task: nothing in flight. The S13 platform + mobile pass is live: PR #6 merged to `main` at 3dcec99 and Vercel deployed it. It added per-route HTML/meta + real 404 + sitemap, stops deploying master PNGs, lazy route chunks, View Transition page turns, a contact brief form, CI with a browser check, and a touch/scroll motion layer.
 Files touched: see `docs/sessions/2026-09-25-S13-claude.md`.
-Committed: pushed to the branch above; no PR opened yet.
-Next concrete step: open a PR, confirm the Vercel preview serves `/work/vela` (clean URL) and returns 404 for an unknown path, then merge. Owner reviews the new mobile motion on a real phone.
+Committed: merged via PR #6 (3dcec99); this handoff update follows as a docs-only change.
+Next concrete step: owner reviews the new mobile motion and page turns on a real phone and tablet; tune pacing from that feedback.
 Verify with: `npm run build && npm run check` (Playwright; every route at 1440 / 1024 / 768 / 390 px plus 7 interaction checks). CI runs the same on every push.
 Watch out for: `vercel.json` no longer rewrites everything to `index.html`; every real route must be in `staticRoutes` (src/lib/meta.ts) or it will 404 on direct load. Use the canonical domain, not hashed deployment URLs.
 
@@ -26,16 +26,16 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - Each project has three project-specific supporting stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each story with distinct compositions: VELA editorial, NORTHLINE architectural, HELIO solar, AURA dark product. Film frames carry project titles and an accessible play/pause control; the film is replaced by a still when reduced motion is requested. Build and four-width overflow checks passed. See `docs/sessions/2026-09-23-S8-codex.md` and S9.
 - `npm run images` succeeds with `sharp`; `npm run build` passes. Keyboard Enter opens and closes Services rows. The 390px mobile menu fits with the new social links; the Contact opener and representative motion frames were visually inspected. Scroll-position checks at 390 and 1024 px confirmed changing image translation and project cues.
 - Canonical production headers for `/` and `/work/vela` return HTTP 200 without `x-robots-tag`; the HTML has no robots noindex tag.
-- S13 (branch, see STOPPED AT): the build writes `dist/<route>.html` per route with its own title, description, canonical, og:url and (projects) a 1.91:1 og:image from `_responsive/social/`, plus `404.html` (noindex), `robots.txt` and `sitemap.xml`. Vercel serves them with `cleanUrls`; unknown paths get a real 404. Master PNGs are pruned from `dist` (deploy 79 MB → 23 MB); they stay in `public/`. Pages other than Home are lazy chunks, preloaded on idle; the gain is small (~5 KB gz) because React and `site.ts` dominate the main bundle.
+- Production check after PR #6: `/`, `/work`, `/work/vela`, `/contact`, `/sitemap.xml` and `/robots.txt` return 200; `/nope` returns 404; master PNGs return 404. `/work/vela` serves its own title, canonical, absolute `og:url` and the 1.91:1 social `og:image`. At 390 px a project card opens its case study with the correct header ink.
+- S13 (live since PR #6): the build writes `dist/<route>.html` per route with its own title, description, canonical, og:url and (projects) a 1.91:1 og:image from `_responsive/social/`, plus `404.html` (noindex), `robots.txt` and `sitemap.xml`. Vercel serves them with `cleanUrls`; unknown paths get a real 404. Master PNGs are pruned from `dist` (deploy 79 MB → 23 MB); they stay in `public/`. Pages other than Home are lazy chunks, preloaded on idle; the gain is small (~5 KB gz) because React and `site.ts` dominate the main bundle.
 - S13 page turns: internal links run inside a View Transition (old page lifts, new wipes up; a project card's image morphs into the case study's lead image). Reduced motion or no API → plain navigation.
 - S13 contact: `/contact` has a brief form. Without `VITE_CONTACT_ENDPOINT` it drafts an email in the visitor's mail app; set that env var to any JSON form endpoint (e.g. Formspree) to post instead.
 - S13 mobile/tablet motion: on touch screens the element crossing the middle of the screen takes its hover treatment (project pull-in, service width stretch, Pantheon accent bar, next-project gold), presses answer with a scale, display type unfolds along the width axis as it scrolls in (CSS scroll timelines; static where unsupported), the hero plate pushes in and the headline folds as you leave it, list items rise into place, the contact bolt charges, and the interruption's sky flickers when the bolt strikes. Desktop is unchanged.
 
 ## NEXT QUEUE
-1. Open a PR for the S13 branch, check the Vercel preview (clean URLs, real 404, page turns on a phone), merge.
-2. Owner reviews motion pacing on a physical phone and tablet; tune specific sections based on feedback.
-3. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
-4. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
+1. Owner reviews motion pacing on a physical phone and tablet; tune specific sections based on feedback.
+2. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
+3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
 
 ## INVARIANTS
 - The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
