@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { conceptNotice, projects, type Project } from '../content/site';
 import { Picture } from '../components/Picture';
@@ -7,6 +7,7 @@ import { Reveal, Line } from '../components/Reveal';
 import { greekNumeral } from '../lib/antiquity';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useFocusBand } from '../hooks/useFocusBand';
+import { useReducedMotion } from '../hooks/useReducedMotion';
 import NotFound from './NotFound';
 
 export default function ProjectPage() {
@@ -112,16 +113,9 @@ function CaseStory({ project }: { project: Project }) {
 }
 
 function MotionStudy({ media, client }: { media: Project['caseStudy']['media']; client: string }) {
-  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const reducedMotion = useReducedMotion();
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(query.matches);
-    query.addEventListener('change', update);
-    return () => query.removeEventListener('change', update);
-  }, []);
 
   const togglePlayback = () => {
     const video = videoRef.current;

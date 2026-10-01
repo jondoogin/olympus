@@ -1,13 +1,13 @@
 # OLYMPUS — State
-Updated: 2026-09-25 · S13 · by: claude
+Updated: 2026-10-01 · S14 · by: claude
 
 ## STOPPED AT
-Task: S13 platform + mobile pass is on branch `claude/next-features-chatgpt-wait-btk862` (not merged). It adds per-route HTML/meta + real 404 + sitemap, stops deploying master PNGs, lazy route chunks, View Transition page turns, a contact brief form, CI with a browser check, and a touch/scroll motion layer.
-Files touched: see `docs/sessions/2026-09-25-S13-claude.md`.
-Committed: pushed to the branch above; no PR opened yet.
-Next concrete step: open a PR, confirm the Vercel preview serves `/work/vela` (clean URL) and returns 404 for an unknown path, then merge. Owner reviews the new mobile motion on a real phone.
-Verify with: `npm run build && npm run check` (Playwright; every route at 1440 / 1024 / 768 / 390 px plus 7 interaction checks). CI runs the same on every push.
-Watch out for: `vercel.json` no longer rewrites everything to `index.html`; every real route must be in `staticRoutes` (src/lib/meta.ts) or it will 404 on direct load. Use the canonical domain, not hashed deployment URLs.
+Task: S14 prerendering is on branch `claude/project-thread-cp0yjy` (draft PR). Every route's HTML now ships its rendered page markup, and the client hydrates it. S13 was merged as PR #6; PR #7 (S13 handoff notes) is still open.
+Files touched: see `docs/sessions/2026-10-01-S14-claude.md`.
+Committed: pushed to the branch above with a draft PR open.
+Next concrete step: check the Vercel preview loads with JavaScript off (View Source shows the page text), confirm the page turns and mobile motion still feel right, then merge.
+Verify with: `npm run build && npm run check` (now 11 interaction checks, including no-JS reading and hydration).
+Watch out for: render-time code must not touch `window`/`document` (it now also runs in Node at build). Read browser-only values in effects, or with `useSyncExternalStore` and a server snapshot, as `useReducedMotion` does.
 
 ## NOW
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
@@ -31,8 +31,10 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - S13 contact: `/contact` has a brief form. Without `VITE_CONTACT_ENDPOINT` it drafts an email in the visitor's mail app; set that env var to any JSON form endpoint (e.g. Formspree) to post instead.
 - S13 mobile/tablet motion: on touch screens the element crossing the middle of the screen takes its hover treatment (project pull-in, service width stretch, Pantheon accent bar, next-project gold), presses answer with a scale, display type unfolds along the width axis as it scrolls in (CSS scroll timelines; static where unsupported), the hero plate pushes in and the headline folds as you leave it, list items rise into place, the contact bolt charges, and the interruption's sky flickers when the bolt strikes. Desktop is unchanged.
 
+- S14 prerender: `scripts/site-plugin.ts` loads `src/entry-server.tsx` through Vite's SSR loader after the build and writes each route's markup into `<div id="root" data-route="…">` (404.html uses `*`). `main.tsx` hydrates only when `data-route` matches the path, after loading that route's chunk; otherwise it renders fresh (dev server, SPA fallbacks). A `<noscript>` style shows reveal targets without JavaScript.
+
 ## NEXT QUEUE
-1. Open a PR for the S13 branch, check the Vercel preview (clean URLs, real 404, page turns on a phone), merge.
+1. Review and merge the S14 prerender PR after checking its Vercel preview; merge or close PR #7 (S13 handoff notes).
 2. Owner reviews motion pacing on a physical phone and tablet; tune specific sections based on feedback.
 3. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
 4. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
@@ -54,6 +56,7 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - Projects must stay labelled as fictional concepts. Never imply real clients or real results.
 - Every animation must collapse under `prefers-reduced-motion`. Add the new selector to the reduce block at the end of `sections.css`.
 - A new route needs three things: the `<Route>` in App.tsx, a lazy entry in `src/routes.tsx`, and a place in `staticRoutes` / `routeMeta` (src/lib/meta.ts) so the build writes its HTML file. `pageModule` in scripts/site-plugin.ts maps it to its chunk.
+- Render-time code runs in Node at build (prerender). No `window`, `document` or `matchMedia` outside effects; the first client render must match the build's markup or hydration fails (the check catches it).
 - Touch-only states key off `(hover: none)` and `.is-focus` (hooks/useFocusBand). Scroll-timeline effects live in one `@supports (animation-timeline: view())` block in sections.css and are limited to < 1100px.
 
 ## FRAGILE

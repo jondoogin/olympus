@@ -706,7 +706,7 @@
   .mmenu__nav a { opacity: 1; transform: none; }
   .hero__scroll::after { animation: none; }
   .pause__media .pic img, .proj__frame .pic, .manifesto__frame .pic { translate: none !important; }
-  .case-film video { display: none; }
+  .case-film video, .case-film__toggle { display: none; }
   .hero__pic img, .proj__frame .pic, .god__frame .pic, .case-media .pic,
   .case-plate .pic img, .case-gallery .pic img, .case-idea__statement,
   .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic,

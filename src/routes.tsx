@@ -45,9 +45,16 @@ export function preloadRoute(pathname: string): Promise<void> {
   return byPath[pathname]?.preload() ?? Promise.resolve();
 }
 
+const pages = [ProjectPage, ...Object.values(byPath)];
+
+/** Loads every route's code (the build-time render needs all of it). */
+export function preloadAll() {
+  return Promise.all(pages.map((p) => p.preload())).then(() => {});
+}
+
 /** Fetches every route's code once the browser is idle after first load. */
 export function preloadAllWhenIdle() {
-  const all = () => [ProjectPage, ...Object.values(byPath)].forEach((p) => void p.preload().catch(() => {}));
+  const all = () => pages.forEach((p) => void p.preload().catch(() => {}));
   const idle = () => ('requestIdleCallback' in window ? window.requestIdleCallback(all, { timeout: 4000 }) : setTimeout(all, 2000));
   if (document.readyState === 'complete') idle();
   else window.addEventListener('load', idle, { once: true });

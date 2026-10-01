@@ -32,6 +32,10 @@ for (const f of htmlFiles) {
   if (titles.has(title)) fail(f, `duplicate <title> "${title}" (also ${titles.get(title)})`);
   titles.set(title, f);
   if (f === '404.html' && !html.includes('name="robots" content="noindex"')) fail(f, 'missing noindex');
+  // Prerendered: the page's own markup ships in the HTML, not just an empty #root.
+  const rootTag = html.match(/<div id="root" data-route="([^"]*)">([\s\S]{0,40})/);
+  if (!rootTag || rootTag[2].startsWith('</div>')) fail(f, 'not prerendered (empty #root)');
+  else if (!/<main[^>]*>[\s\S]*<h1/.test(html)) fail(f, 'prerendered markup has no <h1> in <main>');
   if (process.env.VITE_SITE_URL && f !== '404.html' && !html.includes('rel="canonical"')) fail(f, 'missing canonical link');
 }
 await access(path.join(DIST, 'robots.txt')).catch(() => fail('dist', 'missing robots.txt'));
@@ -45,7 +49,7 @@ const base = server.resolvedUrls.local[0].replace(/\/$/, '');
 const browser = await chromium.launch();
 await mkdir(OUT, { recursive: true });
 
-async function open(width, url, opts = {}) {
+async function open(width, url, { initScript, ...opts } = {}) {
   const mobile = width < 800;
   const context = await browser.newContext({
     viewport: { width, height: mobile ? 844 : 900 },
@@ -53,6 +57,7 @@ async function open(width, url, opts = {}) {
     isMobile: mobile,
     ...opts,
   });
+  if (initScript) await context.addInitScript(initScript);
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -115,7 +120,9 @@ await Promise.all(Array.from({ length: 4 }, async () => {
 process.stdout.write('\n');
 
 // ---------- Interactions ----------
+let interactions = 0;
 async function interaction(name, width, url, run, opts) {
+  interactions++;
   const { page, context, errors } = await open(width, url, opts);
   try {
     await page.waitForTimeout(600);
@@ -182,6 +189,36 @@ await interaction('contact brief', 390, '/contact', async (page) => {
   expect(href?.startsWith('mailto:') && href.includes('Check'), 'draft email link missing the brief');
 });
 
+for (const [url, width] of [['/work/vela', 390], ['/', 1440]]) {
+  await interaction(`readable without JavaScript ${url} @${width}`, width, url, async (page) => {
+    // The hero <h1> has no box of its own (its lines are positioned), so look at any part of it.
+    const h1 = page.locator('main h1, main h1 *').filter({ hasText: /\S/ });
+    expect(await h1.evaluateAll((els) => els.some((el) => el.getBoundingClientRect().height > 0)), 'no visible <h1>');
+    const hidden = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-reveal]')].filter((el) => getComputedStyle(el).opacity === '0').length,
+    );
+    expect(hidden === 0, `${hidden} reveal target(s) stayed invisible`);
+  }, { javaScriptEnabled: false });
+}
+
+for (const url of ['/about', '/work/helio']) {
+  await interaction(`hydrates the prerendered page ${url}`, 1440, url, async (page) => {
+    // Hydration keeps the server-rendered nodes; a client re-render would remove them.
+    await page.waitForTimeout(600);
+    const removed = await page.evaluate(() => window.__removedHeadings);
+    expect(removed === 0, `${removed} prerendered heading(s) were replaced instead of hydrated`);
+  }, {
+    initScript: () => {
+      window.__removedHeadings = 0;
+      new MutationObserver((records) => {
+        for (const r of records) for (const n of r.removedNodes) {
+          if (n.nodeType === 1 && (n.matches('h1') || n.querySelector('h1'))) window.__removedHeadings++;
+        }
+      }).observe(document, { childList: true, subtree: true });
+    },
+  });
+}
+
 await browser.close();
 await new Promise((resolve) => server.httpServer.close(resolve));
 
@@ -190,4 +227,4 @@ if (failures.length) {
   console.error(`\n${failures.length} problem(s):\n  ${failures.join('\n  ')}\nScreenshots: ${OUT}/`);
   process.exit(1);
 }
-console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and 7 interaction checks.`);
+console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and ${interactions} interaction checks.`);
