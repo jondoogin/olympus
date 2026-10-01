@@ -17,12 +17,13 @@ const fail = (where, msg) => failures.push(`${where}: ${msg}`);
 const htmlFiles = [
   ...(await readdir(DIST)).filter((f) => f.endsWith('.html')),
   ...(await readdir(path.join(DIST, 'work'))).filter((f) => f.endsWith('.html')).map((f) => `work/${f}`),
+  ...(await readdir(path.join(DIST, 'people'))).filter((f) => f.endsWith('.html')).map((f) => `people/${f}`),
 ];
 const routes = htmlFiles
   .filter((f) => f !== '404.html')
   .map((f) => (f === 'index.html' ? '/' : `/${f.replace(/\.html$/, '')}`))
   .sort();
-if (routes.length < 11) fail('dist', `expected 11 route pages, found ${routes.length}`);
+if (routes.length < 17) fail('dist', `expected 17 route pages, found ${routes.length}`);
 
 const titles = new Map();
 for (const f of htmlFiles) {
@@ -155,6 +156,19 @@ for (const width of [1440, 390]) {
   });
 }
 
+for (const width of [1440, 390]) {
+  await interaction(`dossier navigation @${width}`, width, '/people', async (page) => {
+    await page.locator('.people-bio__more').first().click();
+    await page.waitForURL('**/people/zeus');
+    await page.waitForTimeout(1200);
+    expect((await page.locator('main h1').textContent())?.includes('Zeus'), 'dossier did not render');
+    expect((await page.evaluate(() => window.scrollY)) === 0, 'dossier did not open at the top');
+    expect((await page.title()).startsWith('Zeus'), 'tab title was not updated');
+    await page.locator('.person-next').click();
+    await page.waitForURL('**/people/athena');
+  });
+}
+
 await interaction('header ink on a dark page, loaded directly', 768, '/work/helio', async (page) => {
   await page.waitForTimeout(800);
   const ink = await page.locator('.site-header').getAttribute('data-ink');
@@ -190,4 +204,4 @@ if (failures.length) {
   console.error(`\n${failures.length} problem(s):\n  ${failures.join('\n  ')}\nScreenshots: ${OUT}/`);
   process.exit(1);
 }
-console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and 7 interaction checks.`);
+console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and 9 interaction checks.`);

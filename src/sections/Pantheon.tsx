@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { pantheon, type God } from '../content/site';
+import { interior, pantheon, type God } from '../content/site';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
@@ -10,7 +10,7 @@ export function GodCard({ g, i }: { g: God; i: number }) {
   const portraitRef = useFocusBand(useScrollProgress<HTMLDivElement>());
   return (
     <Reveal as="figure" className={`god god--${i + 1}`} threshold={0.25}>
-      <div className="god__frame" data-accent={g.accent} ref={portraitRef}>
+      <div className="god__frame" data-accent={g.accent} ref={portraitRef} data-morph-source>
         <Picture
           image={g.image}
           alt={g.alt}
@@ -20,7 +20,7 @@ export function GodCard({ g, i }: { g: God; i: number }) {
       </div>
       <figcaption className="god__cap">
         <span className="god__role">{g.role}</span>
-        <span className="god__name">{g.name}</span>
+        <Link to={`/people/${g.slug}`} className="god__name god__link" data-morph="person" aria-label={`${g.name}, ${g.role}. ${interior.people.dossier.open}`}>{g.name}</Link>
         <q className="god__line">{g.line}</q>
         <span className="god__formerly">{g.formerly}</span>
       </figcaption>

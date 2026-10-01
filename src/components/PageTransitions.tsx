@@ -5,13 +5,28 @@ import { preloadRoute } from '../routes';
 import { mq } from '../lib/tokens';
 import { scrollToStart } from '../lib/scroll';
 
+type Morph = { source: HTMLElement; name: string; target: string };
+
+/** The element a clicked link carries into the next page, if any. */
+function morphFor(a: HTMLAnchorElement): Morph | null {
+  if (a.classList.contains('proj__link')) {
+    const source = a.querySelector<HTMLElement>('.proj__frame');
+    return source && { source, name: 'case-media', target: '.case-media img' };
+  }
+  if (a.dataset.morph === 'person') {
+    const source = a.closest('.god, .people-bio')?.querySelector<HTMLElement>('[data-morph-source]');
+    return source ? { source, name: 'person-portrait', target: '.person-hero__portrait img' } : null;
+  }
+  return null;
+}
+
 const settle = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
 
 /**
  * Page turns. Internal link clicks load the next route's code, then swap the page
  * inside a View Transition: the old page lifts away while the new one wipes up
  * (styles in components.css, "Page transitions"). A project card's image carries
- * over into the case study's lead image. Browsers without the API, and visitors who
+ * over into the case study's lead image, and a partner's portrait into their dossier. Browsers without the API, and visitors who
  * ask for reduced motion, get a plain navigation.
  */
 export function PageTransitions() {
@@ -35,10 +50,11 @@ export function PageTransitions() {
         return;
       }
 
-      // A project card hands its image to the case study it opens.
-      const frame = a.classList.contains('proj__link') ? a.querySelector<HTMLElement>('.proj__frame') : null;
-      if (frame) {
-        frame.style.viewTransitionName = 'case-media';
+      // A project card hands its image to the case study it opens; a portrait hands
+      // itself to the partner's dossier.
+      const morph = morphFor(a);
+      if (morph) {
+        morph.source.style.viewTransitionName = morph.name;
         root.classList.add('vt-morph');
       }
 
@@ -47,12 +63,12 @@ export function PageTransitions() {
         flushSync(() => navigate(to));
         scrollToStart(url.hash);
         // Give the arriving lead image a moment to decode so the morph lands on a picture.
-        const img = frame && document.querySelector<HTMLImageElement>('.case-media img');
+        const img = morph && document.querySelector<HTMLImageElement>(morph.target);
         if (img) await Promise.race([img.decode().catch(() => {}), settle(450)]);
       });
       transition.finished.finally(() => {
         root.classList.remove('vt-morph');
-        if (frame) frame.style.viewTransitionName = '';
+        if (morph) morph.source.style.viewTransitionName = '';
       });
     };
 

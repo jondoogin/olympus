@@ -346,7 +346,20 @@ export const services = [
   },
 ];
 
+/** A partner's dossier page (/people/:slug). Fictional persona, played straight. */
+export type Dossier = {
+  /** Two short paragraphs. */
+  profile: [string, string];
+  /** The facts column: four dry label / value pairs. */
+  record: { label: string; value: string }[];
+  /** Three house rules of their own, numbered in Greek. */
+  rules: [string, string, string];
+  /** Concept projects they shaped, with their part in one line. */
+  work: { slug: string; note: string }[];
+};
+
 export type God = {
+  slug: string;
   name: string;
   role: string;
   line: string;
@@ -356,10 +369,12 @@ export type God = {
   alt: string;
   crop: Crop;
   accent?: 'gold' | 'aegean' | 'apollo';
+  dossier: Dossier;
 };
 
 export const pantheon: God[] = [
   {
+    slug: 'zeus',
     name: 'Zeus',
     role: 'CEO',
     line: 'Big ideas. Bigger budgets.',
@@ -368,8 +383,30 @@ export const pantheon: God[] = [
     alt: 'Zeus: close crop of a bearded marble statue in black sunglasses against blue sky.',
     crop: { mobile: '50% 30%' },
     accent: 'gold',
+    dossier: {
+      profile: [
+        'Zeus founded OLYMPUS on the theory that most brands are too polite to be remembered. He runs the agency the way he once ran the sky: few rules, enforced with conviction.',
+        'He reads every brief, attends the first meeting and the last, and stays out of the middle unless the middle needs weather. His notes are short. His standards are not.',
+      ],
+      record: [
+        { label: 'Leads', value: 'The agency, nominally' },
+        { label: 'Office hours', value: 'Whenever it thunders' },
+        { label: 'Signs off', value: 'Everything, eventually' },
+        { label: 'Known for', value: 'Raising the budget in the room' },
+      ],
+      rules: [
+        'Ask for the brave version first. Sensible can wait.',
+        'Nobody remembers the safe option.',
+        'One decision-maker per brief. Usually me.',
+      ],
+      work: [
+        { slug: 'northline', note: 'Pushed the positioning from decades to centuries.' },
+        { slug: 'vela', note: 'Approved the severity, then asked for more.' },
+      ],
+    },
   },
   {
+    slug: 'athena',
     name: 'Athena',
     role: 'Executive Creative Director',
     line: 'Discipline creates freedom.',
@@ -378,8 +415,30 @@ export const pantheon: God[] = [
     alt: 'Athena: marble bust in a crested helmet with a severe gaze, a single blue paint-marker slash on the backdrop.',
     crop: { mobile: '50% 30%' },
     accent: 'aegean',
+    dossier: {
+      profile: [
+        'Athena runs the creative department like a campaign she intends to win. Every piece of work has to survive one question — why this, and not the obvious thing — before it leaves the building.',
+        'She believes taste is a discipline rather than a gift, and can usually prove it on a whiteboard. Junior designers fear her. Senior ones ask for her calendar.',
+      ],
+      record: [
+        { label: 'Leads', value: 'Creative, all of it' },
+        { label: 'Office hours', value: 'Before anyone else arrives' },
+        { label: 'Signs off', value: 'Concepts, systems, type' },
+        { label: 'Known for', value: 'Cutting the second-best idea first' },
+      ],
+      rules: [
+        'Define the argument before you draw anything.',
+        'Every rule in a system must earn its place.',
+        'Restraint is a decision, not an absence.',
+      ],
+      work: [
+        { slug: 'vela', note: 'Wrote the rules of the identity, then enforced them.' },
+        { slug: 'aura', note: 'Kept the campaign as quiet as the product.' },
+      ],
+    },
   },
   {
+    slug: 'hermes',
     name: 'Hermes',
     role: 'Strategy',
     line: 'Same day. Different hemisphere.',
@@ -387,8 +446,30 @@ export const pantheon: God[] = [
     image: 'hermes-strategy',
     alt: 'Hermes: marble bust in a winged helmet and dark sunglasses against a motion-blurred blue backdrop.',
     crop: { mobile: '50% 25%' },
+    dossier: {
+      profile: [
+        'Hermes leads strategy, which he describes as reaching the useful answer before the meeting ends. He reads everything, talks to everyone, and arrives with the insight while others are still circulating the agenda.',
+        'He is the agency’s translator: between research and language, between clients and creatives, and occasionally between time zones he visited that same morning.',
+      ],
+      record: [
+        { label: 'Leads', value: 'Strategy and naming' },
+        { label: 'Office hours', value: 'Several, in different hemispheres' },
+        { label: 'Signs off', value: 'Positioning and briefs' },
+        { label: 'Known for', value: 'Replying before you press send' },
+      ],
+      rules: [
+        'A brief should fit in a sentence and survive a week.',
+        'Find the tension, then name it.',
+        'Speed is a courtesy. Accuracy is the job.',
+      ],
+      work: [
+        { slug: 'northline', note: 'Found the five-hundred-year frame and named the practice around it.' },
+        { slug: 'aura', note: 'Built the launch strategy around doing less.' },
+      ],
+    },
   },
   {
+    slug: 'apollo',
     name: 'Apollo',
     role: 'Creative',
     line: 'A little brighter. A little louder.',
@@ -397,8 +478,30 @@ export const pantheon: God[] = [
     alt: 'Apollo: curly-haired marble sculpture in orange acetate sunglasses, lit by hard flash and an orange glow.',
     crop: { mobile: '50% 25%' },
     accent: 'apollo',
+    dossier: {
+      profile: [
+        'Apollo leads creative, by which he means making the idea impossible to ignore. He works in light, rhythm and colour, and can tell within a bar whether a film will be remembered.',
+        'He gave up prophecy because clients asked for revisions anyway. He kept the sun because it photographs well.',
+      ],
+      record: [
+        { label: 'Leads', value: 'Campaign and craft' },
+        { label: 'Office hours', value: 'Sunrise to golden hour' },
+        { label: 'Signs off', value: 'Film, music, colour' },
+        { label: 'Known for', value: 'One more grade after “final”' },
+      ],
+      rules: [
+        'If it isn’t vivid, it isn’t finished.',
+        'Edit to the beat.',
+        'Make one thing glow. Let the rest stay dark.',
+      ],
+      work: [
+        { slug: 'helio', note: 'Turned a poster brief into a sunrise.' },
+        { slug: 'vela', note: 'Lit the campaign, then kept it cool.' },
+      ],
+    },
   },
   {
+    slug: 'dionysus',
     name: 'Dionysus',
     role: 'Culture / Experiences',
     line: 'Work hard. Party harder.',
@@ -406,8 +509,29 @@ export const pantheon: God[] = [
     image: 'dionysus-culture',
     alt: 'Dionysus: expressive marble bust with ivy in its hair, head tipped back under violet stage light.',
     crop: { mobile: '50% 30%' },
+    dossier: {
+      profile: [
+        'Dionysus leads culture and experiences. He designs the moments people talk about afterwards: launches, rooms, gatherings, and the slightly-too-late part of the evening when the best ideas tend to appear.',
+        'He insists a brand is something people do together, not something they look at. He has the guest lists to support the theory.',
+      ],
+      record: [
+        { label: 'Leads', value: 'Experiences and events' },
+        { label: 'Office hours', value: 'After six' },
+        { label: 'Signs off', value: 'Rooms, guest lists, playlists' },
+        { label: 'Known for', value: 'The after-party being the launch' },
+      ],
+      rules: [
+        'Design the arrival. People forgive a great deal after a good entrance.',
+        'Invite the right twelve, not the wrong twelve hundred.',
+        'Leave room for the unplanned.',
+      ],
+      work: [
+        { slug: 'helio', note: 'Made the festival somewhere you could stand, not just something you could see.' },
+      ],
+    },
   },
   {
+    slug: 'artemis',
     name: 'Artemis',
     role: 'Production',
     line: 'On time. On target.',
@@ -415,6 +539,27 @@ export const pantheon: God[] = [
     image: 'artemis-production',
     alt: 'Artemis: marble bust with tied hair and a direct gaze, sharp light with a sage-green shadow.',
     crop: { mobile: '50% 25%' },
+    dossier: {
+      profile: [
+        'Artemis leads production. She turns ambition into a schedule, a budget and a crew, then makes sure all three arrive on the same day. Nothing leaves without her sign-off, and nothing leaves late.',
+        'She is calm in a way that makes everyone else slightly nervous. Her timelines are drawn in pen.',
+      ],
+      record: [
+        { label: 'Leads', value: 'Production and delivery' },
+        { label: 'Office hours', value: 'Early. Precisely.' },
+        { label: 'Signs off', value: 'Schedules, budgets, final files' },
+        { label: 'Known for', value: 'Never once saying “it’ll be fine”' },
+      ],
+      rules: [
+        'Name the deadline, then defend it.',
+        'Protect the makers’ time like your own.',
+        'Check the final file twice. Then once more.',
+      ],
+      work: [
+        { slug: 'aura', note: 'Planned the product film to the frame.' },
+        { slug: 'northline', note: 'Put a five-hundred-year brand on a twelve-week schedule.' },
+      ],
+    },
   },
 ];
 
@@ -563,6 +708,18 @@ export const interior = {
     lead: 'Meet the fictional leadership of OLYMPUS. Six familiar names, recast as a small creative agency with very contemporary opinions.',
     intro: 'No anonymous departments. Each discipline has a face and a point of view; every brief gets the people who will actually make the work.',
     note: 'Fictional agency and characters — these are creative personae, not staff biographies.',
+    /** Chrome for the individual dossier pages (/people/:slug). */
+    dossier: {
+      open: 'Read the dossier',
+      notice: 'Fictional persona — a character, not a staff biography',
+      profile: 'Profile',
+      record: 'On the record',
+      rules: 'Personal house rules',
+      work: 'Fingerprints',
+      workNote: 'Fictional concept projects, not client work.',
+      next: 'Next partner',
+      all: 'The whole Pantheon',
+    },
     bios: [
       'Sets the ambition, then asks whether the idea is brave enough to deserve it. Zeus keeps the agency focused on work that can stand in the open.',
       'Treats clarity as a creative act. Athena makes the argument behind the work as exacting as the work itself.',

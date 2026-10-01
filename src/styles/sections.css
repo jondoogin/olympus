@@ -395,6 +395,11 @@
 .god__line { font-family: var(--font-serif); font-style: italic; font-size: var(--fs-lead); line-height: 1.1; margin-top: 0.2rem; }
 .god__formerly { margin-top: var(--s-2); max-width: 26ch; font-family: var(--font-mono); font-size: var(--fs-micro); line-height: 1.45; color: var(--fg-muted); }
 .god[data-reveal='fade'] { transition-duration: 1100ms; }
+/* The name is the card's link; its hit area stretches over the whole card. */
+.god { position: relative; }
+.god__link::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+.god__link:focus-visible { outline: none; }
+.god:has(.god__link:focus-visible) { outline: 2px solid var(--aegean); outline-offset: 6px; }
 
 @media (hover: hover) and (pointer: fine) {
   .god:hover .pic img { scale: 1.045; }
@@ -611,6 +616,9 @@
   .case-idea__statement { translate: 0 calc((var(--p, 0.5) - 0.5) * -2rem); }
   .case-page[data-project='helio'] .case-idea::before { translate: 0 calc((var(--p, 0.5) - 0.5) * 16%); }
   .people-bio__image .pic { scale: 1.16; translate: 0 calc((var(--p, 0.5) - 0.5) * -12%); }
+  .person-hero__portrait .pic { scale: 1.12; translate: 0 calc((var(--p, 0.5) - 0.5) * -10%); }
+  .person-rules__list li { translate: calc((var(--p, 0.5) - 0.5) * -1.5rem) 0; }
+  .person-rules__list li:nth-child(even) { translate: calc((var(--p, 0.5) - 0.5) * 1.5rem) 0; }
   .people-bio:nth-child(even) .people-bio__copy[data-reveal='fade'] { transition-delay: 170ms; }
   .interior-story__main h2 { translate: 0 calc((var(--p, 0.5) - 0.5) * -1.5rem); }
   .interior-story__aside { translate: 0 calc((var(--p, 0.5) - 0.5) * 1rem); }
@@ -709,7 +717,7 @@
   .case-film video { display: none; }
   .hero__pic img, .proj__frame .pic, .god__frame .pic, .case-media .pic,
   .case-plate .pic img, .case-gallery .pic img, .case-idea__statement,
-  .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic,
+  .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic, .person-hero__portrait .pic, .person-rules__list li,
   .interior-story__main h2, .interior-story__aside { translate: none !important; scale: 1 !important; }
   .proj__view { opacity: 1; translate: none; transition: none; }
   .brief__bolt, .interrupt::after { animation: none !important; }

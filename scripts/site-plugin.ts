@@ -1,6 +1,6 @@
 // Build-time pages for a client-rendered site.
 // After Vite writes dist/, this plugin:
-//  - writes one HTML file per route (dist/work.html, dist/work/vela.html, …) with that
+//  - writes one HTML file per route (dist/work.html, dist/work/vela.html, dist/people/zeus.html, …) with that
 //    route's title, description, canonical and social tags, plus a modulepreload for
 //    the route's code chunk. Vercel serves them via `cleanUrls` (see vercel.json).
 //  - writes dist/404.html (noindex), which Vercel serves with a real 404 status.
@@ -17,6 +17,7 @@ import manifest from '../src/content/image-manifest.json';
 function pageModule(route: string) {
   if (route === '/') return null;
   if (route.startsWith('/work/')) return 'src/pages/ProjectPage.tsx';
+  if (route.startsWith('/people/')) return 'src/pages/PersonPage.tsx';
   const name = route.slice(1);
   return `src/pages/${name[0].toUpperCase()}${name.slice(1)}Page.tsx`;
 }
