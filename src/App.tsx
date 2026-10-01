@@ -5,7 +5,7 @@ import { Footer } from './components/Footer';
 import { PageTransitions } from './components/PageTransitions';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import { AboutPage, ContactPage, CulturePage, PeoplePage, ProjectPage, ServicesPage, WorkPage, preloadAllWhenIdle } from './routes';
+import { AboutPage, ContactPage, CulturePage, PeoplePage, PersonPage, ProjectPage, ServicesPage, WorkPage, preloadAllWhenIdle } from './routes';
 import { pageTitle } from './lib/meta';
 import { scrollToStart } from './lib/scroll';
 import { titles } from './content/site';
@@ -59,6 +59,7 @@ export default function App() {
             <Route path="/work/:slug" element={<ProjectPage />} />
             <Route path="/services" element={<ServicesPage />} />
             <Route path="/people" element={<PeoplePage />} />
+            <Route path="/people/:slug" element={<PersonPage />} />
             <Route path="/culture" element={<CulturePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />

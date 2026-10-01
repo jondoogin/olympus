@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { InteriorIntro } from '../components/InteriorIntro';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
@@ -31,13 +32,14 @@ function PeopleBio({ god, index }: { god: God; index: number }) {
   const ref = useScrollProgress<HTMLElement>();
   return (
     <article className="people-bio" ref={ref}>
-      <div className="people-bio__image"><Picture image={god.image} alt={god.alt} crop={god.crop} sizes="(min-width: 1100px) 26vw, (min-width: 768px) 36vw, 88vw" /></div>
+      <div className="people-bio__image" data-morph-source><Picture image={god.image} alt={god.alt} crop={god.crop} sizes="(min-width: 1100px) 26vw, (min-width: 768px) 36vw, 88vw" /></div>
       <Reveal className="people-bio__copy" kind="fade" threshold={0.1}>
         <Label n={String(index + 1).padStart(2, '0')}>{god.role}</Label>
         <h3>{god.name}</h3>
         <p className="people-bio__line"><em>{god.line}</em></p>
         <p>{interior.people.bios[index]}</p>
         <p className="sys">{god.formerly}</p>
+        <p><Link to={`/people/${god.slug}`} className="textlink people-bio__more" data-morph="person">{interior.people.dossier.open}<span className="sr-only">: {god.name}</span> <span aria-hidden="true">→</span></Link></p>
       </Reveal>
     </article>
   );

@@ -1,6 +1,6 @@
 // Per-route document metadata. Shared by the app (tab titles) and the build
 // (scripts/site-plugin.ts writes one HTML file per route with these tags).
-import { conceptNotice, interior, nav, projects, titles } from '../content/site';
+import { conceptNotice, interior, nav, pantheon, projects, titles } from '../content/site';
 import { imageMeta, type ImageKey } from './images';
 
 export type RouteMeta = {
@@ -39,6 +39,14 @@ export function routeMeta(pathname: string): RouteMeta {
       image: socialImage(project.image),
     };
   }
+  if (pathname.startsWith('/people/')) {
+    const god = pantheon.find((g) => pathname === `/people/${g.slug}`);
+    if (!god) return notFoundMeta();
+    return {
+      title: `${god.name}, ${god.role}${titles.suffix}`,
+      description: `${god.line} ${god.formerly} ${interior.people.dossier.notice}.`,
+    };
+  }
   const item = nav.find((n) => pathname === n.to);
   const key = interiorKey(pathname);
   if (!item || !key) return notFoundMeta();
@@ -50,4 +58,4 @@ function notFoundMeta(): RouteMeta {
 }
 
 /** Every route that exists as a real page. The build writes one HTML file for each. */
-export const staticRoutes = ['/', ...nav.map((n) => n.to), ...projects.map((p) => `/work/${p.slug}`)];
+export const staticRoutes = ['/', ...nav.map((n) => n.to), ...projects.map((p) => `/work/${p.slug}`), ...pantheon.map((g) => `/people/${g.slug}`)];
