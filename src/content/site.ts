@@ -44,6 +44,8 @@ export type Project = {
   crop: Crop;
   scope: string[];
   layout: 'portrait-left' | 'bleed' | 'square-right' | 'offset';
+  context: { business: string; audience: string; assignment: string; constraint: string };
+  application: { label: string; title: string; subtitle: string; rows: [string, string][]; footer: string; caption: string };
   caseStudy: {
     brief: { label: string; title: string; body: string };
     idea: { label: string; statement: string; body: string };
@@ -59,45 +61,74 @@ export type Project = {
   };
 };
 
+export const projectContextLabels: Record<string, string> = { business: 'The business', audience: 'Who it serves', assignment: 'Our assignment', constraint: 'The constraint' };
+
 export const conceptNotice = 'Fictional concept — no real client';
 
 export const projects: Project[] = [
   {
     slug: 'vela',
     client: 'VELA',
-    discipline: 'Fashion identity',
+    discipline: "Made-to-order clothing",
     year: '2026',
-    line: 'A house identity cut like the collection: severe, soft, and impossible to mistake.',
+    line: "A first collection of six occasion pieces, built around appointments rather than endless stock.",
     image: 'fashion-campaign',
     alt: 'An ivory sculptural gown on a faceless mannequin, standing on a flat cobalt-blue ground among ancient marble columns.',
     crop: { mobile: '50% 40%' },
     scope: ['Identity', 'Art direction', 'Campaign'],
     layout: 'portrait-left',
+    context: {
+      business: "A small Athens clothing studio making sculptural occasionwear to order.",
+      audience: "People buying one considered piece for a wedding, dinner or important occasion.",
+      assignment: "Introduce Collection 01 and explain the appointment-to-fitting process.",
+      constraint: "A six-piece collection; no seasonal catalogue or retail network."
+    },
+    application: {
+      label: "Collection / appointment card",
+      title: "VELA",
+      subtitle: "Collection 01 — made for your occasion",
+      rows: [
+        [
+          "01 / COLUMN",
+          "Ivory crepe · dress"
+        ],
+        [
+          "02 / FOLD",
+          "Cotton poplin · top"
+        ],
+        [
+          "03 / LINE",
+          "Wool twill · trouser"
+        ]
+      ],
+      footer: "Choose a piece. Meet the studio. Make it yours.",
+      caption: "Collection card / Three of six pieces, with a clear route to a fitting."
+    },
     caseStudy: {
       brief: {
-        label: 'The brief',
-        title: 'Make restraint impossible to ignore.',
-        body: 'VELA is an imagined fashion house built around sculptural form. Its first collection needed an identity that could feel unmistakable without competing with the clothes. The concept brief asked for presence, not noise.',
+        label: "The assignment",
+        title: "Introduce the clothes. Explain the commitment.",
+        body: "The studio’s first six-piece collection needs more than a beautiful launch image. Customers need to understand what is made to order, how a fitting works, and why they should book an appointment before an occasion. The identity has to work on a garment label as well as a campaign."
       },
       idea: {
-        label: 'The idea',
-        statement: 'Quiet is a form of force.',
-        body: 'Let the silhouette do the talking. Hard light, generous space, and one decisive frame give the collection its own gravity.',
+        label: "The idea",
+        statement: "Made for the moment you keep.",
+        body: "Treat the garment as the lasting part of an occasion. The campaign gives each silhouette space; the collection language gives each piece a name, a material and a place in a wardrobe."
       },
       system: {
-        label: 'The system',
-        title: 'A house language cut to the bone.',
-        body: 'The proposed direction moves between severe and soft: blunt typography against sculptural fabric, a cool field of colour against warm stone, and layouts that leave room for the unexpected.',
+        label: "The system",
+        title: "From first impression to first fitting.",
+        body: "Ivory and cobalt connect the campaign to the studio’s practical materials. Numbered styles make a small collection easy to navigate. Short, direct instructions make the service feel personal without making the process mysterious.",
         principles: [
-          'Shape before decoration',
-          'Space as a signature',
-          'Campaign images with the confidence to stand alone',
-        ],
+          "Number every style consistently across lookbook and order card.",
+          "Show material and silhouette before a mood or promise.",
+          "End each collection touchpoint with an appointment invitation."
+        ]
       },
       outcome: {
-        label: 'The outcome',
-        title: 'A direction, ready to become a world.',
-        body: 'This is an editorial concept, not a launched identity. The campaign images, material studies and motion piece show the intended direction; no client approval, audience response, or commercial result is claimed.',
+        label: "The proposed kit",
+        title: "A launch kit for a small studio.",
+        body: "The proposed kit includes a collection card, garment naming, appointment language and campaign direction. A useful next test would be whether a new customer can explain how to order after reading the card. No garments or customer orders are represented as real."
       },
       media: {
         galleryLabel: 'Campaign and identity studies',
@@ -114,12 +145,12 @@ export const projects: Project[] = [
         materials: {
           image: 'vela-material-study',
           alt: 'Unmarked ivory paper, sculptural fabric and a cobalt-blue card arranged on sunlit travertine.',
-          caption: 'Identity study / Paper, cloth, colour',
+          caption: 'Palette study / Paper, cloth, colour',
         },
         film: {
           src: '/media/vela-motion-study.mp4',
           label: 'VELA motion study',
-          caption: 'Motion study / 00:09 / silent',
+          caption: 'Art-direction motion study / 00:09 / silent',
         },
       },
     },
@@ -127,39 +158,66 @@ export const projects: Project[] = [
   {
     slug: 'northline',
     client: 'NORTHLINE',
-    discipline: 'Architecture',
+    discipline: "Civic architecture",
     year: '2026',
-    line: 'Positioning a practice that builds for the next five hundred years, not the next five.',
+    line: "An identity for a practice turning underused public buildings into useful places again.",
     image: 'architecture-campaign',
     alt: 'A brutalist travertine monolith beside a single ancient Doric column, raking Mediterranean light and a still reflecting pool.',
     crop: { mobile: '30% 50%', tablet: '40% 50%', desktop: '50% 55%' },
-    scope: ['Brand strategy', 'Naming', 'Identity', 'Film'],
+    scope: ['Positioning', 'Identity', 'Proposal system'],
     layout: 'bleed',
+    context: {
+      business: "An independent architecture practice focused on reuse of civic buildings.",
+      audience: "Municipal project teams, community organisations and public funding panels.",
+      assignment: "Make the practice’s approach legible in proposals and public consultation.",
+      constraint: "Explain what is retained, what changes and who benefits before showing a hero render."
+    },
+    application: {
+      label: "Practice / project sheet",
+      title: "NORTHLINE",
+      subtitle: "Existing places. New public life.",
+      rows: [
+        [
+          "N / 014",
+          "Harbour Reading Room"
+        ],
+        [
+          "RETAIN",
+          "Masonry shell + courtyard"
+        ],
+        [
+          "ADD",
+          "Step-free entry + reading rooms"
+        ]
+      ],
+      footer: "Project study / Public library reuse / Concept stage",
+      caption: "Proposal cover / An illustrative library brief, with scope and status visible."
+    },
     caseStudy: {
       brief: {
-        label: 'The brief',
-        title: 'Give permanence a point of view.',
-        body: 'NORTHLINE is an imagined architecture practice working between civic scale and intimate detail. The concept brief called for a name and identity that could speak about longevity without borrowing the usual language of luxury or progress.',
+        label: "The assignment",
+        title: "Help a public client see the plan.",
+        body: "NORTHLINE needs to communicate a specific kind of practice: one that adapts existing libraries, halls and community buildings. Its audience has to evaluate scope, access and public value. A brand built only around monumental imagery would leave those questions unanswered."
       },
       idea: {
-        label: 'The idea',
-        statement: 'Built to outlast the moment.',
-        body: 'Put the ancient and the new in the same frame. The distance between them becomes the argument: good architecture belongs to its time and remains useful beyond it.',
+        label: "The idea",
+        statement: "Keep what matters. Make room for what comes next.",
+        body: "Make retention and change visible together. The ancient-and-modern art direction becomes a visual shorthand for reuse; the proposal system does the explaining in plain language."
       },
       system: {
-        label: 'The system',
-        title: 'A visual language with weight.',
-        body: 'The proposed identity takes its cues from architectural plans and stone itself: decisive geometry, warm mineral colour, deep shadow, and space left deliberately unfilled. Print pieces feel measured rather than embellished.',
+        label: "The system",
+        title: "A practice that shows its workings.",
+        body: "The identity borrows the hierarchy of a drawing set: project number, status, scope and a clear reading order. Warm mineral tones connect to existing fabric, while measured lines separate inherited structure from proposed interventions.",
         principles: [
-          'A name that sets direction',
-          'Geometry as the organising device',
-          'Material evidence over ornamental claims',
-        ],
+          "Give every project a number and a visible stage.",
+          "Separate retained fabric from new work in project descriptions.",
+          "Lead proposals with public use, access and the brief."
+        ]
       },
       outcome: {
-        label: 'The outcome',
-        title: 'A practice imagined for the long view.',
-        body: 'The name, imagery and motion study form a proposed brand world for a fictional practice. No buildings were commissioned, identity was launched, or audience response measured.',
+        label: "The proposed kit",
+        title: "A working language for proposals.",
+        body: "The concept includes a proposal cover, project-sheet structure and verbal positioning. Harbour Reading Room is an illustrative commission, not a built project. The next test would be whether a panel can find the scope and project stage without reading the entire proposal."
       },
       media: {
         galleryLabel: 'Architecture and identity studies',
@@ -176,12 +234,12 @@ export const projects: Project[] = [
         materials: {
           image: 'northline-materials',
           alt: 'Architectural paper, a charcoal cover and a small travertine block arranged on a sunlit stone table.',
-          caption: 'Identity study / Paper and stone',
+          caption: 'Palette study / Paper and stone',
         },
         film: {
           src: '/media/northline-motion-study.mp4',
           label: 'NORTHLINE motion study',
-          caption: 'Motion study / 00:09 / silent',
+          caption: 'Art-direction motion study / 00:09 / silent',
         },
       },
     },
@@ -189,39 +247,78 @@ export const projects: Project[] = [
   {
     slug: 'helio',
     client: 'HELIO',
-    discipline: 'Culture / Music',
+    discipline: "Music festival",
     year: '2026',
-    line: 'A summer festival that asked for a poster and got a sunrise.',
+    line: "Two evenings of live music by the sea, with an identity that gets people to the right stage.",
     image: 'culture-campaign',
     alt: 'A white marble hand reaching toward a blazing orange sun disc against an ultramarine sky above a coastline.',
     crop: { mobile: '60% 40%' },
-    scope: ['Campaign', 'Experience', 'Motion'],
+    scope: ['Campaign', 'Programme', 'Wayfinding direction'],
     layout: 'square-right',
+    context: {
+      business: "A fictional two-evening music gathering at a coastal amphitheatre outside Athens.",
+      audience: "Local music audiences and visitors planning a late-summer weekend.",
+      assignment: "Build an announcement, running order and on-site information around one recognisable signal.",
+      constraint: "A single stage, a sunset start and essential travel information that must stay readable."
+    },
+    application: {
+      label: "Festival / programme poster",
+      title: "HELIO",
+      subtitle: "18—19 September 2026 · Coast Stage",
+      rows: [
+        [
+          "FRI / 18:00",
+          "Doors + terrace selections"
+        ],
+        [
+          "FRI / 19:30",
+          "Salt Choir"
+        ],
+        [
+          "FRI / 21:00",
+          "Blue Hours"
+        ],
+        [
+          "SAT / 18:00",
+          "Doors + terrace selections"
+        ],
+        [
+          "SAT / 19:30",
+          "Mira Vale"
+        ],
+        [
+          "SAT / 21:00",
+          "Afterlight"
+        ]
+      ],
+      footer: "One stage / Music until 23:00 / Last return shuttle 23:30",
+      caption: "Programme poster / Fictional artists and event; the running order is part of the identity."
+    },
     caseStudy: {
       brief: {
-        label: 'The brief',
-        title: 'Make a summer gathering feel inevitable.',
-        body: 'HELIO is an imagined music and culture festival on the Mediterranean coast. The concept brief asked for an identity that could move from a single announcement to a place, a ticket and a shared moment, without losing its charge.',
+        label: "The assignment",
+        title: "Sell the evening. Make the evening work.",
+        body: "HELIO’s imagined first edition is small enough to have one stage and a readable timetable. The campaign needs a recognisable image, but the programme also needs dates, set times, doors and a way home. The same system must serve both jobs."
       },
       idea: {
-        label: 'The idea',
-        statement: 'Follow the sun.',
-        body: 'One orange disc becomes the event’s signal. Against ultramarine and pale stone, it reads as a poster from a distance, a stage from above, and a destination at the end of the day.',
+        label: "The idea",
+        statement: "Meet here before the sun goes down.",
+        body: "The orange disc marks the destination. On an announcement it carries the mood; on a programme it anchors the date; on site it marks the stage. Essential information stays in a fixed, high-contrast band."
       },
       system: {
-        label: 'The system',
-        title: 'One symbol. A whole horizon.',
-        body: 'The proposed campaign holds to three elements: the solar circle, an electric blue field, and flashes of weathered marble. Repetition builds recognition while scale changes the feeling from intimate print to monumental space.',
+        label: "The system",
+        title: "Recognition at a distance. Information up close.",
+        body: "Blue, orange and a large solar circle tie together the campaign. A stable type hierarchy keeps the artist, time and place readable even when the disc changes scale. The illustrative programme gives the identity an actual evening to organise.",
         principles: [
-          'A circle that carries the campaign',
-          'Blue and orange with no apology',
-          'An experience imagined from the first frame',
-        ],
+          "Keep date and venue together on every announcement.",
+          "Use one chronological running order for a single stage.",
+          "Treat return travel as part of the event information."
+        ]
       },
       outcome: {
-        label: 'The outcome',
-        title: 'A festival world before the first note.',
-        body: 'The campaign images, printed-material study and motion piece explore a fictional event identity. No festival took place, tickets were sold, or attendance and cultural impact measured.',
+        label: "The proposed kit",
+        title: "A festival people could navigate.",
+        body: "The proposed kit joins campaign direction to a programme poster and travel language. All artists, timings and event details are fictional. Before a real launch, ticketing, accessibility, venue capacity and transport would need an operational brief."
       },
       media: {
         galleryLabel: 'Campaign and experience studies',
@@ -238,12 +335,12 @@ export const projects: Project[] = [
         materials: {
           image: 'helio-materials',
           alt: 'Unprinted blue folded poster, orange circular card and blank ivory ticket on a marble ledge by the sea.',
-          caption: 'Identity study / Circle, colour, invitation',
+          caption: 'Palette study / Circle, colour, invitation',
         },
         film: {
           src: '/media/helio-motion-study.mp4',
           label: 'HELIO motion study',
-          caption: 'Motion study / 00:09 / silent',
+          caption: 'Art-direction motion study / 00:09 / silent',
         },
       },
     },
@@ -251,39 +348,66 @@ export const projects: Project[] = [
   {
     slug: 'aura',
     client: 'AURA',
-    discipline: 'Technology',
+    discipline: "Home audio",
     year: '2026',
-    line: 'Launching a device that does less, beautifully. The campaign followed suit.',
+    line: "A tabletop wireless speaker whose launch explains the one control you actually touch.",
     image: 'technology-campaign',
     alt: 'A reflective obsidian audio device with a glowing circular halo interface resting on a marble plinth in a sunlit modernist courtyard.',
     crop: { mobile: '28% 60%', tablet: '32% 60%', desktop: '40% 60%' },
-    scope: ['Launch strategy', 'Product film', 'Content system'],
+    scope: ['Positioning', 'Art direction', 'Product language'],
     layout: 'offset',
+    context: {
+      business: "A fictional audio brand developing a compact tabletop wireless speaker.",
+      audience: "People listening at home who want a straightforward alternative to screen-led controls.",
+      assignment: "Introduce the speaker and turn its illuminated ring into an understandable control.",
+      constraint: "The product is a design concept; no acoustic, battery or connectivity performance is claimed."
+    },
+    application: {
+      label: "Product / quick-start insert",
+      title: "AURA",
+      subtitle: "One speaker. One ring.",
+      rows: [
+        [
+          "01 / CONNECT",
+          "Power on. Pair from your phone."
+        ],
+        [
+          "02 / TURN",
+          "Rotate the ring to adjust volume."
+        ],
+        [
+          "03 / PRESS",
+          "Press once to pause or resume."
+        ]
+      ],
+      footer: "AURA / Tabletop speaker / Proposed interaction model",
+      caption: "Quick-start insert / A proposed control model, subject to product development."
+    },
     caseStudy: {
       brief: {
-        label: 'The brief',
-        title: 'Let the product make room for life.',
-        body: 'AURA is an imagined personal audio device with one luminous control and no visual clutter. The concept brief asked for a launch direction that could explain its restraint through feeling and form, without inventing features or specifications.',
+        label: "The assignment",
+        title: "Tell people what the object does.",
+        body: "The original product image suggests an audio device but leaves its role unclear. We define the concept as a tabletop wireless speaker, then build the launch around a simple proposed interaction: turn for volume, press for playback. That gives the ring a purpose beyond decoration."
       },
       idea: {
-        label: 'The idea',
-        statement: 'Less to see. More to feel.',
-        body: 'Give the object space, then let its single halo become the signal. The campaign moves between an intimate material detail and a quiet architectural setting where the product feels considered rather than announced.',
+        label: "The idea",
+        statement: "Your music. Within reach.",
+        body: "Show the speaker where it would be used, then explain the control in three steps. The luminous ring becomes both the campaign signature and the starting point for learning the product."
       },
       system: {
-        label: 'The system',
-        title: 'A launch held in one line of light.',
-        body: 'The proposed system pairs reflective obsidian with pale marble, clean blue air, and a fine warm ring. Crops shift from close product evidence to large fields of calm; packaging follows the same reduction.',
+        label: "The system",
+        title: "A product story with an instruction manual.",
+        body: "Close crops introduce the ring and surface. Wider frames place the speaker in a room. The insert uses numbered actions and plain verbs; packaging leads with the product category so the brand name never has to explain everything.",
         principles: [
-          'The halo as a consistent visual cue',
-          'Product form before feature language',
-          'Quiet space around every object',
-        ],
+          "Name the product category on the first encounter.",
+          "Connect each control gesture to one stated action.",
+          "Keep proposed interactions separate from untested technical claims."
+        ]
       },
       outcome: {
-        label: 'The outcome',
-        title: 'A product world, deliberately unfinished.',
-        body: 'These images and the silent motion study propose a launch language for a fictional device. They do not describe a manufactured product, tested capability, commercial launch, or measured result.',
+        label: "The proposed kit",
+        title: "A launch concept you can understand.",
+        body: "The proposed kit includes category positioning, quick-start language and image direction. The speaker and control model are fictional and would require industrial design and usability testing. The useful question now is whether the insert makes the intended interaction clear."
       },
       media: {
         galleryLabel: 'Product and identity studies',
@@ -300,12 +424,12 @@ export const projects: Project[] = [
         materials: {
           image: 'aura-materials',
           alt: 'Reflective black audio device beside an unmarked black box and blank ivory card on a marble surface.',
-          caption: 'Identity study / The unboxing moment',
+          caption: 'Palette study / The unboxing moment',
         },
         film: {
           src: '/media/aura-motion-study.mp4',
           label: 'AURA motion study',
-          caption: 'Motion study / 00:09 / silent',
+          caption: 'Art-direction motion study / 00:09 / silent',
         },
       },
     },
@@ -400,8 +524,8 @@ export const pantheon: God[] = [
         'One decision-maker per brief. Usually me.',
       ],
       work: [
-        { slug: 'northline', note: 'Pushed the positioning from decades to centuries.' },
-        { slug: 'vela', note: 'Approved the severity, then asked for more.' },
+        { slug: 'northline', note: 'Kept public use at the centre of the practice’s positioning.' },
+        { slug: 'vela', note: 'Connected the collection campaign to the appointment experience.' },
       ],
     },
   },
@@ -432,8 +556,8 @@ export const pantheon: God[] = [
         'Restraint is a decision, not an absence.',
       ],
       work: [
-        { slug: 'vela', note: 'Wrote the rules of the identity, then enforced them.' },
-        { slug: 'aura', note: 'Kept the campaign as quiet as the product.' },
+        { slug: 'vela', note: 'Built a numbered collection system from lookbook to order card.' },
+        { slug: 'aura', note: 'Made the speaker category and control language easy to understand.' },
       ],
     },
   },
@@ -463,8 +587,8 @@ export const pantheon: God[] = [
         'Speed is a courtesy. Accuracy is the job.',
       ],
       work: [
-        { slug: 'northline', note: 'Found the five-hundred-year frame and named the practice around it.' },
-        { slug: 'aura', note: 'Built the launch strategy around doing less.' },
+        { slug: 'northline', note: 'Framed the practice around reuse and clearer public proposals.' },
+        { slug: 'aura', note: 'Built the launch around the speaker’s proposed ring control.' },
       ],
     },
   },
@@ -495,8 +619,8 @@ export const pantheon: God[] = [
         'Make one thing glow. Let the rest stay dark.',
       ],
       work: [
-        { slug: 'helio', note: 'Turned a poster brief into a sunrise.' },
-        { slug: 'vela', note: 'Lit the campaign, then kept it cool.' },
+        { slug: 'helio', note: 'Connected the solar campaign image to a readable festival programme.' },
+        { slug: 'vela', note: 'Gave each collection silhouette a consistent visual setting.' },
       ],
     },
   },
@@ -526,7 +650,7 @@ export const pantheon: God[] = [
         'Leave room for the unplanned.',
       ],
       work: [
-        { slug: 'helio', note: 'Made the festival somewhere you could stand, not just something you could see.' },
+        { slug: 'helio', note: 'Joined the campaign to set times, stage information and return travel.' },
       ],
     },
   },
@@ -556,8 +680,8 @@ export const pantheon: God[] = [
         'Check the final file twice. Then once more.',
       ],
       work: [
-        { slug: 'aura', note: 'Planned the product film to the frame.' },
-        { slug: 'northline', note: 'Put a five-hundred-year brand on a twelve-week schedule.' },
+        { slug: 'aura', note: 'Planned the product imagery around form, setting and interaction.' },
+        { slug: 'northline', note: 'Turned the positioning into a usable proposal and project-sheet structure.' },
       ],
     },
   },
@@ -569,7 +693,7 @@ export const proof = [
   { n: '1', label: 'unreasonable standard' },
 ];
 
-export const workNote = 'Four imagined collaborations. The clients are fictional concepts; the standards are not.';
+export const workNote = 'Four fictional businesses. Four specific briefs. See the thinking and the proposed work.';
 
 export const proofFacts = [
   { label: 'Status', body: 'A fictional independent agency, imagined in 2026. Operational since roughly the Bronze Age, if the mythology is to be believed.' },

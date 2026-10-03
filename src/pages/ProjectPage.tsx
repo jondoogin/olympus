@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { conceptNotice, projects, type Project } from '../content/site';
+import { conceptNotice, projects, projectContextLabels, type Project } from '../content/site';
 import { Picture } from '../components/Picture';
 import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
@@ -30,6 +30,7 @@ export default function ProjectPage() {
           <ul className="case-hero__scope">{p.scope.map((s) => <li key={s}>{s}</li>)}</ul>
         </div>
       </section>
+      <ProjectContext project={p} />
       <figure className="case-media" data-ink="ivory" ref={mediaRef}>
         <Picture image={p.image} alt={p.alt} sizes="100vw" crop={p.crop} priority />
       </figure>
@@ -87,6 +88,7 @@ function CaseStory({ project }: { project: Project }) {
           </div>
         </div>
       </section>
+      <ProjectApplication project={project} />
       <section className="case-gallery section" data-theme={darkSystem ? 'dark' : undefined} data-ink={darkSystem ? 'ivory' : 'obsidian'} aria-label={story.media.galleryLabel} ref={galleryRef}>
         <div className="wrap case-gallery__grid">
           <Reveal as="figure" kind="fade">
@@ -108,6 +110,43 @@ function CaseStory({ project }: { project: Project }) {
         </div>
       </section>
     </>
+  );
+}
+
+function ProjectContext({ project }: { project: Project }) {
+  return (
+    <section className="case-context" data-ink="obsidian" aria-label={project.context.business}>
+      <dl className="wrap case-context__grid">
+        {Object.entries(project.context).map(([key, value]) => (
+          <div key={key}><dt className="label">{projectContextLabels[key]}</dt><dd>{value}</dd></div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function ProjectApplication({ project }: { project: Project }) {
+  const a = project.application;
+  return (
+    <section className="case-application section" data-ink="obsidian" aria-label={a.label}>
+      <figure className="wrap">
+        <Label>{a.label}</Label>
+        <div className={`application-board application-board--${project.slug}`}>
+          <div className="application-board__art" aria-hidden="true">
+            {project.slug === 'vela' && <svg viewBox="0 0 240 360"><path d="M94 30 75 70 92 124 40 330H200L148 124 165 70 146 30 120 46Z" fill="currentColor"/><path d="m120 48-5 270m-21-190 52 12" fill="none" stroke="#bbb3a5" strokeWidth="2"/></svg>}
+            {project.slug === 'northline' && <svg viewBox="0 0 360 300"><g fill="none" stroke="currentColor" strokeWidth="3"><path d="M30 30H330V270H30ZM130 30V180H230V30M30 180H130M230 180H330M130 270V225H230V270"/><path d="M130 180H230V225H130Z" strokeDasharray="5 5"/><path d="M45 45H115V165H45ZM245 45H315V165H245Z" strokeWidth="1"/></g></svg>}
+            {project.slug === 'helio' && <span className="application-sun" />}
+            {project.slug === 'aura' && <span className="application-speaker"><span /></span>}
+          </div>
+          <div className="application-board__content">
+            <h3>{a.title}</h3><p className="application-board__subtitle">{a.subtitle}</p>
+            <dl>{a.rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+            <p className="application-board__footer">{a.footer}</p>
+          </div>
+        </div>
+        <figcaption className="label">{a.caption}</figcaption>
+      </figure>
+    </section>
   );
 }
 
