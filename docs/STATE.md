@@ -1,15 +1,16 @@
 # OLYMPUS — State
-Updated: 2026-10-01 · S14 · by: claude
+Updated: 2026-10-03 · S15 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight. S14 partner dossiers merged to `main` via PR #9. Each of the six gods now has a page at `/people/:slug` (zeus, athena, hermes, apollo, dionysus, artemis): portrait hero, profile, "On the record" ledger, three personal rules, the concept projects they shaped, and a next-partner link. Pantheon cards and People bios link to them, and the portrait morphs into the dossier during the page turn.
-Files touched: see `docs/sessions/2026-10-01-S14-claude.md`.
-Committed: merged via PR #9. The owner wants PRs merged automatically once CI is green and conflict-free; no manual approval step.
-Next concrete step: owner reviews motion pacing and the new dossiers on a real phone and tablet; tune from that feedback.
-Verify with: `npm run build && npm run check` (Playwright; every route at 1440 / 1024 / 768 / 390 px plus 9 interaction checks). CI runs the same on every push.
-Watch out for: `vercel.json` no longer rewrites everything to `index.html`; every real route must be in `staticRoutes` (src/lib/meta.ts) or it will 404 on direct load. Use the canonical domain, not hashed deployment URLs. `npm run check` runs without Google Fonts, so it cannot catch display type that clips with real Archivo; check long names (DIONYSUS) with fonts loaded.
+Task: nothing in flight. Grounded project redesign is complete locally; production still serves main.
+Files touched: src/content/site.ts, src/pages/ProjectPage.tsx, src/styles/components.css.
+Committed: wip/grounded-projects @ ddbf188 (implementation); session docs follow in a separate commit.
+Next concrete step: review the four case studies on the local preview at http://127.0.0.1:5173/work, then publish this branch when requested.
+Verify with: npm run build && npm run check (passed: 18 routes × 4 widths and 9 interactions).
+Watch out for: this branch starts from origin/main, including Claude’s partner dossiers. The existing campaign masters remain art-direction studies. Product interactions, musicians and architecture commissions are fictional; never convert them into performance or real-client claims.
 
 ## NOW
+- S15 (local on `wip/grounded-projects`): projects now describe specific businesses, audiences, assignments and constraints. VELA is a made-to-order studio, NORTHLINE a civic reuse practice, HELIO a two-evening festival and AURA a tabletop speaker concept. Each case study includes a responsive designed application (collection card, proposal cover, programme or quick-start insert). Homepage/work summaries and partner dossier project notes agree with those briefs. All copy stays in site.ts.
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
@@ -34,6 +35,7 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - S13 mobile/tablet motion: on touch screens the element crossing the middle of the screen takes its hover treatment (project pull-in, service width stretch, Pantheon accent bar, next-project gold), presses answer with a scale, display type unfolds along the width axis as it scrolls in (CSS scroll timelines; static where unsupported), the hero plate pushes in and the headline folds as you leave it, list items rise into place, the contact bolt charges, and the interruption's sky flickers when the bolt strikes. Desktop is unchanged.
 
 ## NEXT QUEUE
+0. Review the grounded project redesign locally; publish `wip/grounded-projects` when requested.
 1. Owner reviews motion pacing (and the S14 dossiers) on a physical phone and tablet; tune specific sections based on feedback.
 2. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
 3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
