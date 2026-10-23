@@ -1,22 +1,24 @@
 # OLYMPUS — State
-Updated: 2026-10-13 · S20 · by: codex
+Updated: 2026-10-23 · S21 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight. Fixed iPhone access by publishing a public standalone identity preview.
-Files touched: docs/STATE.md and docs/sessions/2026-10-13-S20-codex.md only.
-Committed: source clean at 6ddf2fd on wip/identity-projects; deployment handoff committed separately.
-Next concrete step: review https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike on a phone and use Replay strike.
-Verify with: curl -f -L https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike (public HTTP 200 confirmed).
-Watch out for: 127.0.0.1 on a phone points to the phone itself. Only the identity prototype is deployed; full S17/S18 website changes remain local. Production is unchanged.
+Task: nothing in flight. Published all current Olympus application work to production via PR #10.
+Files touched: integrated S15/S17/S18 application work, prerendering, dependency patches; release handoff in docs/STATE.md and docs/sessions/2026-10-23-S21-codex.md.
+Committed: application release main @ 8b0bde706c4ac172d0ff943e9616d896131846db; release handoff follows separately.
+Next concrete step: optional physical-phone review of https://olympus-green.vercel.app/work and /identity/strike; tune only from concrete feedback.
+Verify with: npm run build && npm run check; OLYMPUS_REVIEW_URL=https://olympus-green.vercel.app npm run check:identity.
+Watch out for: older reactive-logo branches are superseded by the selected S18 mark. Cloud-only historical Git objects stalled packing; publication used an exact source-tree snapshot in a fresh checkout. Preserve the old branches.
 
 ## NOW
-- Selected-mark phone preview: https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike is public, with replay, downloads and all sixteen studies. Deployed only the saved identity assets from 6ddf2fd to the existing Olympus Vercel project as a preview. Page and SVG assets return public HTTP 200; no Git push or production deployment.
-- S18 (local `wip/identity-projects`): owner selected the first O with a yellow bolt. The refined mark has a roughly doubled bolt width at its two intersections, a diagonal cut and two angular edge fractures. The O stays stationary through a single lightning introduction, then holds the final mark. Static colour/mono and animated SVG masters, favicon and both wordmark variants are integrated; the other six letter outlines and library originals are preserved. /identity/strike.html has replay and downloads; /identity/index.html retains sixteen studies with the selected first study updated. Original first study is archived. `scripts/strike-mark.mjs` owns shared geometry/timing; `npm run identity` regenerates vectors and review pages.
+- Production release S21: https://olympus-green.vercel.app now includes all seven project briefs, THALASSA/ORISON/FIELDWORK cases, drawing plates, Archivo typography and the selected struck-O identity. PR #10 merged at 8b0bde7; Vercel production deployment dpl_HXZhK3BNYTfmiWigitbuozdTVDnz is READY and aliases the canonical URL. Production CI passed; local regression passed 84 pages and 20 interactions; live logo checks passed all four widths. Full receipt is in the S21 session note.
+- Every route is prerendered and then hydrated, integrating completed commit 3917219 with the current people dossiers and seven project systems. No-JavaScript reading and hydration checks pass. Vite 6.4.5, sharp 0.35.5 and source-map-js 1.2.2 resolve the build-tool audit findings; clean install reports zero vulnerabilities.
+- Current identity review: https://olympus-green.vercel.app/identity/strike (replay and downloadable SVGs); /identity retains the sixteen studies. The older standalone preview remains an archived fixed build.
+- S18 (production since S21): owner selected the first O with a yellow bolt. The refined mark has a roughly doubled bolt width at its two intersections, a diagonal cut and two angular edge fractures. The O stays stationary through a single lightning introduction, then holds the final mark. Static colour/mono and animated SVG masters, favicon and both wordmark variants are integrated; the other six letter outlines and library originals are preserved. /identity/strike.html has replay and downloads; /identity/index.html retains sixteen studies with the selected first study updated. Original first study is archived. `scripts/strike-mark.mjs` owns shared geometry/timing; `npm run identity` regenerates vectors and review pages.
 - S18 motion: the main header uses animated `Logo`; menu/footer remain static. SVG mask IDs are scoped per component instance, route changes retain the header, and reduced motion disables all strike animations. `npm run check:identity` verifies four widths, opening/impact/final states, stationary O bounds, unique IDs, header persistence, replay and reduced motion. `npm run render:identity` exports a 600px, 3-second GIF that plays once plus timing/final PNGs. Editable SVGs and a download ZIP are described in `output/identity-strike/README.md`. Build, 84-page/16-interaction regression and focused identity checks passed.
 
 - S17 typography: Archivo now carries display, editorial and body copy. Plain Arabic numbers replace the carved Greek register in navigation, indexes, forms and principles. The Greek hero inscription, duplicate Greek proof labels, Greek maxim headings and Olympiad footer are removed. Fine-line SVG drawing plates and one quiet manifesto construction sketch carry the antiquity detail instead.
 - S17 projects: THALASSA (island ferry), ORISON (listening hotel), FIELDWORK (seed library) add three grounded fictional briefs, designed applications, nine built-in imagegen photos and three authored vector poster plates. Masters are in `05-selected-work/`; responsive assets, social crops and metadata are integrated. Exact image prompts and generation method are saved in `output/imagegen/prompts.md`. `npm run identity` and `npm run plates` regenerate the vector review and poster masters; run `npm run images` after new poster exports.
-- S15 (public preview on `wip/grounded-projects`): projects now describe specific businesses, audiences, assignments and constraints. VELA is a made-to-order studio, NORTHLINE a civic reuse practice, HELIO a two-evening festival and AURA a tabletop speaker concept. Each case study includes a responsive designed application (collection card, proposal cover, programme or quick-start insert). Homepage/work summaries and partner dossier project notes agree with those briefs. All copy stays in site.ts.
+- S15 (production since S21): projects now describe specific businesses, audiences, assignments and constraints. VELA is a made-to-order studio, NORTHLINE a civic reuse practice, HELIO a two-evening festival and AURA a tabletop speaker concept. Each case study includes a responsive designed application (collection card, proposal cover, programme or quick-start insert). Homepage/work summaries and partner dossier project notes agree with those briefs. All copy stays in site.ts.
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
 - The homepage is complete: Hero → Manifesto → Work (7 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
@@ -41,8 +43,7 @@ Watch out for: 127.0.0.1 on a phone points to the phone itself. Only the identit
 - S13 mobile/tablet motion: on touch screens the element crossing the middle of the screen takes its hover treatment (project pull-in, service width stretch, Pantheon accent bar, next-project gold), presses answer with a scale, display type unfolds along the width axis as it scrolls in (CSS scroll timelines; static where unsupported), the hero plate pushes in and the headline folds as you leave it, list items rise into place, the contact bolt charges, and the interruption's sky flickers when the bolt strikes. Desktop is unchanged.
 
 ## NEXT QUEUE
-0. Review the selected struck mark and one-shot animation at the public phone preview above; tune bolt geometry or timing from concrete feedback.
-1. Review the expanded /work index, three new cases and seven drawing interactions on a physical phone/tablet. Push or publish a preview when requested; S17 is local only.
+1. Optional: review the live work index, three new cases, drawing interactions and selected logo on a physical phone/tablet. Browser viewport checks passed; no physical-device acceptance is claimed.
 2. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
 3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
 

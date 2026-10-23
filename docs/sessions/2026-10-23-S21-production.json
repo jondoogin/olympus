@@ -1,0 +1,15 @@
+{
+  "base": "https://olympus-green.vercel.app",
+  "checkedAt": "2026-10-23T18:26:47.139Z",
+  "routes": 20,
+  "views": 28,
+  "widths": [
+    1440,
+    1024,
+    768,
+    390
+  ],
+  "unknownRoute": 404,
+  "noJavaScript": true,
+  "errors": []
+}
