@@ -27,6 +27,9 @@ const SOCIAL = [
   { key: 'architecture-campaign' },
   { key: 'culture-campaign', top: 0.04 },
   { key: 'technology-campaign' },
+  { key: 'thalassa-hero' },
+  { key: 'orison-hero' },
+  { key: 'fieldwork-hero' },
 ];
 
 async function exists(p) {

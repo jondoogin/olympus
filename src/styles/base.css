@@ -83,7 +83,7 @@ main:focus { outline: none; }
   line-height: 1.2;
 }
 .label__n {
-  font-family: var(--font-inscr); font-weight: 400; font-size: 1.3em; letter-spacing: 0.06em;
+  font-family: var(--font-inscr); font-weight: 400; font-size: 1em; letter-spacing: 0.02em;
   color: var(--fg-muted); line-height: 1;
 }
 .inscr.label__n, .interrupt__rule .inscr { font-size: 1.3em; }
@@ -108,7 +108,7 @@ main:focus { outline: none; }
 }
 @keyframes sys-pulse { 50% { opacity: 0.25; } }
 
-em { font-family: var(--font-serif); font-style: italic; font-weight: 400; letter-spacing: -0.01em; }
+em { font-family: var(--font-grotesk); font-style: normal; font-weight: 400; letter-spacing: -0.01em; }
 
 .lead { font-size: var(--fs-lead); line-height: 1.3; letter-spacing: -0.01em; }
 

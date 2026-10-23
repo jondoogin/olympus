@@ -45,7 +45,7 @@ export function Hero() {
           </Link>
         </div>
         <ul className="hero__meta" aria-label="At a glance">
-          <li className="inscr hero__inscr" lang="el">{hero.inscription}</li>
+          <li className="inscr hero__inscr">{hero.inscription}</li>
           <li>{hero.est}</li>
           <Readout />
           <li className="hero__scroll" aria-hidden="true">{hero.scroll}</li>

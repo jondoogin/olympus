@@ -1,29 +1,36 @@
 # OLYMPUS — State
-Updated: 2026-10-01 · S14 · by: claude
+Updated: 2026-10-13 · S20 · by: codex
 
 ## STOPPED AT
-Task: nothing in flight. S14 partner dossiers merged to `main` via PR #9. Each of the six gods now has a page at `/people/:slug` (zeus, athena, hermes, apollo, dionysus, artemis): portrait hero, profile, "On the record" ledger, three personal rules, the concept projects they shaped, and a next-partner link. Pantheon cards and People bios link to them, and the portrait morphs into the dossier during the page turn.
-Files touched: see `docs/sessions/2026-10-01-S14-claude.md`.
-Committed: merged via PR #9. The owner wants PRs merged automatically once CI is green and conflict-free; no manual approval step.
-Next concrete step: owner reviews motion pacing and the new dossiers on a real phone and tablet; tune from that feedback.
-Verify with: `npm run build && npm run check` (Playwright; every route at 1440 / 1024 / 768 / 390 px plus 9 interaction checks). CI runs the same on every push.
-Watch out for: `vercel.json` no longer rewrites everything to `index.html`; every real route must be in `staticRoutes` (src/lib/meta.ts) or it will 404 on direct load. Use the canonical domain, not hashed deployment URLs. `npm run check` runs without Google Fonts, so it cannot catch display type that clips with real Archivo; check long names (DIONYSUS) with fonts loaded.
+Task: nothing in flight. Fixed iPhone access by publishing a public standalone identity preview.
+Files touched: docs/STATE.md and docs/sessions/2026-10-13-S20-codex.md only.
+Committed: source clean at 6ddf2fd on wip/identity-projects; deployment handoff committed separately.
+Next concrete step: review https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike on a phone and use Replay strike.
+Verify with: curl -f -L https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike (public HTTP 200 confirmed).
+Watch out for: 127.0.0.1 on a phone points to the phone itself. Only the identity prototype is deployed; full S17/S18 website changes remain local. Production is unchanged.
 
 ## NOW
+- Selected-mark phone preview: https://olympus-lmfn1vugq-read-with-lantern.vercel.app/identity/strike is public, with replay, downloads and all sixteen studies. Deployed only the saved identity assets from 6ddf2fd to the existing Olympus Vercel project as a preview. Page and SVG assets return public HTTP 200; no Git push or production deployment.
+- S18 (local `wip/identity-projects`): owner selected the first O with a yellow bolt. The refined mark has a roughly doubled bolt width at its two intersections, a diagonal cut and two angular edge fractures. The O stays stationary through a single lightning introduction, then holds the final mark. Static colour/mono and animated SVG masters, favicon and both wordmark variants are integrated; the other six letter outlines and library originals are preserved. /identity/strike.html has replay and downloads; /identity/index.html retains sixteen studies with the selected first study updated. Original first study is archived. `scripts/strike-mark.mjs` owns shared geometry/timing; `npm run identity` regenerates vectors and review pages.
+- S18 motion: the main header uses animated `Logo`; menu/footer remain static. SVG mask IDs are scoped per component instance, route changes retain the header, and reduced motion disables all strike animations. `npm run check:identity` verifies four widths, opening/impact/final states, stationary O bounds, unique IDs, header persistence, replay and reduced motion. `npm run render:identity` exports a 600px, 3-second GIF that plays once plus timing/final PNGs. Editable SVGs and a download ZIP are described in `output/identity-strike/README.md`. Build, 84-page/16-interaction regression and focused identity checks passed.
+
+- S17 typography: Archivo now carries display, editorial and body copy. Plain Arabic numbers replace the carved Greek register in navigation, indexes, forms and principles. The Greek hero inscription, duplicate Greek proof labels, Greek maxim headings and Olympiad footer are removed. Fine-line SVG drawing plates and one quiet manifesto construction sketch carry the antiquity detail instead.
+- S17 projects: THALASSA (island ferry), ORISON (listening hotel), FIELDWORK (seed library) add three grounded fictional briefs, designed applications, nine built-in imagegen photos and three authored vector poster plates. Masters are in `05-selected-work/`; responsive assets, social crops and metadata are integrated. Exact image prompts and generation method are saved in `output/imagegen/prompts.md`. `npm run identity` and `npm run plates` regenerate the vector review and poster masters; run `npm run images` after new poster exports.
+- S15 (public preview on `wip/grounded-projects`): projects now describe specific businesses, audiences, assignments and constraints. VELA is a made-to-order studio, NORTHLINE a civic reuse practice, HELIO a two-evening festival and AURA a tabletop speaker concept. Each case study includes a responsive designed application (collection card, proposal cover, programme or quick-start insert). Homepage/work summaries and partner dossier project notes agree with those briefs. All copy stays in site.ts.
 - A fictional creative agency site: "OLYMPUS", run by reincarnated Greek gods. The brief is `docs/brief/CLAUDE-WEBSITE-PROMPT.txt`.
 - Stack: React 19 + TypeScript + Vite + React Router 7, plain CSS with tokens, no UI or animation libs.
-- The homepage is complete: Hero → Manifesto → Work (4 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
-- VELA, NORTHLINE, HELIO and AURA each have a complete fictional concept case study with brief, idea, system, outcome, three supporting stills and a silent motion study. Services, People, Culture and About have route-specific concept content; Contact now has a real email link and brief guidance. Work is the complete concept index.
+- The homepage is complete: Hero → Manifesto → Work (7 fictional clients) → Services index → Pantheon → Interruption → Clouds pause → Proof → Contact → Footer, plus the mobile menu.
+- VELA, NORTHLINE, HELIO, AURA, THALASSA, ORISON and FIELDWORK each have a complete fictional concept case study with brief, idea, system, outcome, supporting stills, a designed application and a reader-controlled drawing plate. Services, People, Culture and About have route-specific concept content; Contact now has a real email link and brief guidance. Work is the complete concept index.
 - Repo: https://github.com/jondoogin/olympus (public, confirmed intentional by owner). PR #5 merged the contact and responsive motion update to `main` at 1b5dce9. Earlier wip branches remain as milestones.
 - Hosting: Vercel auto-deploys `main`. Canonical live URL: https://olympus-green.vercel.app. The hashed deployment URLs are fixed-build previews and change each deploy; do not use them as the site URL.
 - Production browser check after PR #5: `/`, all four `/work/:slug` routes and all five interior routes load directly with HTTP 200. At 1440 / 1024 / 768 / 390 px all ten rendered without overflow, failed loaded images or a Vite overlay. At mobile/tablet widths, project and case-study imagery, portraits and interior text have scroll-linked depth and entrance choreography; work cards expose a view cue without hover. Reduced-motion VELA uses its still and all new translations collapse. `og:url`, `og:image`, and `twitter:image` remain absolute `https://olympus-green.vercel.app/...` URLs. `VITE_SITE_URL` is set to that origin, with `https://` and no trailing slash. Update it and redeploy if a custom domain is attached.
 - Vercel Authentication is off project-wide, so previews are public. Standard Protection only exempts production custom domains; consider re-enabling it after one is attached.
 - Contact: `john@duggan.design` and owner-supplied Instagram, LinkedIn, Behance and Dribbble profiles are live. No standalone submission form or office address is published. No collaborator cities are displayed as facts; real network details await the owner. See `docs/ROUTES.md`.
-- Voice layer (Claude S3): Greek numerals on indexes, carved Greek (GFS Didot), and live screen readouts (IBM Plex Mono). Rules are in `docs/DESIGN-SYSTEM.md` under "S3 layer".
+- Voice layer: the S3 carved typography experiment is superseded by S17 clarity. IBM Plex Mono remains for plain indexes and live readouts. Current rules are in `docs/DESIGN-SYSTEM.md`.
 - External review: production build passes; the desktop homepage and 390px mobile menu render, navigation works, and no horizontal overflow was found at 1440 / 1024 / 768 / 390 px. Breakpoint checks covered layout width, not full visual review at every size.
 - Review fixes complete: closed service descriptions are absent from the accessibility tree, mobile route navigation focuses the new main content, and routes have distinct document titles. Browser-verified on `/`, `/work`, and `/work/vela` where applicable. See `docs/sessions/2026-09-23-S4-codex.md`.
 - Rebase integration: Claude's tab-away title behavior remains; VELA has a project-specific fictional-concept title. Its concept notice uses the screen register, and its numbered principles use `greekNumeral()`. Build and four-width checks passed after rebase. See `docs/sessions/2026-09-23-S6-codex.md`.
-- Each project has three project-specific supporting stills, responsive derivatives, and a 9-second silent motion study assembled from stills. The media is integrated into each story with distinct compositions: VELA editorial, NORTHLINE architectural, HELIO solar, AURA dark product. Film frames carry project titles and an accessible play/pause control; the film is replaced by a still when reduced motion is requested. Build and four-width overflow checks passed. See `docs/sessions/2026-09-23-S8-codex.md` and S9.
+- S17 replaces the four slow slideshow films with seven project-specific SVG plates (`components/ProjectDiagram.tsx`). Each has three keyboard/touch buttons, visible selection and a polite live explanation. Reduced motion removes transitions. Original MP4s remain in public/media but are pruned from dist. Full regression passed: 84 pages, no overflow/broken images/runtime errors, 16 interactions. New long project names have their own card scales.
 - `npm run images` succeeds with `sharp`; `npm run build` passes. Keyboard Enter opens and closes Services rows. The 390px mobile menu fits with the new social links; the Contact opener and representative motion frames were visually inspected. Scroll-position checks at 390 and 1024 px confirmed changing image translation and project cues.
 - Canonical production headers for `/` and `/work/vela` return HTTP 200 without `x-robots-tag`; the HTML has no robots noindex tag.
 - Production check after PR #6: `/`, `/work`, `/work/vela`, `/contact`, `/sitemap.xml` and `/robots.txt` return 200; `/nope` returns 404; master PNGs return 404. `/work/vela` serves its own title, canonical, absolute `og:url` and the 1.91:1 social `og:image`. At 390 px a project card opens its case study with the correct header ink.
@@ -34,12 +41,13 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - S13 mobile/tablet motion: on touch screens the element crossing the middle of the screen takes its hover treatment (project pull-in, service width stretch, Pantheon accent bar, next-project gold), presses answer with a scale, display type unfolds along the width axis as it scrolls in (CSS scroll timelines; static where unsupported), the hero plate pushes in and the headline folds as you leave it, list items rise into place, the contact bolt charges, and the interruption's sky flickers when the bolt strikes. Desktop is unchanged.
 
 ## NEXT QUEUE
-1. Owner reviews motion pacing (and the S14 dossiers) on a physical phone and tablet; tune specific sections based on feedback.
+0. Review the selected struck mark and one-shot animation at the public phone preview above; tune bolt geometry or timing from concrete feedback.
+1. Review the expanded /work index, three new cases and seven drawing interactions on a physical phone/tablet. Push or publish a preview when requested; S17 is local only.
 2. Optional: choose a form service and set `VITE_CONTACT_ENDPOINT` so briefs post instead of drafting an email.
 3. Add an office address or collaborator details only if the owner supplies real information. A custom domain remains optional.
 
 ## INVARIANTS
-- The logo is never retyped or redrawn. `components/Logo.tsx` inlines the library SVG and maps only `fill="#080808"` → currentColor.
+- Original library logo masters are preserved. The owner selected mark 01 in S18. `components/Logo.tsx` uses versioned SVGs in `src/assets/identity/` with the canonical struck O and broader diagonal bolt; the other six letter outlines remain unchanged. Use `scripts/strike-mark.mjs` as the geometry/timing source and scope inline SVG mask IDs per instance.
 - Master assets in `public/OLYMPUS-asset-library/` are never edited. Derivatives come only from `npm run images`.
 - `npm run images` never upscales. It regenerates `src/content/image-manifest.json`, and that manifest is where `lib/images.ts` gets its `ImageKey` types.
 - A new image means: add the master → run `npm run images` → reference it by key through `<Picture>`. Never hardcode a path.
@@ -49,7 +57,7 @@ Watch out for: `vercel.json` no longer rewrites everything to `index.html`; ever
 - Parallax uses the CSS `translate` property; reveals use `transform` or `scale`. Keep them separate so they don't clobber each other.
 - All copy lives in `src/content/site.ts`. Layout components contain no copy strings except UI chrome.
 - Breakpoints are 768 / 1100, defined in both `styles/tokens.css` and `lib/tokens.ts`. Change both together.
-- Greek comes only from the vetted list, and numerals come only from `greekNumeral()` (see DESIGN-SYSTEM "S3 layer"). Screen readouts must show real values.
+- Website indexes use `indexNumber()` (ordinary Arabic digits). Do not reintroduce the retired carved Greek typography. Screen readouts must show real values.
 - Accents stay sparse: gold = bolt / annotations / "&"; Aegean = contact band + focus; Apollo orange = HELIO + Apollo only.
 - No Greek-key borders, no novelty cursor, no WebGL. Handwritten annotations are limited to one per section at most.
 - Projects must stay labelled as fictional concepts. Never imply real clients or real results.

@@ -8,7 +8,11 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview",
-    "check": "node scripts/check-site.mjs"
+    "check": "node scripts/check-site.mjs",
+    "identity": "node scripts/build-identity.mjs",
+    "plates": "node scripts/build-project-plates.mjs",
+    "check:identity": "node scripts/check-strike.mjs",
+    "render:identity": "node scripts/render-strike-preview.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
@@ -20,8 +24,8 @@
     "@types/react-dom": "^19.1.0",
     "@vitejs/plugin-react": "^4.5.0",
     "playwright": "^1.56.1",
-    "sharp": "^0.34.2",
+    "sharp": "^0.35.5",
     "typescript": "~5.8.3",
-    "vite": "^6.3.5"
+    "vite": "^6.4.5"
   }
 }

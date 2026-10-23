@@ -3,7 +3,7 @@ import { contact, contactForm as copy } from '../content/site';
 import { Label } from '../components/Label';
 import { Reveal } from '../components/Reveal';
 import { Mark } from '../components/Mark';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 
 /** Set in Vercel to post briefs to a form service; unset, the form drafts an email instead. */
 const ENDPOINT: string | undefined = import.meta.env.VITE_CONTACT_ENDPOINT || undefined;
@@ -158,7 +158,7 @@ function FieldLabel({ n, htmlFor, children }: { n: number; htmlFor?: string; chi
   const Tag = htmlFor ? 'label' : 'span';
   return (
     <Tag className="brief__label" htmlFor={htmlFor}>
-      <span className="brief__n" aria-hidden="true">{greekNumeral(n)}</span>
+      <span className="brief__n" aria-hidden="true">{indexNumber(n)}</span>
       {children}
     </Tag>
   );
