@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { services } from '../content/site';
 import { Label } from '../components/Label';
 import { Reveal } from '../components/Reveal';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 import { observeFocusBand } from '../hooks/useFocusBand';
 
 export function Services() {
@@ -49,7 +49,7 @@ export function Services() {
                     aria-controls={id}
                     onClick={() => setActive(open && hovered.current !== i ? null : i)}
                   >
-                    <span className="svc__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
+                    <span className="svc__n" aria-hidden="true">{indexNumber(i + 1)}</span>
                     <span className="svc__name">
                       {s.em && <span className="svc__amp">&amp; </span>}
                       {s.name}

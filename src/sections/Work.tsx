@@ -5,7 +5,7 @@ import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useFocusBand } from '../hooks/useFocusBand';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 
 const SIZES: Record<Project['layout'], string> = {
   'portrait-left': '(min-width: 1100px) 46vw, (min-width: 768px) 60vw, 100vw',
@@ -18,14 +18,14 @@ export function ProjectCard({ p, i }: { p: Project; i: number }) {
   const ref = useScrollProgress<HTMLElement>();
   const focusRef = useFocusBand<HTMLAnchorElement>();
   return (
-    <article className={`proj proj--${p.layout}`} ref={ref}>
+    <article className={`proj proj--${p.layout}`} data-project={p.slug} ref={ref}>
       <Link ref={focusRef} to={`/work/${p.slug}`} className="proj__link" aria-label={`${p.client} — ${p.discipline}, ${p.year}. View project`}>
         <Reveal kind="wipe" className="proj__frame">
           <Picture image={p.image} alt={p.alt} sizes={SIZES[p.layout]} crop={p.crop} />
           <span className="proj__view" aria-hidden="true">View project</span>
         </Reveal>
         <Reveal className="proj__meta" kind="fade" threshold={0.1}>
-          <span className="proj__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
+          <span className="proj__n" aria-hidden="true">{indexNumber(i + 1)}</span>
           <h3 className="proj__client">{p.client}</h3>
           <p className="proj__disc">
             <span>{p.discipline}</span>
@@ -48,7 +48,7 @@ export function Work() {
         <Label n="02" className="work__label">Selected work</Label>
         <Reveal as="h2" id="work-title" kind="fade" className="work__title">
           Selected <em>work</em>
-          <sup>(04)</sup>
+          <sup>({String(projects.length).padStart(2, '0')})</sup>
         </Reveal>
         <p className="work__note">{workNote}</p>
       </div>

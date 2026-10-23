@@ -3,7 +3,7 @@ import { interior, pantheon, projects } from '../content/site';
 import { Picture } from '../components/Picture';
 import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useFocusBand } from '../hooks/useFocusBand';
 import NotFound from './NotFound';
@@ -72,7 +72,7 @@ export default function PersonPage() {
           <ol className="person-rules__list">
             {d.rules.map((rule, index) => (
               <li key={rule}>
-                <span className="person-rules__numeral" aria-hidden="true">{greekNumeral(index + 1)}</span>
+                <span className="person-rules__numeral" aria-hidden="true">{indexNumber(index + 1)}</span>
                 <span className="sr-only">{index + 1}. </span>
                 <span className="person-rules__text">{rule}</span>
               </li>

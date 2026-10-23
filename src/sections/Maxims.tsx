@@ -1,7 +1,7 @@
 import { maxims, maximsIntro } from '../content/site';
 import { Label } from '../components/Label';
 import { Reveal } from '../components/Reveal';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 
 /** House rules Βʹ–Δʹ: the Delphic maxims, carved, translated, annotated. */
 export function Maxims() {
@@ -18,8 +18,7 @@ export function Maxims() {
         <ol className="maxims__list">
           {maxims.map((m, i) => (
             <Reveal as="li" key={m.greek} className="maxim" threshold={0.4}>
-              <span className="maxim__n inscr" aria-hidden="true">{greekNumeral(i + 2)}</span>
-              <p className="maxim__greek inscr" lang="grc" aria-hidden="true">{m.greek}</p>
+              <span className="maxim__n inscr" aria-hidden="true">{indexNumber(i + 2)}</span>
               <p className="maxim__en">{m.english}</p>
               <p className="maxim__note">{m.note}</p>
             </Reveal>

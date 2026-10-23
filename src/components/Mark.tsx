@@ -1,7 +1,10 @@
+import { useId } from 'react';
+import { scopeSvgIds } from '../lib/svg';
+
 // Supporting marks from 02-marks, inlined so they can take currentColor / accent.
 import bolt from '../../public/OLYMPUS-asset-library/02-marks/lightning-bolt.svg?raw';
 import delta from '../../public/OLYMPUS-asset-library/02-marks/greek-delta.svg?raw';
-import boltO from '../../public/OLYMPUS-asset-library/02-marks/bolt-o-black-gold.svg?raw';
+import boltO from '../../public/identity/mark-01.svg?raw';
 
 const prep = (svg: string) =>
   svg
@@ -12,5 +15,6 @@ const prep = (svg: string) =>
 const MARKS = { bolt: prep(bolt), delta: prep(delta), boltO: prep(boltO) };
 
 export function Mark({ name, className }: { name: keyof typeof MARKS; className?: string }) {
-  return <span className={`mark mark--${name} ${className ?? ''}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: MARKS[name] }} />;
+  const id = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  return <span className={`mark mark--${name} ${className ?? ''}`} aria-hidden="true" dangerouslySetInnerHTML={{ __html: scopeSvgIds(MARKS[name], id) }} />;
 }

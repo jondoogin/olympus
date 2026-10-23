@@ -1,6 +1,8 @@
 // Build-time pages for a client-rendered site.
 // After Vite writes dist/, this plugin:
-//  - writes one HTML file per route (dist/work.html, dist/work/vela.html, dist/people/zeus.html, …) with that
+//  - renders each route's React markup into its HTML (src/entry-server.tsx), so the
+//    page is readable before, and without, JavaScript. main.tsx hydrates it.
+//  - writes one HTML file per route (dist/work.html, dist/work/vela.html, …) with that
 //    route's title, description, canonical and social tags, plus a modulepreload for
 //    the route's code chunk. Vercel serves them via `cleanUrls` (see vercel.json).
 //  - writes dist/404.html (noindex), which Vercel serves with a real 404 status.
@@ -9,7 +11,7 @@
 //    ever requests their _responsive derivatives. The masters stay untouched in public/.
 import { readFile, rm, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
-import type { Plugin, Rollup } from 'vite';
+import { createServer, type Plugin, type Rollup } from 'vite';
 import { routeMeta, staticRoutes, type RouteMeta } from '../src/lib/meta';
 import manifest from '../src/content/image-manifest.json';
 
@@ -30,8 +32,10 @@ function setMeta(html: string, attr: 'name' | 'property', key: string, value: st
   return html.replace('</head>', `  <meta ${attr}="${key}" content="${esc(value)}" />\n  </head>`);
 }
 
-function render(base: string, meta: RouteMeta, url: string | null, site: string | null, preload: string[], noindex = false) {
-  let html = base.replace(/<title>[^<]*<\/title>/, `<title>${esc(meta.title)}</title>`);
+function render(base: string, route: string, body: string, meta: RouteMeta, url: string | null, site: string | null, preload: string[], noindex = false) {
+  // data-route tells main.tsx which path this markup was rendered for.
+  let html = base.replace('<div id="root"></div>', () => `<div id="root" data-route="${route}">${body}</div>`);
+  html = html.replace(/<title>[^<]*<\/title>/, `<title>${esc(meta.title)}</title>`);
   html = setMeta(html, 'property', 'og:title', meta.title);
   if (meta.description) {
     html = setMeta(html, 'name', 'description', meta.description);
@@ -85,15 +89,36 @@ export function sitePages(): Plugin {
       if (!bundle) return;
       const site = process.env.VITE_SITE_URL?.replace(/\/+$/, '') || null;
       const base = await readFile(path.join(outDir, 'index.html'), 'utf8');
+      if (!base.includes('<div id="root"></div>')) throw new Error('site-plugin: index.html has no empty #root');
 
-      for (const route of staticRoutes) {
-        const url = site ? `${site}${route === '/' ? '/' : route}` : null;
-        const html = render(base, routeMeta(route), url, site, chunksFor(bundle, root, pageModule(route)));
-        const file = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
-        await mkdir(path.dirname(path.join(outDir, file)), { recursive: true });
-        await writeFile(path.join(outDir, file), html);
+      // Load the app through Vite's SSR module loader, outside this build's plugins.
+      const vite = await createServer({
+        root,
+        configFile: false,
+        logLevel: 'error',
+        appType: 'custom',
+        server: { middlewareMode: true, hmr: false, watch: null },
+        optimizeDeps: { noDiscovery: true, include: [] },
+        // Load the router's ESM build; without this, Node picks its CommonJS build.
+        ssr: { resolve: { externalConditions: ['module-sync'] } },
+      });
+      try {
+        const { render: renderApp } = (await vite.ssrLoadModule('/src/entry-server.tsx')) as {
+          render: (url: string) => Promise<string>;
+        };
+        for (const route of staticRoutes) {
+          const url = site ? `${site}${route === '/' ? '/' : route}` : null;
+          const body = await renderApp(route);
+          const html = render(base, route, body, routeMeta(route), url, site, chunksFor(bundle, root, pageModule(route)));
+          const file = route === '/' ? 'index.html' : `${route.slice(1)}.html`;
+          await mkdir(path.dirname(path.join(outDir, file)), { recursive: true });
+          await writeFile(path.join(outDir, file), html);
+        }
+        const notFound = await renderApp('/404');
+        await writeFile(path.join(outDir, '404.html'), render(base, '*', notFound, routeMeta('/404'), null, site, [], true));
+      } finally {
+        await vite.close();
       }
-      await writeFile(path.join(outDir, '404.html'), render(base, routeMeta('/404'), null, site, [], true));
 
       await writeFile(
         path.join(outDir, 'robots.txt'),
@@ -106,6 +131,12 @@ export function sitePages(): Plugin {
           `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
         );
       }
+
+      // Retain the original motion-study files in public, but the drawing plates
+      // replace them on the site. Do not ship unused slideshow media.
+      await Promise.all(['vela', 'northline', 'helio', 'aura'].map((slug) =>
+        rm(path.join(outDir, 'media', `${slug}-motion-study.mp4`), { force: true }),
+      ));
 
       // Masters that `npm run images` turns into derivatives are never requested directly.
       const masters = Object.entries(manifest)

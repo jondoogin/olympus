@@ -1,13 +1,13 @@
-import { useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { conceptNotice, projects, type Project } from '../content/site';
+import { conceptNotice, projects, projectContextLabels, type Project } from '../content/site';
 import { Picture } from '../components/Picture';
 import { Label } from '../components/Label';
 import { Reveal, Line } from '../components/Reveal';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useFocusBand } from '../hooks/useFocusBand';
 import NotFound from './NotFound';
+import { ProjectDiagram, DiagramDrawing } from '../components/ProjectDiagram';
 
 export default function ProjectPage() {
   const mediaRef = useScrollProgress<HTMLElement>();
@@ -30,6 +30,7 @@ export default function ProjectPage() {
           <ul className="case-hero__scope">{p.scope.map((s) => <li key={s}>{s}</li>)}</ul>
         </div>
       </section>
+      <ProjectContext project={p} />
       <figure className="case-media" data-ink="ivory" ref={mediaRef}>
         <Picture image={p.image} alt={p.alt} sizes="100vw" crop={p.crop} priority />
       </figure>
@@ -79,7 +80,7 @@ function CaseStory({ project }: { project: Project }) {
             <ol className="case-system__principles">
               {story.system.principles.map((principle, index) => (
                 <li key={principle}>
-                  <span className="case-system__numeral" aria-hidden="true">{greekNumeral(index + 1)}</span>
+                  <span className="case-system__numeral" aria-hidden="true">{indexNumber(index + 1)}</span>
                   <span className="sr-only">{index + 1}. </span>{principle}
                 </li>
               ))}
@@ -87,6 +88,7 @@ function CaseStory({ project }: { project: Project }) {
           </div>
         </div>
       </section>
+      <ProjectApplication project={project} />
       <section className="case-gallery section" data-theme={darkSystem ? 'dark' : undefined} data-ink={darkSystem ? 'ivory' : 'obsidian'} aria-label={story.media.galleryLabel} ref={galleryRef}>
         <div className="wrap case-gallery__grid">
           <Reveal as="figure" kind="fade">
@@ -99,7 +101,7 @@ function CaseStory({ project }: { project: Project }) {
           </Reveal>
         </div>
       </section>
-      <MotionStudy media={story.media} client={project.client} />
+      <ProjectDiagram key={project.slug} project={project} />
       <section className="case-outcome section" data-theme="stone" data-ink="obsidian" aria-labelledby="case-outcome-title">
         <div className="wrap grid">
           <Label className="case-outcome__label">{story.outcome.label}</Label>
@@ -111,43 +113,40 @@ function CaseStory({ project }: { project: Project }) {
   );
 }
 
-function MotionStudy({ media, client }: { media: Project['caseStudy']['media']; client: string }) {
-  const [reducedMotion, setReducedMotion] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
-  const [playing, setPlaying] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const query = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const update = () => setReducedMotion(query.matches);
-    query.addEventListener('change', update);
-    return () => query.removeEventListener('change', update);
-  }, []);
-
-  const togglePlayback = () => {
-    const video = videoRef.current;
-    if (!video) return;
-    if (video.paused) {
-      void video.play().catch(() => setPlaying(false));
-    } else {
-      video.pause();
-    }
-  };
-
+function ProjectContext({ project }: { project: Project }) {
   return (
-    <figure className="case-film" data-theme="dark" data-ink="ivory">
-      <div className="case-film__frame">
-        <Picture image={media.campaign.image} alt={reducedMotion ? media.campaign.alt : ''} sizes="100vw" />
-        {!reducedMotion && (
-          <video ref={videoRef} autoPlay muted loop playsInline preload="metadata" aria-label={media.film.label} onPlay={() => setPlaying(true)} onPause={() => setPlaying(false)}>
-            <source src={media.film.src} type="video/mp4" />
-          </video>
-        )}
-        <span className="case-film__wordmark" aria-hidden="true">{client}</span>
-      </div>
-      <figcaption className="wrap case-film__caption">
-        <span className="label">{media.film.caption}</span>
-        {!reducedMotion && <button className="case-film__toggle sys" type="button" onClick={togglePlayback} aria-label={`${playing ? 'Pause' : 'Play'} ${media.film.label}`} aria-pressed={playing}>{playing ? 'Pause film' : 'Play film'} <span aria-hidden="true">{playing ? 'Ⅱ' : '▶'}</span></button>}
-      </figcaption>
-    </figure>
+    <section className="case-context" data-ink="obsidian" aria-label={project.context.business}>
+      <dl className="wrap case-context__grid">
+        {Object.entries(project.context).map(([key, value]) => (
+          <div key={key}><dt className="label">{projectContextLabels[key]}</dt><dd>{value}</dd></div>
+        ))}
+      </dl>
+    </section>
+  );
+}
+
+function ProjectApplication({ project }: { project: Project }) {
+  const a = project.application;
+  return (
+    <section className="case-application section" data-ink="obsidian" aria-label={a.label}>
+      <figure className="wrap">
+        <Label>{a.label}</Label>
+        <div className={`application-board application-board--${project.slug}`}>
+          <div className="application-board__art" aria-hidden="true">
+            {project.slug === 'vela' && <svg viewBox="0 0 240 360"><path d="M94 30 75 70 92 124 40 330H200L148 124 165 70 146 30 120 46Z" fill="currentColor"/><path d="m120 48-5 270m-21-190 52 12" fill="none" stroke="#bbb3a5" strokeWidth="2"/></svg>}
+            {project.slug === 'northline' && <svg viewBox="0 0 360 300"><g fill="none" stroke="currentColor" strokeWidth="3"><path d="M30 30H330V270H30ZM130 30V180H230V30M30 180H130M230 180H330M130 270V225H230V270"/><path d="M130 180H230V225H130Z" strokeDasharray="5 5"/><path d="M45 45H115V165H45ZM245 45H315V165H245Z" strokeWidth="1"/></g></svg>}
+            {project.slug === 'helio' && <span className="application-sun" />}
+            {project.slug === 'aura' && <span className="application-speaker"><span /></span>}
+            {['thalassa', 'orison', 'fieldwork'].includes(project.slug) && <DiagramDrawing slug={project.slug} stage={2} />}
+          </div>
+          <div className="application-board__content">
+            <h3>{a.title}</h3><p className="application-board__subtitle">{a.subtitle}</p>
+            <dl>{a.rows.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}</dl>
+            <p className="application-board__footer">{a.footer}</p>
+          </div>
+        </div>
+        <figcaption className="label">{a.caption}</figcaption>
+      </figure>
+    </section>
   );
 }

@@ -1,10 +1,8 @@
 import { Link } from 'react-router-dom';
 import { nav, socials, contact, footerLines } from '../content/site';
-import { greekNumeral, olympiad } from '../lib/antiquity';
 import { Logo } from './Logo';
 
 export function Footer() {
-  const o = olympiad();
   return (
     <footer className="site-footer" data-theme="dark" data-ink="ivory">
       <div className="wrap grid site-footer__grid">
@@ -46,8 +44,7 @@ export function Footer() {
 
       <div className="wrap site-footer__base">
         <span>
-          © Olympus · Olympiad <span className="inscr site-footer__olymp" title={`${o.n}`}>{greekNumeral(o.n)}</span>, year {o.year}
-          <span className="site-footer__muted"> ({new Date().getFullYear()}, to mortals)</span>
+          © Olympus · {new Date().getFullYear()}
         </span>
         <span>A fictional agency. All projects shown are concepts.</span>
         <a href="#top" className="site-footer__top">Back to the summit ↑</a>

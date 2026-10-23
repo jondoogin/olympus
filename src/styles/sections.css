@@ -649,7 +649,7 @@
   .case-next__link.is-focus .case-next__name { color: var(--gold); letter-spacing: -0.02em; }
 
   .btn:active, .contact__cta:active, .site-header__cta:active, .brief__submit:active,
-  .case-film__toggle:active, .mmenu__nav a:active { scale: 0.97; }
+  .mmenu__nav a:active { scale: 0.97; }
   .mmenu__nav a:active .mmenu__label { color: var(--gold); }
 }
 
@@ -714,7 +714,6 @@
   .mmenu__nav a { opacity: 1; transform: none; }
   .hero__scroll::after { animation: none; }
   .pause__media .pic img, .proj__frame .pic, .manifesto__frame .pic { translate: none !important; }
-  .case-film video { display: none; }
   .hero__pic img, .proj__frame .pic, .god__frame .pic, .case-media .pic,
   .case-plate .pic img, .case-gallery .pic img, .case-idea__statement,
   .case-page[data-project='helio'] .case-idea::before, .people-bio__image .pic, .person-hero__portrait .pic, .person-rules__list li,
@@ -723,4 +722,33 @@
   .brief__bolt, .interrupt::after { animation: none !important; }
   ::view-transition-group(*), ::view-transition-old(*), ::view-transition-new(*) { animation: none !important; }
   .proj__frame::after { transition: none; transform: none; }
+}
+
+/* Clarity replaces the carved register. Antiquity lives in the fine-line plates. */
+.hero__b, .manifesto__em, .proj--square-right .proj__client,
+.svc__name, .god__line, .proof__l, .maxim__en { font-style: normal; }
+.hero__b { line-height: 1.05; }
+.proj__line, .svc__line, .god__line, .contact__copy { line-height: 1.4; }
+.maxim__en { font-size: var(--fs-h3); letter-spacing: -.03em; }
+.scroll-study { width: min(240px,40vw); margin-top: var(--s-7); color: var(--stone-ink); opacity: .45; }
+@media (prefers-reduced-motion: reduce) {
+  .diagram-layer, .project-diagram__buttons button { transition: none; }
+}
+
+/* ORISON shares the portrait composition; its longer name needs its own scale. */
+.proj[data-project="orison"] .proj__client { font-size: clamp(2.5rem, 7vw, 8rem); }
+.proj[data-project='fieldwork'] .proj__client { font-size: clamp(2.5rem, 7vw, 5rem); }
+@media (min-width: 1100px) {
+  .proj[data-project='fieldwork'] .proj__client { font-size: clamp(1.75rem, 2.9vw, 3rem); }
+}
+
+/* The header becomes visible before its O is struck. One introduction per mount. */
+.site-header .logo--striking { --strike-delay: 1.3s; }
+@media (prefers-reduced-motion: reduce) {
+  .logo--striking .strike-intact, .logo--striking .strike-cut,
+  .logo--striking .strike-bolt, .logo--striking .strike-trace,
+  .logo--striking .strike-flare, .logo--striking .strike-shards { animation: none !important; }
+  .logo--striking .strike-intact, .logo--striking .strike-trace,
+  .logo--striking .strike-flare, .logo--striking .strike-shards { opacity: 0 !important; }
+  .logo--striking .strike-cut, .logo--striking .strike-bolt { opacity: 1 !important; clip-path: none !important; }
 }

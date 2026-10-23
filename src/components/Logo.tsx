@@ -1,8 +1,10 @@
-// The exact OLYMPUS vector files, inlined so the obsidian fills can follow the
-// ground (ivory on dark, obsidian on light). Paths, proportions and the gold bolt
-// are untouched — only #080808 is mapped to currentColor.
-import wordmark from '../../public/OLYMPUS-asset-library/01-logo/olympus-wordmark-gold-bolt.svg?raw';
-import primary from '../../public/OLYMPUS-asset-library/01-logo/olympus-primary.svg?raw';
+// Selected struck O, with static and one-shot motion versions.
+import { useId } from 'react';
+import { scopeSvgIds } from '../lib/svg';
+import wordmark from '../assets/identity/olympus-wordmark-gold-bolt.svg?raw';
+import primary from '../assets/identity/olympus-primary.svg?raw';
+import wordmarkMotion from '../assets/identity/olympus-wordmark-gold-bolt-animated.svg?raw';
+import primaryMotion from '../assets/identity/olympus-primary-animated.svg?raw';
 
 const prep = (svg: string) =>
   svg
@@ -11,16 +13,19 @@ const prep = (svg: string) =>
     .replace(/\saria-label="[^"]*"/, '');
 
 const SOURCES = { wordmark: prep(wordmark), primary: prep(primary) };
+const MOTION = { wordmark: prep(wordmarkMotion), primary: prep(primaryMotion) };
 
-type Props = { variant?: keyof typeof SOURCES; className?: string; label?: string };
+type Props = { variant?: keyof typeof SOURCES; className?: string; label?: string; animate?: boolean };
 
-export function Logo({ variant = 'wordmark', className, label = 'Olympus' }: Props) {
+export function Logo({ variant = 'wordmark', className, label = 'Olympus', animate = false }: Props) {
+  const id = useId().replace(/[^a-zA-Z0-9_-]/g, '');
+  const source = scopeSvgIds((animate ? MOTION : SOURCES)[variant], id);
   return (
     <span
-      className={`logo logo--${variant} ${className ?? ''}`}
+      className={`logo logo--${variant} ${animate ? 'logo--striking' : ''} ${className ?? ''}`}
       role="img"
       aria-label={label}
-      dangerouslySetInnerHTML={{ __html: SOURCES[variant] }}
+      dangerouslySetInnerHTML={{ __html: source }}
     />
   );
 }

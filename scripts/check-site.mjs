@@ -23,7 +23,7 @@ const routes = htmlFiles
   .filter((f) => f !== '404.html')
   .map((f) => (f === 'index.html' ? '/' : `/${f.replace(/\.html$/, '')}`))
   .sort();
-if (routes.length < 17) fail('dist', `expected 17 route pages, found ${routes.length}`);
+if (routes.length !== 20) fail('dist', `expected 20 route pages, found ${routes.length}`);
 
 const titles = new Map();
 for (const f of htmlFiles) {
@@ -33,6 +33,10 @@ for (const f of htmlFiles) {
   if (titles.has(title)) fail(f, `duplicate <title> "${title}" (also ${titles.get(title)})`);
   titles.set(title, f);
   if (f === '404.html' && !html.includes('name="robots" content="noindex"')) fail(f, 'missing noindex');
+  // Prerendered: the page's own markup ships in the HTML, not just an empty #root.
+  const rootTag = html.match(/<div id="root" data-route="([^"]*)">([\s\S]{0,40})/);
+  if (!rootTag || rootTag[2].startsWith('</div>')) fail(f, 'not prerendered (empty #root)');
+  else if (!/<main[^>]*>[\s\S]*<h1/.test(html)) fail(f, 'prerendered markup has no <h1> in <main>');
   if (process.env.VITE_SITE_URL && f !== '404.html' && !html.includes('rel="canonical"')) fail(f, 'missing canonical link');
 }
 await access(path.join(DIST, 'robots.txt')).catch(() => fail('dist', 'missing robots.txt'));
@@ -46,7 +50,7 @@ const base = server.resolvedUrls.local[0].replace(/\/$/, '');
 const browser = await chromium.launch();
 await mkdir(OUT, { recursive: true });
 
-async function open(width, url, opts = {}) {
+async function open(width, url, { initScript, ...opts } = {}) {
   const mobile = width < 800;
   const context = await browser.newContext({
     viewport: { width, height: mobile ? 844 : 900 },
@@ -54,6 +58,7 @@ async function open(width, url, opts = {}) {
     isMobile: mobile,
     ...opts,
   });
+  if (initScript) await context.addInitScript(initScript);
   const page = await context.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -116,7 +121,9 @@ await Promise.all(Array.from({ length: 4 }, async () => {
 process.stdout.write('\n');
 
 // ---------- Interactions ----------
+let interactions = 0;
 async function interaction(name, width, url, run, opts) {
+  interactions++;
   const { page, context, errors } = await open(width, url, opts);
   try {
     await page.waitForTimeout(600);
@@ -140,10 +147,30 @@ await interaction('services keyboard', 1440, '/', async (page) => {
   expect((await btn.getAttribute('aria-expanded')) === 'false', 'Enter did not close the first service');
 });
 
-await interaction('reduced motion film', 390, '/work/vela', async (page) => {
-  expect((await page.locator('.case-film video').count()) === 0, 'video shown under reduced motion');
-  expect((await page.locator('.case-film img').count()) === 1, 'still missing under reduced motion');
-}, { reducedMotion: 'reduce' });
+for (const slug of ['vela', 'northline', 'helio', 'aura', 'thalassa', 'orison', 'fieldwork']) {
+  await interaction(`diagram ${slug}`, 390, `/work/${slug}`, async (page) => {
+    const buttons = page.locator('.project-diagram__buttons button');
+    expect(await buttons.count() === 3, 'three diagram controls missing');
+    const before = await page.locator('.project-diagram__note').textContent();
+    await buttons.nth(2).focus();
+    await page.keyboard.press('Enter');
+    expect(await buttons.nth(2).getAttribute('aria-pressed') === 'true', 'keyboard did not select third layer');
+    expect(await buttons.nth(0).getAttribute('aria-pressed') === 'false', 'previous layer stayed selected');
+    expect(await page.locator('.project-diagram__note').textContent() !== before, 'explanation did not change');
+    expect(await page.locator('video').count() === 0, 'slideshow video still present');
+    expect(await page.locator('.diagram-layer.is-active').count() >= 1, 'active drawing missing');
+    expect(await page.locator('.diagram-layer').first().evaluate(el => getComputedStyle(el).transitionDuration) === '0s', 'diagram animates under reduced motion');
+  }, { reducedMotion: 'reduce' });
+}
+
+await interaction('new project sequence', 390, '/work/thalassa', async (page) => {
+  await page.locator('.case-next__link').click();
+  await page.waitForURL('**/work/orison');
+  expect(await page.locator('.project-diagram__buttons button').first().getAttribute('aria-pressed') === 'true', 'diagram did not initialise on next project');
+  await page.locator('.case-next__link').click();
+  await page.waitForURL('**/work/fieldwork');
+  expect((await page.title()).startsWith('FIELDWORK'), 'new case title missing');
+});
 
 for (const width of [1440, 390]) {
   await interaction(`project card navigation @${width}`, width, '/work', async (page) => {
@@ -196,6 +223,36 @@ await interaction('contact brief', 390, '/contact', async (page) => {
   expect(href?.startsWith('mailto:') && href.includes('Check'), 'draft email link missing the brief');
 });
 
+for (const [url, width] of [['/work/vela', 390], ['/', 1440]]) {
+  await interaction(`readable without JavaScript ${url} @${width}`, width, url, async (page) => {
+    // The hero <h1> has no box of its own (its lines are positioned), so look at any part of it.
+    const h1 = page.locator('main h1, main h1 *').filter({ hasText: /\S/ });
+    expect(await h1.evaluateAll((els) => els.some((el) => el.getBoundingClientRect().height > 0)), 'no visible <h1>');
+    const hidden = await page.evaluate(() =>
+      [...document.querySelectorAll('[data-reveal]')].filter((el) => getComputedStyle(el).opacity === '0').length,
+    );
+    expect(hidden === 0, `${hidden} reveal target(s) stayed invisible`);
+  }, { javaScriptEnabled: false });
+}
+
+for (const url of ['/about', '/work/helio']) {
+  await interaction(`hydrates the prerendered page ${url}`, 1440, url, async (page) => {
+    // Hydration keeps the server-rendered nodes; a client re-render would remove them.
+    await page.waitForTimeout(600);
+    const removed = await page.evaluate(() => window.__removedHeadings);
+    expect(removed === 0, `${removed} prerendered heading(s) were replaced instead of hydrated`);
+  }, {
+    initScript: () => {
+      window.__removedHeadings = 0;
+      new MutationObserver((records) => {
+        for (const r of records) for (const n of r.removedNodes) {
+          if (n.nodeType === 1 && (n.matches('h1') || n.querySelector('h1'))) window.__removedHeadings++;
+        }
+      }).observe(document, { childList: true, subtree: true });
+    },
+  });
+}
+
 await browser.close();
 await new Promise((resolve) => server.httpServer.close(resolve));
 
@@ -204,4 +261,4 @@ if (failures.length) {
   console.error(`\n${failures.length} problem(s):\n  ${failures.join('\n  ')}\nScreenshots: ${OUT}/`);
   process.exit(1);
 }
-console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and 9 interaction checks.`);
+console.log(`All clear: ${routes.length + 1} routes × ${WIDTHS.length} widths (${count} pages) and ${interactions} interaction checks.`);

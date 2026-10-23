@@ -172,6 +172,53 @@
       "height": 538
     }
   },
+  "fieldwork-detail": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "fieldwork-hero": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "fieldwork-identity": {
+    "dir": "05-selected-work",
+    "width": 1200,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "fieldwork-materials": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
   "helio-campaign": {
     "dir": "05-selected-work",
     "width": 1536,
@@ -240,6 +287,53 @@
       1254
     ]
   },
+  "orison-detail": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "orison-hero": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "orison-identity": {
+    "dir": "05-selected-work",
+    "width": 1200,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "orison-materials": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
   "technology-campaign": {
     "dir": "05-selected-work",
     "width": 1536,
@@ -254,6 +348,53 @@
       "width": 1200,
       "height": 630
     }
+  },
+  "thalassa-detail": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
+  },
+  "thalassa-hero": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ],
+    "social": {
+      "width": 1200,
+      "height": 630
+    }
+  },
+  "thalassa-identity": {
+    "dir": "05-selected-work",
+    "width": 1200,
+    "height": 1600,
+    "widths": [
+      480,
+      800,
+      1200
+    ]
+  },
+  "thalassa-materials": {
+    "dir": "05-selected-work",
+    "width": 1536,
+    "height": 1024,
+    "widths": [
+      480,
+      800,
+      1200,
+      1536
+    ]
   },
   "vela-fabric-detail": {
     "dir": "05-selected-work",

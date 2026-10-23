@@ -43,6 +43,7 @@ export function Manifesto() {
             <Line i={0}>We are</Line>
             <Line i={1}>Olympus.</Line>
           </p>
+          <svg className="scroll-study" viewBox="0 0 240 150" fill="none" stroke="currentColor" strokeWidth="1" aria-hidden="true"><ellipse cx="120" cy="75" rx="90" ry="52"/><ellipse cx="120" cy="75" rx="90" ry="20"/><path d="M20 75H220M120 12V138M64 31Q112 75 64 119M176 31Q128 75 176 119M188 14 118 78 139 78 52 137 111 75 92 75Z"/><path d="M20 25V15H30M210 15H220V25M20 125V135H30M210 135H220V125" opacity=".4"/></svg>
           <p className="manifesto__coda">
             A creative agency for a <em>more interesting</em> world.
           </p>

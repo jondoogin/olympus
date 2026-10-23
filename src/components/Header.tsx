@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { nav, contact, socials, oracleStatus } from '../content/site';
-import { greekNumeral } from '../lib/antiquity';
+import { indexNumber } from '../lib/antiquity';
 import { Logo } from './Logo';
 import { Picture } from './Picture';
 import { Mark } from './Mark';
@@ -79,14 +79,14 @@ export function Header() {
       >
         <div className="site-header__inner">
           <Link to="/" className="site-header__logo" aria-label="Olympus — home">
-            <Logo variant="wordmark" label="Olympus" />
+            <Logo variant="wordmark" label="Olympus" animate />
           </Link>
           <nav className="site-header__nav" aria-label="Primary">
             <ul>
               {nav.slice(0, 5).map((item, i) => (
                 <li key={item.to}>
                   <NavLink to={item.to} className="navlink">
-                    <span className="navlink__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
+                    <span className="navlink__n" aria-hidden="true">{indexNumber(i + 1)}</span>
                     {item.label}
                   </NavLink>
                 </li>
@@ -172,7 +172,7 @@ function MobileMenu({ open, onClose }: { open: boolean; onClose: () => void }) {
           {nav.map((item, i) => (
             <li key={item.to} style={{ ['--i' as string]: i }}>
               <NavLink to={item.to} onClick={onClose}>
-                <span className="mmenu__n" aria-hidden="true">{greekNumeral(i + 1)}</span>
+                <span className="mmenu__n" aria-hidden="true">{indexNumber(i + 1)}</span>
                 <span className="mmenu__label">{item.label}</span>
                 <span className="mmenu__note">{item.note}</span>
               </NavLink>

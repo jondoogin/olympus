@@ -1,5 +1,4 @@
 import { figures, proof, proofFacts } from '../content/site';
-import { greekNumeral } from '../lib/antiquity';
 import { Label } from '../components/Label';
 import { Picture } from '../components/Picture';
 import { Reveal } from '../components/Reveal';
@@ -42,7 +41,6 @@ export function Proof() {
                 <span className="line__inner proof__n">{p.n}</span>
               </span>
               <span className="proof__l">
-                <span className="inscr proof__greek" aria-hidden="true">{greekNumeral(p.n)}</span>
                 {p.label}
               </span>
             </li>
