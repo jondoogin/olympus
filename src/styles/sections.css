@@ -752,3 +752,8 @@
   .logo--striking .strike-flare, .logo--striking .strike-shards { opacity: 0 !important; }
   .logo--striking .strike-cut, .logo--striking .strike-bolt { opacity: 1 !important; clip-path: none !important; }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .install, .install[data-open='true'], .app-toast, .share-btn { transition: none; }
+  .share-btn:active { transform: none; }
+}

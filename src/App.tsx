@@ -3,6 +3,7 @@ import { Route, Routes, useLocation } from 'react-router-dom';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { PageTransitions } from './components/PageTransitions';
+import { AppShell } from './components/AppShell';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import { AboutPage, ContactPage, CulturePage, PeoplePage, PersonPage, ProjectPage, ServicesPage, WorkPage, preloadAllWhenIdle } from './routes';
@@ -49,6 +50,7 @@ export default function App() {
       <ScrollReset />
       <DocumentTitle />
       <PageTransitions />
+      <AppShell />
       <div id="top" />
       <Header />
       <main id="main" tabIndex={-1}>

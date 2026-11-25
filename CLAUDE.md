@@ -12,3 +12,10 @@ unless a specific task requires it. Load reference docs on demand, never
 
 Build: `npm install && npm run build`
 Verify: `npm run build`, then `npm run dev` and check 1440 / 1024 / 768 / 390 px
+
+## Installable app (ongoing requirement)
+Olympus ships as an installable PWA (iPhone Home Screen and Android). Every change must keep it
+installable and native-feeling: keep the manifest/apple meta in `index.html`, `public/manifest.webmanifest`,
+`public/sw.js` (no caching of authenticated or dynamic API responses; navigations stay network-first),
+safe-area insets (`--safe-top`/`--safe-bottom`, `--header-bar`), 44px touch targets and no horizontal
+overflow at 390 px. Regenerate icons with `npm run icons`. Run `npm run check:pwa` after `npm run build`.

@@ -97,7 +97,12 @@
   --dur-slow: 900ms;
   --dur-reveal: 1200ms;
 
-  --header-h: 4.25rem;
+  /* The bar itself; --header-h adds the iPhone status-bar inset when installed edge to edge. */
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --header-bar: 4.25rem;
+  --header-h: calc(var(--header-bar) + var(--safe-top));
+  --tap: 44px; /* minimum touch target */
 }
 
 @media (min-width: 768px) {
@@ -105,7 +110,7 @@
     --cols: 8;
     --gutter: 1.25rem;
     --margin: 2rem;
-    --header-h: 4.75rem;
+    --header-bar: 4.75rem;
   }
 }
 
@@ -114,7 +119,7 @@
     --cols: 12;
     --gutter: 1.5rem;
     --margin: clamp(2rem, 3.2vw, 3.5rem);
-    --header-h: 5.25rem;
+    --header-bar: 5.25rem;
   }
 }
 
