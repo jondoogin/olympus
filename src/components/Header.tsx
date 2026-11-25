@@ -21,7 +21,7 @@ function useHeaderState() {
     const probe = () => {
       raf = 0;
       const y = window.scrollY;
-      const h = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) * 16 || 80;
+      const h = document.querySelector<HTMLElement>('.site-header')?.offsetHeight || 80;
       const line = h / 2;
       const sections = document.querySelectorAll<HTMLElement>('main [data-ink], .site-footer');
       let next: Ink = 'obsidian';

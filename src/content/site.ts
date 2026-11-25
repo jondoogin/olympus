@@ -976,3 +976,23 @@ export const interior = {
     note: 'The form and the email address reach the same real inbox. There is no published office address.',
   },
 } as const;
+
+/** Installable-app chrome: install invitation, connection notices and the share action. */
+export const app = {
+  install: {
+    label: 'Keep Olympus close',
+    title: 'Add Olympus to your Home Screen',
+    body: 'Opens full screen, like an app, and keeps the pages you have read for when the signal drops.',
+    action: 'Install',
+    dismiss: 'Not now',
+    close: 'Dismiss install suggestion',
+    ios: [
+      'Tap Share in Safari’s toolbar (the square with an arrow).',
+      'Scroll down and choose Add to Home Screen.',
+      'Leave Open as Web App switched on, then tap Add.',
+    ],
+  },
+  offline: 'Offline. Pages you have opened are still here.',
+  online: 'Back online.',
+  share: { label: 'Share', copied: 'Link copied', text: 'A fictional concept by Olympus, the creative agency run by the Greek gods.' },
+};

@@ -8,6 +8,7 @@ import { useScrollProgress } from '../hooks/useScrollProgress';
 import { useFocusBand } from '../hooks/useFocusBand';
 import NotFound from './NotFound';
 import { ProjectDiagram, DiagramDrawing } from '../components/ProjectDiagram';
+import { ShareButton } from '../components/AppShell';
 
 export default function ProjectPage() {
   const mediaRef = useScrollProgress<HTMLElement>();
@@ -28,6 +29,7 @@ export default function ProjectPage() {
           <p className="case-hero__concept sys">{conceptNotice}</p>
           <p className="case-hero__line">{p.line}</p>
           <ul className="case-hero__scope">{p.scope.map((s) => <li key={s}>{s}</li>)}</ul>
+          <div className="case-hero__share"><ShareButton title={`${p.client} — OLYMPUS`} path={`/work/${p.slug}`} /></div>
         </div>
       </section>
       <ProjectContext project={p} />

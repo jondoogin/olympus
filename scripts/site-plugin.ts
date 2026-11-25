@@ -9,6 +9,7 @@
 //  - writes robots.txt and, when VITE_SITE_URL is set, sitemap.xml.
 //  - removes the master PNGs that only exist to feed `npm run images`; the site only
 //    ever requests their _responsive derivatives. The masters stay untouched in public/.
+import { createHash } from 'node:crypto';
 import { readFile, rm, writeFile, mkdir } from 'node:fs/promises';
 import path from 'node:path';
 import { createServer, type Plugin, type Rollup } from 'vite';
@@ -119,6 +120,11 @@ export function sitePages(): Plugin {
       } finally {
         await vite.close();
       }
+
+      // Stamp the service worker with this build's identity so each deploy gets fresh caches.
+      const swPath = path.join(outDir, 'sw.js');
+      const buildId = createHash('sha256').update(Object.keys(bundle).sort().join('|')).digest('hex').slice(0, 12);
+      await writeFile(swPath, (await readFile(swPath, 'utf8')).replaceAll('__BUILD_ID__', buildId));
 
       await writeFile(
         path.join(outDir, 'robots.txt'),

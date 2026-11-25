@@ -12,7 +12,9 @@
     "identity": "node scripts/build-identity.mjs",
     "plates": "node scripts/build-project-plates.mjs",
     "check:identity": "node scripts/check-strike.mjs",
-    "render:identity": "node scripts/render-strike-preview.mjs"
+    "render:identity": "node scripts/render-strike-preview.mjs",
+    "icons": "node scripts/build-pwa-icons.mjs",
+    "check:pwa": "node scripts/check-pwa.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",
